@@ -232,55 +232,6 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
             m_icon = imageVectorToPixmap(image);
         }
 
-//        QString newTitle;
-//        QString newIconName;
-//        QString newToolTip;
-
-//        QString overlayIconName = properties[QStringLiteral("OverlayIconName")].toString();
-//        QString iconName = properties[QStringLiteral("IconName")].toString();
-
-//        bool changed = false;
-
-//        newTitle = properties[QStringLiteral("Title")].toString();
-
-//        if (!overlayIconName.isEmpty())
-//            newIconName = iconName;
-//        if (!iconName.isEmpty())
-//            newIconName = iconName;
-
-//        KDbusToolTipStruct toolTip;
-//        properties[QStringLiteral("ToolTip")].value<QDBusArgument>() >> toolTip;
-//        // newToolTip = !toolTip.title.isEmpty() ? toolTip.title : toolTip.subTitle;
-
-//        if (newTitle != m_title) {
-//            m_title = newTitle;
-//            changed = true;
-//        }
-
-//        if (newIconName != m_iconName) {
-//            m_iconName = iconName;
-//            changed = true;
-//        }
-
-//        if (newToolTip != m_tooltip) {
-//            m_tooltip = newToolTip;
-//            changed = true;
-//        }
-
-//        // Icon
-//        KDbusImageVector image;
-//        properties[QStringLiteral("AttentionIconPixmap")].value<QDBusArgument>() >> image;
-//        if (!image.isEmpty()) {
-//            m_icon = imageVectorToPixmap(image);
-//            changed = true;
-//        }
-
-//        properties[QStringLiteral("IconPixmap")].value<QDBusArgument>() >> image;
-//        if (!image.isEmpty()) {
-//            m_icon = imageVectorToPixmap(image);
-//            changed = true;
-//        }
-
         // Menu
         if (!m_menuImporter) {
             QString menuObjectPath = properties[QStringLiteral("Menu")].value<QDBusObjectPath>().path();

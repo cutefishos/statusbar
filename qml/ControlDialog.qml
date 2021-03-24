@@ -18,6 +18,7 @@ ControlCenterDialog {
     minimumHeight: _mainLayout.implicitHeight + Meui.Units.largeSpacing * 4
     maximumHeight: _mainLayout.implicitHeight + Meui.Units.largeSpacing * 4
 
+    property var margin: 4 * Meui.Units.devicePixelRatio
     property point position: Qt.point(0, 0)
 
     onWidthChanged: adjustCorrectLocation()
@@ -34,21 +35,10 @@ ControlCenterDialog {
         var posX = control.position.x
         var posY = control.position.y
 
-        // left
-        if (posX < 0)
-            posX = Meui.Units.largeSpacing
+        if (posX + control.width >= Screen.width)
+            posX = Screen.width - control.width - control.margin
 
-        // top
-        if (posY < 0)
-            posY = Meui.Units.largeSpacing
-
-        // right
-        if (posX + control.width > Screen.width)
-            posX = Screen.width - control.width
-
-        // bottom
-        if (posY > control.height > Screen.width)
-            posY = Screen.width - control.width - Meui.Units.largeSpacing
+        posY = rootItem.y + rootItem.height + control.margin
 
         control.x = posX
         control.y = posY
