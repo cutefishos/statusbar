@@ -3,17 +3,26 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
 import Cutefish.StatusBar 1.0
-import Cyber.NetworkManagement 1.0 as NM
+import Cutefish.NetworkManagement 1.0 as NM
 import MeuiKit 1.0 as Meui
 
 Item {
     id: rootItem
 
+    property int iconSize: 16
+
     Rectangle {
         id: background
         anchors.fill: parent
         color: Meui.Theme.backgroundColor
-        opacity: 0.6
+        opacity: 0.5
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.Linear
+            }
+        }
     }
 
     Meui.PopupTips {
@@ -56,7 +65,7 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    width: parent.height * 0.7
+                    width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
                     source: model.iconName ? "image://icontheme/" + model.iconName : ""
@@ -95,7 +104,7 @@ Item {
                     id: volumeIcon
                     visible: volume.isValid && status === Image.Ready
                     source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
-                    width: 16
+                    width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
                     asynchronous: true
@@ -104,7 +113,7 @@ Item {
 
                 Image {
                     id: wirelessIcon
-                    width: 16
+                    width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
                     source: network.wirelessIconName ? "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + network.wirelessIconName + ".svg" : ""
@@ -119,7 +128,7 @@ Item {
                 Image {
                     id: batteryIcon
                     visible: battery.available && status === Image.Ready
-                    height: 16
+                    height: rootItem.iconSize
                     width: height + 6
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + battery.iconSource

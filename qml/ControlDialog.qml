@@ -4,9 +4,9 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
+import Cutefish.Accounts 1.0 as Accounts
 import Cutefish.StatusBar 1.0
 import MeuiKit 1.0 as Meui
-import Cutefish.Accounts 1.0 as Accounts
 
 ControlCenterDialog {
     id: control

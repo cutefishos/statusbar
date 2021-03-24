@@ -39,6 +39,8 @@ void StatusBar::updateGeometry()
     QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 30);
     setGeometry(windowRect);
     updateViewStruts();
+
+    KWindowEffects::enableBlurBehind(winId(), true);
 }
 
 void StatusBar::updateViewStruts()
