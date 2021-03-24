@@ -35,6 +35,7 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: Meui.Units.smallSpacing
         anchors.rightMargin: Meui.Units.smallSpacing
+        spacing: 0
 
         Item {
             Layout.fillWidth: true
@@ -63,7 +64,17 @@ Item {
                 width: trayView.itemWidth
                 height: ListView.view.height
 
+                property bool darkMode: Meui.Theme.darkMode
+                onDarkModeChanged: updateTimer.restart()
+
+                Timer {
+                    id: updateTimer
+                    interval: 10
+                    onTriggered: iconItem.updateIcon()
+                }
+
                 Meui.IconItem {
+                    id: iconItem
                     anchors.centerIn: parent
                     width: rootItem.iconSize
                     height: width
@@ -80,7 +91,7 @@ Item {
             id: controler
 
             Layout.fillHeight: true
-            Layout.preferredWidth: _controlerLayout.implicitWidth
+            Layout.preferredWidth: _controlerLayout.implicitWidth + Meui.Units.largeSpacing
 
             onClicked: {
                 if (controlDialog.visible)
@@ -96,6 +107,8 @@ Item {
             RowLayout {
                 id: _controlerLayout
                 anchors.fill: parent
+                anchors.leftMargin: Meui.Units.smallSpacing
+                anchors.rightMargin: Meui.Units.smallSpacing
 
                 spacing: Meui.Units.largeSpacing
 
