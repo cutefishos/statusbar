@@ -63,12 +63,11 @@ Item {
                 width: trayView.itemWidth
                 height: ListView.view.height
 
-                Image {
+                Meui.IconItem {
                     anchors.centerIn: parent
                     width: rootItem.iconSize
                     height: width
-                    sourceSize: Qt.size(width, height)
-                    source: model.iconName ? "image://icontheme/" + model.iconName : ""
+                    source: model.iconName ? model.iconName : model.icon
                 }
 
                 onClicked: trayModel.leftButtonClick(model.id)
