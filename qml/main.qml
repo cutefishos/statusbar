@@ -15,7 +15,7 @@ Item {
         id: background
         anchors.fill: parent
         color: Meui.Theme.backgroundColor
-        opacity: 0.5
+        opacity: 0.6
 
         Behavior on color {
             ColorAnimation {
@@ -147,6 +147,16 @@ Item {
                     Layout.alignment: Qt.AlignCenter
                     asynchronous: true
                 }
+
+//                Image {
+//                    id: powerIcon
+//                    height: rootItem.iconSize + 2
+//                    width: height
+//                    sourceSize: Qt.size(width, height)
+//                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+//                    Layout.alignment: Qt.AlignCenter
+//                    asynchronous: true
+//                }
 
                 Label {
                     id: timeLabel
