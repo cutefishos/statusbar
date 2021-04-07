@@ -51,6 +51,7 @@ Item {
             Layout.fillHeight: true
             Layout.preferredWidth: acticityLayout.implicitWidth + Meui.Units.largeSpacing
 
+            visible: acticityLabel.text
             onClicked: acticityMenu.open()
 
             RowLayout {
@@ -61,6 +62,7 @@ Item {
                 spacing: Meui.Units.largeSpacing
 
                 Label {
+                    id: acticityLabel
                     text: acticity.title
                 }
 

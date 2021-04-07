@@ -45,7 +45,17 @@ void Activity::close()
 
 void Activity::onActiveWindowChanged()
 {
-    KWindowInfo info(KWindowSystem::activeWindow(), NET::WMState | NET::WMVisibleName);
+    KWindowInfo info(KWindowSystem::activeWindow(),
+                     NET::WMState | NET::WMVisibleName,
+                     NET::WM2WindowClass);
+
+    // Skip...
+    if (info.windowClassClass() == "cutefish-launcher" ||
+        info.windowClassClass() == "cutefish-desktop") {
+        m_title.clear();
+        emit titleChanged();
+        return;
+    }
 
     QString title = info.visibleName();
     if (title != m_title) {
