@@ -37,6 +37,24 @@ Item {
         anchors.rightMargin: Meui.Units.smallSpacing
         spacing: 0
 
+        StandardItem {
+            id: acticityItem
+            Layout.fillHeight: true
+
+            width: acticityLayout.implicitWidth + Meui.Units.largeSpacing
+
+            RowLayout {
+                id: acticityLayout
+                anchors.fill: parent
+                anchors.leftMargin: Meui.Units.smallSpacing
+                anchors.rightMargin: Meui.Units.smallSpacing
+
+                Label {
+                    text: acticity.title
+                }
+            }
+        }
+
         Item {
             Layout.fillWidth: true
         }

@@ -17,34 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BRIGHTNESS_H
-#define BRIGHTNESS_H
+#ifndef ACTIVITY_H
+#define ACTIVITY_H
 
 #include <QObject>
-#include <QDBusInterface>
 
-class Brightness : public QObject
+class Activity : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int value READ value NOTIFY valueChanged)
-    Q_PROPERTY(bool enabled READ enabled CONSTANT)
+    Q_PROPERTY(QString title READ title NOTIFY titleChanged)
 
 public:
-    explicit Brightness(QObject *parent = nullptr);
+    explicit Activity(QObject *parent = nullptr);
 
-    Q_INVOKABLE void setValue(int value);
+    QString title() const;
 
-    int value() const;
-    bool enabled() const;
+    Q_INVOKABLE void close();
+
+private slots:
+    void onActiveWindowChanged();
 
 signals:
-    void valueChanged();
+    void titleChanged();
 
 private:
-    QDBusConnection m_dbusConnection;
-    QDBusInterface m_iface;
-    int m_value;
-    bool m_enabled;
+    QString m_title;
 };
 
-#endif // BRIGHTNESS_H
+#endif // ACTIVITY_H

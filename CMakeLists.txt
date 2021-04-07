@@ -25,8 +25,8 @@ set(SRCS
     src/appearance.cpp
     src/volume.cpp
     src/processprovider.cpp
+    src/activity.cpp
 
-    src/systemtray/statusnotifieritemjob.cpp
     src/systemtray/statusnotifieritemsource.cpp
     src/systemtray/systemtraytypes.cpp
     src/systemtray/systemtraytypedefs.h
