@@ -49,7 +49,7 @@ Item {
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
-            width: acticityLayout.implicitWidth + Meui.Units.largeSpacing
+            Layout.preferredWidth: acticityLayout.implicitWidth + Meui.Units.largeSpacing
 
             onClicked: acticityMenu.open()
 
