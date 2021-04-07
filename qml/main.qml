@@ -48,9 +48,17 @@ Item {
                 anchors.fill: parent
                 anchors.leftMargin: Meui.Units.smallSpacing
                 anchors.rightMargin: Meui.Units.smallSpacing
+                spacing: Meui.Units.largeSpacing
 
                 Label {
                     text: acticity.title
+                }
+
+                Image {
+                    width: 16
+                    height: 16
+                    sourceSize: Qt.size(width, height)
+                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
                 }
             }
         }

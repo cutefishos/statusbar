@@ -101,5 +101,7 @@
         <file>qml/ControlDialog.qml</file>
         <file>qml/CardItem.qml</file>
         <file>qml/IconButton.qml</file>
+        <file>images/dark/down.svg</file>
+        <file>images/light/down.svg</file>
     </qresource>
 </RCC>
