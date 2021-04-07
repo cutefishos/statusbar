@@ -31,6 +31,15 @@ Item {
         backgroundOpacity: Meui.Theme.darkMode ? 0.3 : 0.4
     }
 
+    Meui.DesktopMenu {
+        id: acticityMenu
+
+        MenuItem {
+            text: qsTr("Close")
+            onTriggered: acticity.close()
+        }
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: Meui.Units.smallSpacing
@@ -40,8 +49,9 @@ Item {
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
-
             width: acticityLayout.implicitWidth + Meui.Units.largeSpacing
+
+            onClicked: acticityMenu.open()
 
             RowLayout {
                 id: acticityLayout
