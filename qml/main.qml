@@ -61,17 +61,25 @@ Item {
                 anchors.rightMargin: Meui.Units.smallSpacing
                 spacing: Meui.Units.largeSpacing
 
+                Image {
+                    width: 22
+                    height: 22
+                    sourceSize: Qt.size(width, height)
+                    source: "image://icontheme/" + acticity.icon
+                    visible: status === Image.Ready
+                }
+
                 Label {
                     id: acticityLabel
                     text: acticity.title
                 }
 
-                Image {
-                    width: 16
-                    height: 16
-                    sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
-                }
+//                Image {
+//                    width: 16
+//                    height: 16
+//                    sourceSize: Qt.size(width, height)
+//                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
+//                }
             }
         }
 

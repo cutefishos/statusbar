@@ -19,7 +19,13 @@
 
 #include "activity.h"
 
+#include <QFile>
+#include <QDebug>
 #include <QX11Info>
+#include <QDirIterator>
+#include <QSettings>
+#include <QRegularExpression>
+
 #include <NETWM>
 #include <KWindowSystem>
 
@@ -29,13 +35,18 @@ Activity::Activity(QObject *parent)
     onActiveWindowChanged();
 
     connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &Activity::onActiveWindowChanged);
-    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged),
-            this, &Activity::onActiveWindowChanged);
+    // connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged),
+    //         this, &Activity::onActiveWindowChanged);
 }
 
 QString Activity::title() const
 {
     return m_title;
+}
+
+QString Activity::icon() const
+{
+    return m_icon;
 }
 
 void Activity::close()
@@ -51,15 +62,97 @@ void Activity::onActiveWindowChanged()
 
     // Skip...
     if (info.windowClassClass() == "cutefish-launcher" ||
-        info.windowClassClass() == "cutefish-desktop") {
+        info.windowClassClass() == "cutefish-desktop" ||
+        info.windowClassClass() == "cutefish-statusbar") {
         m_title.clear();
+        m_icon.clear();
         emit titleChanged();
+        emit iconChanged();
         return;
     }
+
+    m_pid = info.pid();
+    m_windowClass = info.windowClassClass().toLower();
 
     QString title = info.visibleName();
     if (title != m_title) {
         m_title = title;
         emit titleChanged();
+        m_icon.clear();
+        emit iconChanged();
     }
+
+    matchInfo();
+}
+
+void Activity::matchInfo()
+{
+    QString command = commandFromPid(m_pid);
+
+    qDebug() << command;
+
+    // TODO: optimization
+    QDirIterator it("/usr/share/applications", { "*.desktop" },
+                    QDir::NoFilter, QDirIterator::Subdirectories);
+
+    while (it.hasNext()) {
+        const QString &filePath = it.next();
+
+        QSettings desktop(filePath, QSettings::IniFormat);
+        desktop.setIniCodec("UTF-8");
+        desktop.beginGroup("Desktop Entry");
+
+        if (desktop.value("NoDisplay").toBool() ||
+            desktop.value("Hidden").toBool()) {
+            continue;
+        }
+
+        QString exec = desktop.value("Exec").toString();
+        exec.remove(QRegularExpression("%."));
+        exec.remove(QRegularExpression("^\""));
+        exec = exec.simplified();
+
+        if (command == exec) {
+            QString name = desktop.value(QString("Name[%1]").arg(QLocale::system().name())).toString();
+            if (name.isEmpty())
+                name = desktop.value("Name").toString();
+
+            m_title = name;
+            emit titleChanged();
+
+            m_icon = desktop.value("Icon").toString();
+            emit iconChanged();
+
+            break;
+        }
+    }
+}
+
+QString Activity::commandFromPid(quint32 pid)
+{
+    QFile file(QString("/proc/%1/cmdline").arg(pid));
+
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray cmd = file.readAll();
+
+        // ref: https://github.com/KDE/kcoreaddons/blob/230c98aa7e01f9e36a9c2776f3633182e6778002/src/lib/util/kprocesslist_unix.cpp#L137
+        if (!cmd.isEmpty()) {
+            // extract non-truncated name from cmdline
+            int zeroIndex = cmd.indexOf('\0');
+            int processNameStart = cmd.lastIndexOf('/', zeroIndex);
+            if (processNameStart == -1) {
+                processNameStart = 0;
+            } else {
+                processNameStart++;
+            }
+
+            QString name = QString::fromLocal8Bit(cmd.mid(processNameStart, zeroIndex - processNameStart));
+
+            cmd.replace('\0', ' ');
+            QString command = QString::fromLocal8Bit(cmd).trimmed();
+            return name;
+        }
+    }
+
+    return QString();
 }

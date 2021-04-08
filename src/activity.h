@@ -26,22 +26,31 @@ class Activity : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
+    Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
 
 public:
     explicit Activity(QObject *parent = nullptr);
 
     QString title() const;
+    QString icon() const;
 
     Q_INVOKABLE void close();
 
 private slots:
     void onActiveWindowChanged();
+    void matchInfo();
+
+    QString commandFromPid(quint32 pid);
 
 signals:
     void titleChanged();
+    void iconChanged();
 
 private:
     QString m_title;
+    QString m_icon;
+    QString m_windowClass;
+    quint32 m_pid;
 };
 
 #endif // ACTIVITY_H
