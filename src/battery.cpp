@@ -74,6 +74,12 @@ bool Battery::onBattery() const
     return m_onBattery;
 }
 
+bool Battery::showPercentage() const
+{
+    // TODO
+    return true;
+}
+
 int Battery::chargeState() const
 {
     return m_interface.property("chargeState").toInt();

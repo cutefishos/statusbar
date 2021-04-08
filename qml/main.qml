@@ -183,15 +183,24 @@ Item {
                              wirelessIcon.status === Image.Ready
                 }
 
-                Image {
-                    id: batteryIcon
-                    visible: battery.available && status === Image.Ready
-                    height: rootItem.iconSize
-                    width: height + 6
-                    sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
-                    Layout.alignment: Qt.AlignCenter
-                    asynchronous: true
+                // Battery Item
+                RowLayout {
+                    Label {
+                        font.pointSize: 11
+                        text: battery.chargePercent + "%"
+                        visible: battery.showPercentage
+                    }
+
+                    Image {
+                        id: batteryIcon
+                        visible: battery.available && status === Image.Ready
+                        height: rootItem.iconSize
+                        width: height + 6
+                        sourceSize: Qt.size(width, height)
+                        source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
+                        Layout.alignment: Qt.AlignCenter
+                        asynchronous: true
+                    }
                 }
 
 //                Image {

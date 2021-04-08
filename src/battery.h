@@ -33,6 +33,7 @@ class Battery : public QObject
     Q_PROPERTY(int capacity READ capacity NOTIFY capacityChanged)
     Q_PROPERTY(QString statusString READ statusString NOTIFY remainingTimeChanged)
     Q_PROPERTY(bool onBattery READ onBattery NOTIFY onBatteryChanged)
+    Q_PROPERTY(bool showPercentage READ showPercentage NOTIFY showPercentageChanged)
     Q_PROPERTY(QString iconSource READ iconSource NOTIFY iconSourceChanged)
 
 public:
@@ -40,6 +41,7 @@ public:
 
     bool available() const;
     bool onBattery() const;
+    bool showPercentage() const;
 
     int chargeState() const;
     int chargePercent() const;
@@ -58,6 +60,7 @@ signals:
     void onBatteryChanged();
     void lastChargedPercentChanged();
     void iconSourceChanged();
+    void showPercentageChanged();
 
 private slots:
     void onPropertiesChanged(const QString &ifaceName, const QVariantMap &changedProps, const QStringList &invalidatedProps);
