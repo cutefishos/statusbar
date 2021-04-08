@@ -65,7 +65,7 @@ Item {
                     width: 22
                     height: 22
                     sourceSize: Qt.size(width, height)
-                    source: "image://icontheme/" + acticity.icon
+                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
                     visible: status === Image.Ready
                 }
 
