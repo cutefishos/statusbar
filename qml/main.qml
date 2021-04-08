@@ -61,17 +61,30 @@ Item {
                 anchors.rightMargin: Meui.Units.smallSpacing
                 spacing: Meui.Units.largeSpacing
 
-                Image {
+                Meui.IconItem {
+                    id: acticityIcon
                     width: 22
                     height: 22
-                    sourceSize: Qt.size(width, height)
-                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
-                    visible: status === Image.Ready
+                    source: acticity.icon ? acticity.icon : ""
+                    visible: source !== ""
                 }
 
                 Label {
                     id: acticityLabel
                     text: acticity.title
+
+                    NumberAnimation {
+                        id: fadeInAni
+                        target: acticityLabel
+                        property: "opacity"
+                        duration: 250
+                        from: 0.0
+                        to: 1.0
+                    }
+
+                    onTextChanged: {
+                        fadeInAni.start()
+                    }
                 }
 
 //                Image {

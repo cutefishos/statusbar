@@ -89,8 +89,6 @@ void Activity::matchInfo()
 {
     QString command = commandFromPid(m_pid);
 
-    qDebug() << command;
-
     // TODO: optimization
     QDirIterator it("/usr/share/applications", { "*.desktop" },
                     QDir::NoFilter, QDirIterator::Subdirectories);
