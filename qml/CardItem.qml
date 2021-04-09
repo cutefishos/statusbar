@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
-import MeuiKit 1.0 as Meui
+import FishUI 1.0 as FishUI
 
 Item {
     id: control
@@ -14,15 +14,15 @@ Item {
 
     signal clicked
 
-    property var hoverColor: Meui.Theme.darkMode ? Qt.lighter(Meui.Theme.secondBackgroundColor, 2)
-                                                 : Qt.darker(Meui.Theme.secondBackgroundColor, 1.3)
-    property var pressedColor: Meui.Theme.darkMode ? Qt.lighter(Meui.Theme.secondBackgroundColor, 1.8)
-                                                 : Qt.darker(Meui.Theme.secondBackgroundColor, 1.5)
+    property var hoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2)
+                                                   : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.3)
+    property var pressedColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 1.8)
+                                                     : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.5)
 
-    property var highlightHoverColor: Meui.Theme.darkMode ? Qt.lighter(Meui.Theme.highlightColor, 1.1)
-                                                          : Qt.darker(Meui.Theme.highlightColor, 1.1)
-    property var highlightPressedColor: Meui.Theme.darkMode ? Qt.lighter(Meui.Theme.highlightColor, 1.1)
-                                                            : Qt.darker(Meui.Theme.highlightColor, 1.2)
+    property var highlightHoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
+                                                            : Qt.darker(FishUI.Theme.highlightColor, 1.1)
+    property var highlightPressedColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
+                                                              : Qt.darker(FishUI.Theme.highlightColor, 1.2)
 
     MouseArea {
         id: _mouseArea
@@ -42,9 +42,9 @@ Item {
         }
     }
 
-    Meui.RoundedRect {
+    FishUI.RoundedRect {
         anchors.fill: parent
-        radius: Meui.Theme.bigRadius
+        radius: FishUI.Theme.bigRadius
         backgroundOpacity: control.checked ? 0.9 : 0.3
         animationEnabled: false
 
@@ -55,22 +55,22 @@ Item {
                 else if (_mouseArea.containsMouse)
                     return highlightHoverColor
                 else
-                    return Meui.Theme.highlightColor
+                    return FishUI.Theme.highlightColor
             } else {
                 if (_mouseArea.pressed)
                     return pressedColor
                 else if (_mouseArea.containsMouse)
                     return hoverColor
                 else
-                    return Meui.Theme.secondBackgroundColor
+                    return FishUI.Theme.secondBackgroundColor
             }
         }
     }
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.leftMargin: Meui.Theme.smallRadius
-        anchors.rightMargin: Meui.Theme.smallRadius
+        anchors.leftMargin: FishUI.Theme.smallRadius
+        anchors.rightMargin: FishUI.Theme.smallRadius
 
         Image {
             id: _image
@@ -79,12 +79,12 @@ Item {
             sourceSize: Qt.size(width, height)
             asynchronous: true
             Layout.alignment: Qt.AlignCenter
-            Layout.topMargin: Meui.Units.largeSpacing
+            Layout.topMargin: FishUI.Units.largeSpacing
 
 //            ColorOverlay {
 //                anchors.fill: _image
 //                source: _image
-//                color: control.checked ? Meui.Theme.highlightedTextColor : Meui.Theme.disabledTextColor
+//                color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.disabledTextColor
 //            }
         }
 
@@ -94,7 +94,7 @@ Item {
 
         Label {
             id: _titleLabel
-            color: control.checked ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
             Layout.preferredHeight: control.height * 0.15
             Layout.alignment: Qt.AlignHCenter
         }
@@ -105,12 +105,12 @@ Item {
 
         Label {
             id: _label
-            color: control.checked ? Meui.Theme.highlightedTextColor : Meui.Theme.textColor
+            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
             elide: Label.ElideRight
             Layout.preferredHeight: control.height * 0.1
             Layout.alignment: Qt.AlignHCenter
             // Layout.fillWidth: true
-            Layout.bottomMargin: Meui.Units.largeSpacing
+            Layout.bottomMargin: FishUI.Units.largeSpacing
         }
 
         Item {

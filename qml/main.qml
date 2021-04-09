@@ -4,7 +4,7 @@ import QtQuick.Controls 2.12
 
 import Cutefish.StatusBar 1.0
 import Cutefish.NetworkManagement 1.0 as NM
-import MeuiKit 1.0 as Meui
+import FishUI 1.0 as FishUI
 
 Item {
     id: rootItem
@@ -14,7 +14,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: Meui.Theme.backgroundColor
+        color: FishUI.Theme.backgroundColor
         opacity: 0.6
 
         Behavior on color {
@@ -25,13 +25,13 @@ Item {
         }
     }
 
-    Meui.PopupTips {
+    FishUI.PopupTips {
         id: popupTips
-        backgroundColor: Meui.Theme.backgroundColor
-        backgroundOpacity: Meui.Theme.darkMode ? 0.3 : 0.4
+        backgroundColor: FishUI.Theme.backgroundColor
+        backgroundOpacity: FishUI.Theme.darkMode ? 0.3 : 0.4
     }
 
-    Meui.DesktopMenu {
+    FishUI.DesktopMenu {
         id: acticityMenu
 
         MenuItem {
@@ -42,14 +42,14 @@ Item {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Meui.Units.smallSpacing
-        anchors.rightMargin: Meui.Units.smallSpacing
+        anchors.leftMargin: FishUI.Units.smallSpacing
+        anchors.rightMargin: FishUI.Units.smallSpacing
         spacing: 0
 
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
-            Layout.preferredWidth: acticityLayout.implicitWidth + Meui.Units.largeSpacing
+            Layout.preferredWidth: acticityLayout.implicitWidth + FishUI.Units.largeSpacing
 
             visible: acticityLabel.text
             onClicked: acticityMenu.open()
@@ -57,11 +57,11 @@ Item {
             RowLayout {
                 id: acticityLayout
                 anchors.fill: parent
-                anchors.leftMargin: Meui.Units.smallSpacing
-                anchors.rightMargin: Meui.Units.smallSpacing
-                spacing: Meui.Units.largeSpacing
+                anchors.leftMargin: FishUI.Units.smallSpacing
+                anchors.rightMargin: FishUI.Units.smallSpacing
+                spacing: FishUI.Units.largeSpacing
 
-                Meui.IconItem {
+                FishUI.IconItem {
                     id: acticityIcon
                     width: 22
                     height: 22
@@ -91,7 +91,7 @@ Item {
 //                    width: 16
 //                    height: 16
 //                    sourceSize: Qt.size(width, height)
-//                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
+//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
 //                }
             }
         }
@@ -110,7 +110,7 @@ Item {
             spacing: 0
 
             property var itemSize: rootItem.height * 0.8
-            property var itemWidth: itemSize + Meui.Units.largeSpacing
+            property var itemWidth: itemSize + FishUI.Units.largeSpacing
 
             Layout.fillHeight: true
             Layout.preferredWidth: itemWidth * count
@@ -123,7 +123,7 @@ Item {
                 width: trayView.itemWidth
                 height: ListView.view.height
 
-                property bool darkMode: Meui.Theme.darkMode
+                property bool darkMode: FishUI.Theme.darkMode
                 onDarkModeChanged: updateTimer.restart()
 
                 Timer {
@@ -132,7 +132,7 @@ Item {
                     onTriggered: iconItem.updateIcon()
                 }
 
-                Meui.IconItem {
+                FishUI.IconItem {
                     id: iconItem
                     anchors.centerIn: parent
                     width: rootItem.iconSize
@@ -150,7 +150,7 @@ Item {
             id: controler
 
             Layout.fillHeight: true
-            Layout.preferredWidth: _controlerLayout.implicitWidth + Meui.Units.largeSpacing
+            Layout.preferredWidth: _controlerLayout.implicitWidth + FishUI.Units.largeSpacing
 
             onClicked: {
                 if (controlDialog.visible)
@@ -166,15 +166,15 @@ Item {
             RowLayout {
                 id: _controlerLayout
                 anchors.fill: parent
-                anchors.leftMargin: Meui.Units.smallSpacing
-                anchors.rightMargin: Meui.Units.smallSpacing
+                anchors.leftMargin: FishUI.Units.smallSpacing
+                anchors.rightMargin: FishUI.Units.smallSpacing
 
-                spacing: Meui.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
 
                 Image {
                     id: volumeIcon
                     visible: volume.isValid && status === Image.Ready
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
@@ -187,7 +187,7 @@ Item {
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
-                    source: network.wirelessIconName ? "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + network.wirelessIconName + ".svg" : ""
+                    source: network.wirelessIconName ? "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + network.wirelessIconName + ".svg" : ""
                     asynchronous: true
                     Layout.alignment: Qt.AlignCenter
                     visible: network.enabled &&
@@ -210,7 +210,7 @@ Item {
                         height: rootItem.iconSize
                         width: height + 6
                         sourceSize: Qt.size(width, height)
-                        source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
+                        source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
                         asynchronous: true
                     }
@@ -221,7 +221,7 @@ Item {
 //                    height: rootItem.iconSize + 2
 //                    width: height
 //                    sourceSize: Qt.size(width, height)
-//                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
 //                    Layout.alignment: Qt.AlignCenter
 //                    asynchronous: true
 //                }

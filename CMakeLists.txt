@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 CONFIG REQUIRED Widgets DBus X11Extras Concurrent Svg LinguistTools QuickControls2)
 find_package(KF5WindowSystem REQUIRED)
 find_package(dbusmenu-qt5 REQUIRED)
-find_package(MeuiKit REQUIRED)
+find_package(FishUI REQUIRED)
 
 set(SRCS
     src/main.cpp
@@ -64,7 +64,7 @@ target_link_libraries(cutefish-statusbar
   Qt5::DBus
   Qt5::Svg
 
-  MeuiKit
+  FishUI
 
   KF5::WindowSystem
   dbusmenu-qt5

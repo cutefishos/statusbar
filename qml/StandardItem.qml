@@ -3,7 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
-import MeuiKit 1.0 as Meui
+import FishUI 1.0 as FishUI
 import Cutefish.StatusBar 1.0
 
 Item {
@@ -45,14 +45,14 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        radius: Meui.Theme.smallRadius
+        radius: FishUI.Theme.smallRadius
 
         color: {
             if (_mouseArea.containsMouse) {
                 if (_mouseArea.containsPress)
-                    return (Meui.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.2)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.2)
                 else
-                    return (Meui.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.1)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.1)
             }
 
             return "transparent"

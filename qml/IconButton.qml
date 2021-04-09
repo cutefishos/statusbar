@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import MeuiKit 1.0 as Meui
+import FishUI 1.0 as FishUI
 
 Item {
     id: control
@@ -35,9 +35,9 @@ Item {
         color: {
             if (mouseArea.containsMouse) {
                 if (mouseArea.containsPress)
-                    return (Meui.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.3)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.3)
                 else
-                    return (Meui.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.2)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.2)
             }
 
             return "transparent"

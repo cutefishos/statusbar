@@ -6,19 +6,19 @@ import QtGraphicalEffects 1.0
 
 import Cutefish.Accounts 1.0 as Accounts
 import Cutefish.StatusBar 1.0
-import MeuiKit 1.0 as Meui
+import FishUI 1.0 as FishUI
 
 ControlCenterDialog {
     id: control
     width: 500
-    height: _mainLayout.implicitHeight + Meui.Units.largeSpacing * 4
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
 
     minimumWidth: 500
     maximumWidth: 500
-    minimumHeight: _mainLayout.implicitHeight + Meui.Units.largeSpacing * 4
-    maximumHeight: _mainLayout.implicitHeight + Meui.Units.largeSpacing * 4
+    minimumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
+    maximumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
 
-    property var margin: 4 * Meui.Units.devicePixelRatio
+    property var margin: 4 * FishUI.Units.devicePixelRatio
     property point position: Qt.point(0, 0)
 
     onWidthChanged: adjustCorrectLocation()
@@ -52,22 +52,22 @@ ControlCenterDialog {
         id: currentUser
     }
 
-    Meui.WindowBlur {
+    FishUI.WindowBlur {
         view: control
         geometry: Qt.rect(control.x, control.y, control.width, control.height)
         windowRadius: _background.radius
         enabled: true
     }
 
-    Meui.RoundedRect {
+    FishUI.RoundedRect {
         id: _background
         anchors.fill: parent
         radius: control.height * 0.05
-        color: Meui.Theme.backgroundColor
-        backgroundOpacity: Meui.Theme.darkMode ? 0.3 : 0.4
+        color: FishUI.Theme.backgroundColor
+        backgroundOpacity: FishUI.Theme.darkMode ? 0.3 : 0.4
     }
 
-    Meui.WindowShadow {
+    FishUI.WindowShadow {
         view: control
         geometry: Qt.rect(control.x, control.y, control.width, control.height)
         radius: _background.radius
@@ -76,11 +76,11 @@ ControlCenterDialog {
     ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
-        anchors.leftMargin: Meui.Units.largeSpacing * 2
-        anchors.topMargin: Meui.Units.largeSpacing * 1.5
-        anchors.rightMargin: Meui.Units.largeSpacing * 2
-        anchors.bottomMargin: Meui.Units.largeSpacing
-        spacing: Meui.Units.largeSpacing
+        anchors.leftMargin: FishUI.Units.largeSpacing * 2
+        anchors.topMargin: FishUI.Units.largeSpacing * 1.5
+        anchors.rightMargin: FishUI.Units.largeSpacing * 2
+        anchors.bottomMargin: FishUI.Units.largeSpacing
+        spacing: FishUI.Units.largeSpacing
 
         Item {
             id: topItem
@@ -90,7 +90,7 @@ ControlCenterDialog {
             RowLayout {
                 id: topItemLayout
                 anchors.fill: parent
-                spacing: Meui.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
 
                 Image {
                     id: userIcon
@@ -126,7 +126,7 @@ ControlCenterDialog {
                     implicitWidth: topItem.height * 0.8
                     implicitHeight: topItem.height * 0.8
                     Layout.alignment: Qt.AlignTop
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
                     onLeftButtonClicked: {
                         control.visible = false
                         process.startDetached("cutefish-settings")
@@ -138,7 +138,7 @@ ControlCenterDialog {
                     implicitWidth: topItem.height * 0.8
                     implicitHeight: topItem.height * 0.8
                     Layout.alignment: Qt.AlignTop
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
                     onLeftButtonClicked: {
                         control.visible = false
                         process.startDetached("cutefish-shutdown")
@@ -155,13 +155,13 @@ ControlCenterDialog {
 
             RowLayout {
                 anchors.fill: parent
-                spacing: Meui.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
 
                 CardItem {
                     id: wirelessItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - Meui.Units.largeSpacing * 2
-                    icon: Meui.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
+                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
                                                          : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: network.wirelessHardwareEnabled
                     checked: network.wirelessEnabled
@@ -175,8 +175,8 @@ ControlCenterDialog {
                 CardItem {
                     id: bluetoothItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - Meui.Units.largeSpacing * 2
-                    icon: Meui.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
+                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
                                                          : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: false
                     label: qsTr("Bluetooth")
@@ -186,13 +186,13 @@ ControlCenterDialog {
                 CardItem {
                     id: darkModeItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - Meui.Units.largeSpacing * 2
-                    icon: Meui.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
+                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
                                                          : "qrc:/images/light/dark-mode.svg"
-                    checked: Meui.Theme.darkMode
+                    checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
-                    text: Meui.Theme.darkMode ? qsTr("On") : qsTr("Off")
-                    onClicked: appearance.switchDarkMode(!Meui.Theme.darkMode)
+                    text: FishUI.Theme.darkMode ? qsTr("On") : qsTr("Off")
+                    onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
                 }
 
                 Item {
@@ -207,25 +207,25 @@ ControlCenterDialog {
             height: 50
             visible: brightness.enabled
 
-            Meui.RoundedRect {
+            FishUI.RoundedRect {
                 id: brightnessItemBg
                 anchors.fill: parent
                 anchors.margins: 0
-                radius: Meui.Theme.bigRadius
-                color: Meui.Theme.backgroundColor
+                radius: FishUI.Theme.bigRadius
+                color: FishUI.Theme.backgroundColor
                 backgroundOpacity: 0.3
             }
 
             RowLayout {
                 anchors.fill: brightnessItemBg
-                anchors.margins: Meui.Units.largeSpacing
-                spacing: Meui.Units.largeSpacing
+                anchors.margins: FishUI.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
 
                 Image {
                     width: parent.height * 0.6
                     height: parent.height * 0.6
                     sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
                 }
 
                 Slider {
@@ -250,25 +250,25 @@ ControlCenterDialog {
             height: 50
             visible: volume.isValid
 
-            Meui.RoundedRect {
+            FishUI.RoundedRect {
                 id: volumeItemBg
                 anchors.fill: parent
                 anchors.margins: 0
-                radius: Meui.Theme.bigRadius
-                color: Meui.Theme.backgroundColor
+                radius: FishUI.Theme.bigRadius
+                color: FishUI.Theme.backgroundColor
                 backgroundOpacity: 0.3
             }
 
             RowLayout {
                 anchors.fill: volumeItemBg
-                anchors.margins: Meui.Units.largeSpacing
-                spacing: Meui.Units.largeSpacing
+                anchors.margins: FishUI.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
 
                 Image {
                     width: parent.height * 0.6
                     height: parent.height * 0.6
                     sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
                 }
 
                 Slider {
@@ -310,8 +310,8 @@ ControlCenterDialog {
             }
 
             StandardItem {
-                width: batteryLayout.implicitWidth + Meui.Units.largeSpacing
-                height: batteryLayout.implicitHeight + Meui.Units.largeSpacing
+                width: batteryLayout.implicitWidth + FishUI.Units.largeSpacing
+                height: batteryLayout.implicitHeight + FishUI.Units.largeSpacing
 
                 onClicked: {
                     control.visible = false
@@ -329,14 +329,14 @@ ControlCenterDialog {
                         width: 22
                         height: 16
                         sourceSize: Qt.size(width, height)
-                        source: "qrc:/images/" + (Meui.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
+                        source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         asynchronous: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     }
 
                     Label {
                         text: battery.chargePercent + "%"
-                        color: Meui.Theme.textColor
+                        color: FishUI.Theme.textColor
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     }
                 }
