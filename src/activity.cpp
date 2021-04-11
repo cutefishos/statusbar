@@ -65,27 +65,25 @@ void Activity::onActiveWindowChanged()
         info.windowClassClass() == "cutefish-desktop" ||
         info.windowClassClass() == "cutefish-statusbar") {
         m_title.clear();
-        m_icon.clear();
         emit titleChanged();
-        emit iconChanged();
         return;
     }
 
     m_pid = info.pid();
     m_windowClass = info.windowClassClass().toLower();
 
-    QString title = info.visibleName();
-    if (title != m_title) {
-        m_title = title;
-        emit titleChanged();
-        m_icon.clear();
-        emit iconChanged();
+    if (!matchInfo()) {
+        QString title = info.visibleName();
+        if (title != m_title) {
+            m_title = title;
+            emit titleChanged();
+            m_icon.clear();
+            emit iconChanged();
+        }
     }
-
-    matchInfo();
 }
 
-void Activity::matchInfo()
+bool Activity::matchInfo()
 {
     QString command = commandFromPid(m_pid);
 
@@ -121,9 +119,11 @@ void Activity::matchInfo()
             m_icon = desktop.value("Icon").toString();
             emit iconChanged();
 
-            break;
+            return true;
         }
     }
+
+    return false;
 }
 
 QString Activity::commandFromPid(quint32 pid)

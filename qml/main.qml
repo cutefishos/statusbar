@@ -51,7 +51,7 @@ Item {
             Layout.fillHeight: true
             Layout.preferredWidth: acticityLayout.implicitWidth + FishUI.Units.largeSpacing
 
-            visible: acticityLabel.text
+            visible: acticity.title
             onClicked: acticityMenu.open()
 
             RowLayout {
@@ -61,38 +61,19 @@ Item {
                 anchors.rightMargin: FishUI.Units.smallSpacing
                 spacing: FishUI.Units.largeSpacing
 
-                FishUI.IconItem {
+                Image {
                     id: acticityIcon
-                    width: 22
-                    height: 22
-                    source: acticity.icon ? acticity.icon : ""
-                    visible: source !== ""
+                    width: 16
+                    height: 16
+                    sourceSize: Qt.size(width, height)
+                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
+                    visible: status === Image.Ready
                 }
 
                 Label {
                     id: acticityLabel
                     text: acticity.title
-
-                    NumberAnimation {
-                        id: fadeInAni
-                        target: acticityLabel
-                        property: "opacity"
-                        duration: 250
-                        from: 0.0
-                        to: 1.0
-                    }
-
-                    onTextChanged: {
-                        fadeInAni.start()
-                    }
                 }
-
-//                Image {
-//                    width: 16
-//                    height: 16
-//                    sourceSize: Qt.size(width, height)
-//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/down.svg" : "light/down.svg")
-//                }
             }
         }
 

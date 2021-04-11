@@ -38,7 +38,7 @@ public:
 
 private slots:
     void onActiveWindowChanged();
-    void matchInfo();
+    bool matchInfo();
 
     QString commandFromPid(quint32 pid);
 
