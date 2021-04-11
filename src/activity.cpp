@@ -31,6 +31,7 @@
 
 Activity::Activity(QObject *parent)
     : QObject(parent)
+    , m_cApps(CApplications::self())
 {
     onActiveWindowChanged();
 
@@ -72,7 +73,18 @@ void Activity::onActiveWindowChanged()
     m_pid = info.pid();
     m_windowClass = info.windowClassClass().toLower();
 
-    if (!matchInfo()) {
+    CAppItem *item = m_cApps->matchItem(m_pid);
+
+    if (item) {
+        m_title = item->localName;
+        emit titleChanged();
+
+        if (m_icon != item->icon) {
+            m_icon = item->icon;
+            emit iconChanged();
+        }
+
+    } else {
         QString title = info.visibleName();
         if (title != m_title) {
             m_title = title;
@@ -81,76 +93,4 @@ void Activity::onActiveWindowChanged()
             emit iconChanged();
         }
     }
-}
-
-bool Activity::matchInfo()
-{
-    QString command = commandFromPid(m_pid);
-
-    // TODO: optimization
-    QDirIterator it("/usr/share/applications", { "*.desktop" },
-                    QDir::NoFilter, QDirIterator::Subdirectories);
-
-    while (it.hasNext()) {
-        const QString &filePath = it.next();
-
-        QSettings desktop(filePath, QSettings::IniFormat);
-        desktop.setIniCodec("UTF-8");
-        desktop.beginGroup("Desktop Entry");
-
-        if (desktop.value("NoDisplay").toBool() ||
-            desktop.value("Hidden").toBool()) {
-            continue;
-        }
-
-        QString exec = desktop.value("Exec").toString();
-        exec.remove(QRegularExpression("%."));
-        exec.remove(QRegularExpression("^\""));
-        exec = exec.simplified();
-
-        if (command == exec) {
-            QString name = desktop.value(QString("Name[%1]").arg(QLocale::system().name())).toString();
-            if (name.isEmpty())
-                name = desktop.value("Name").toString();
-
-            m_title = name;
-            emit titleChanged();
-
-            m_icon = desktop.value("Icon").toString();
-            emit iconChanged();
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
-QString Activity::commandFromPid(quint32 pid)
-{
-    QFile file(QString("/proc/%1/cmdline").arg(pid));
-
-    if (file.open(QIODevice::ReadOnly)) {
-        QByteArray cmd = file.readAll();
-
-        // ref: https://github.com/KDE/kcoreaddons/blob/230c98aa7e01f9e36a9c2776f3633182e6778002/src/lib/util/kprocesslist_unix.cpp#L137
-        if (!cmd.isEmpty()) {
-            // extract non-truncated name from cmdline
-            int zeroIndex = cmd.indexOf('\0');
-            int processNameStart = cmd.lastIndexOf('/', zeroIndex);
-            if (processNameStart == -1) {
-                processNameStart = 0;
-            } else {
-                processNameStart++;
-            }
-
-            QString name = QString::fromLocal8Bit(cmd.mid(processNameStart, zeroIndex - processNameStart));
-
-            cmd.replace('\0', ' ');
-            QString command = QString::fromLocal8Bit(cmd).trimmed();
-            return name;
-        }
-    }
-
-    return QString();
 }

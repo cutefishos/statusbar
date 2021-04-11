@@ -49,9 +49,8 @@ Item {
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
-            Layout.preferredWidth: acticityLayout.implicitWidth + FishUI.Units.largeSpacing
-
-            visible: acticity.title
+            Layout.preferredWidth: acticityLayout.implicitWidth ? acticityLayout.implicitWidth + FishUI.Units.largeSpacing
+                                                                : 0
             onClicked: acticityMenu.open()
 
             RowLayout {
@@ -61,18 +60,20 @@ Item {
                 anchors.rightMargin: FishUI.Units.smallSpacing
                 spacing: FishUI.Units.largeSpacing
 
-                Image {
-                    id: acticityIcon
-                    width: 16
-                    height: 16
-                    sourceSize: Qt.size(width, height)
-                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
-                    visible: status === Image.Ready
-                }
+//                Image {
+//                    id: acticityIcon
+//                    width: 16
+//                    height: 16
+//                    sourceSize: Qt.size(width, height)
+//                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
+//                    visible: status === Image.Ready
+//                    asynchronous: true
+//                }
 
                 Label {
                     id: acticityLabel
                     text: acticity.title
+                    visible: text
                 }
             }
         }

@@ -17,39 +17,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTIVITY_H
-#define ACTIVITY_H
+#ifndef CAPPLICATIONS_H
+#define CAPPLICATIONS_H
 
 #include <QObject>
-#include "capplications.h"
+#include <QFileSystemWatcher>
 
-class Activity : public QObject
+class CAppItem
 {
-    Q_OBJECT
-    Q_PROPERTY(QString title READ title NOTIFY titleChanged)
-    Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
-
 public:
-    explicit Activity(QObject *parent = nullptr);
-
-    QString title() const;
-    QString icon() const;
-
-    Q_INVOKABLE void close();
-
-private slots:
-    void onActiveWindowChanged();
-
-signals:
-    void titleChanged();
-    void iconChanged();
-
-private:
-    CApplications *m_cApps;
-    QString m_title;
-    QString m_icon;
-    QString m_windowClass;
-    quint32 m_pid;
+    QString path;
+    QString localName;
+    QString name;
+    QString comment;
+    QString icon;
+    QString fullExec;
+    QString exec;
 };
 
-#endif // ACTIVITY_H
+class CApplications : public QObject
+{
+    Q_OBJECT
+
+public:
+    static CApplications *self();
+    explicit CApplications(QObject *parent = nullptr);
+    ~CApplications();
+
+    CAppItem *find(const QString &fileName);
+    CAppItem *matchItem(quint32 pid);
+
+private:
+    void refresh();
+    void addApplication(const QString &filePath);
+    void removeApplication(CAppItem *item);
+
+    QStringList commandFromPid(quint32 pid);
+
+private:
+    QFileSystemWatcher *m_watcher;
+    QList<CAppItem *> m_items;
+};
+
+#endif // CAPPLICATIONS_H
