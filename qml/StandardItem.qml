@@ -35,7 +35,7 @@ Item {
             if (containsMouse && control.popupText !== "") {
                 popupTips.popupText = control.popupText
                 popupTips.position = Qt.point(control.mapToGlobal(0, 0).x + (control.width / 2 - popupTips.width / 2),
-                                              control.height + 1)
+                                              control.height + FishUI.Units.smallSpacing)
                 popupTips.show()
             } else {
                 popupTips.hide()

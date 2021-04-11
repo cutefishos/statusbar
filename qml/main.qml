@@ -92,7 +92,7 @@ Item {
             spacing: 0
 
             property var itemSize: rootItem.height * 0.8
-            property var itemWidth: itemSize + FishUI.Units.largeSpacing
+            property var itemWidth: itemSize + FishUI.Units.smallSpacing
 
             Layout.fillHeight: true
             Layout.preferredWidth: itemWidth * count
@@ -180,6 +180,8 @@ Item {
 
                 // Battery Item
                 RowLayout {
+                    visible: battery.available
+
                     Label {
                         font.pointSize: 11
                         text: battery.chargePercent + "%"
@@ -188,13 +190,11 @@ Item {
 
                     Image {
                         id: batteryIcon
-                        visible: battery.available && status === Image.Ready
                         height: rootItem.iconSize
                         width: height + 6
                         sourceSize: Qt.size(width, height)
                         source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
-                        asynchronous: true
                     }
                 }
 
