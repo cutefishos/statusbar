@@ -10,13 +10,13 @@ import FishUI 1.0 as FishUI
 
 ControlCenterDialog {
     id: control
-    width: 500
-    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
+    width: 450
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
 
-    minimumWidth: 500
-    maximumWidth: 500
-    minimumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
-    maximumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 4
+    minimumWidth: 450
+    maximumWidth: 450
+    minimumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
+    maximumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
 
     property var margin: 4 * FishUI.Units.devicePixelRatio
     property point position: Qt.point(0, 0)
@@ -76,16 +76,16 @@ ControlCenterDialog {
     ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
-        anchors.leftMargin: FishUI.Units.largeSpacing * 2
+        anchors.leftMargin: FishUI.Units.largeSpacing * 1.5
         anchors.topMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.rightMargin: FishUI.Units.largeSpacing * 2
+        anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
         anchors.bottomMargin: FishUI.Units.largeSpacing
         spacing: FishUI.Units.largeSpacing
 
         Item {
             id: topItem
             Layout.fillWidth: true
-            height: 50
+            height: 48
 
             RowLayout {
                 id: topItemLayout
@@ -150,12 +150,12 @@ ControlCenterDialog {
         Item {
             id: controlItem
             Layout.fillWidth: true
-            height: 120
+            height: 110
             visible: wirelessItem.visible || bluetoothItem.visible
 
             RowLayout {
                 anchors.fill: parent
-                spacing: FishUI.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing * 1.5
 
                 CardItem {
                     id: wirelessItem
@@ -204,7 +204,7 @@ ControlCenterDialog {
         Item {
             id: brightnessItem
             Layout.fillWidth: true
-            height: 50
+            height: 45
             visible: brightness.enabled
 
             FishUI.RoundedRect {
@@ -222,8 +222,8 @@ ControlCenterDialog {
                 spacing: FishUI.Units.largeSpacing
 
                 Image {
-                    width: parent.height * 0.6
-                    height: parent.height * 0.6
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
                 }
@@ -247,7 +247,7 @@ ControlCenterDialog {
         Item {
             id: volumeItem
             Layout.fillWidth: true
-            height: 50
+            height: 45
             visible: volume.isValid
 
             FishUI.RoundedRect {
@@ -265,8 +265,8 @@ ControlCenterDialog {
                 spacing: FishUI.Units.largeSpacing
 
                 Image {
-                    width: parent.height * 0.6
-                    height: parent.height * 0.6
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
                 }
