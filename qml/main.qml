@@ -45,7 +45,7 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: FishUI.Units.smallSpacing
         anchors.rightMargin: FishUI.Units.smallSpacing
-        spacing: 0
+        spacing: FishUI.Units.smallSpacing
 
         StandardItem {
             id: acticityItem
@@ -91,13 +91,13 @@ Item {
             layoutDirection: Qt.RightToLeft
             interactive: false
             clip: true
-            spacing: 0
+            spacing: FishUI.Units.smallSpacing
 
             property var itemSize: rootItem.height * 0.8
             property var itemWidth: itemSize + FishUI.Units.smallSpacing
 
             Layout.fillHeight: true
-            Layout.preferredWidth: itemWidth * count
+            Layout.preferredWidth: (itemWidth + (count - 1) * FishUI.Units.smallSpacing) * count
 
             model: SystemTrayModel {
                 id: trayModel

@@ -57,7 +57,7 @@ StatusBar::StatusBar(QQuickView *parent)
 void StatusBar::updateGeometry()
 {
     const QRect rect = qApp->primaryScreen()->geometry();
-    QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 28 * qApp->devicePixelRatio());
+    QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 26 * qApp->devicePixelRatio());
     setGeometry(windowRect);
     updateViewStruts();
 
