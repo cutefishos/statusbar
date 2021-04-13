@@ -59,12 +59,12 @@ Item {
                 anchors.fill: parent
                 anchors.leftMargin: FishUI.Units.smallSpacing
                 anchors.rightMargin: FishUI.Units.smallSpacing
-                spacing: FishUI.Units.largeSpacing
+                spacing: FishUI.Units.smallSpacing * 1.5
 
                 Image {
                     id: acticityIcon
-                    width: 16
-                    height: 16
+                    width: rootItem.iconSize
+                    height: rootItem.iconSize
                     sourceSize: Qt.size(width, height)
                     source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
                     visible: status === Image.Ready
