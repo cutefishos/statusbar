@@ -4,32 +4,40 @@
 <context>
     <name>ControlDialog</name>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="178"/>
+        <location filename="../qml/ControlDialog.qml" line="168"/>
         <source>Wi-Fi</source>
         <translation>无线网络</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
+        <location filename="../qml/ControlDialog.qml" line="171"/>
+        <location filename="../qml/ControlDialog.qml" line="194"/>
         <source>On</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="193"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
+        <location filename="../qml/ControlDialog.qml" line="171"/>
+        <location filename="../qml/ControlDialog.qml" line="183"/>
+        <location filename="../qml/ControlDialog.qml" line="194"/>
         <source>Off</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="192"/>
+        <location filename="../qml/ControlDialog.qml" line="182"/>
         <source>Bluetooth</source>
         <translation>蓝牙</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="203"/>
+        <location filename="../qml/ControlDialog.qml" line="193"/>
         <source>Dark Mode</source>
         <translation>深色模式</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/main.qml" line="39"/>
+        <source>Close</source>
+        <translation>关闭</translation>
     </message>
 </context>
 </TS>

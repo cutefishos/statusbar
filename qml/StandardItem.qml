@@ -45,6 +45,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
+        anchors.topMargin: 1
+        anchors.bottomMargin: 1
         radius: FishUI.Theme.smallRadius
 
         color: {

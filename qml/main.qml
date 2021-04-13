@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 
 import Cutefish.StatusBar 1.0
 import Cutefish.NetworkManagement 1.0 as NM
@@ -9,7 +10,7 @@ import FishUI 1.0 as FishUI
 Item {
     id: rootItem
 
-    property int iconSize: 16
+    property int iconSize: 16 * Screen.devicePixelRatio
 
     Rectangle {
         id: background
@@ -60,20 +61,21 @@ Item {
                 anchors.rightMargin: FishUI.Units.smallSpacing
                 spacing: FishUI.Units.largeSpacing
 
-//                Image {
-//                    id: acticityIcon
-//                    width: 16
-//                    height: 16
-//                    sourceSize: Qt.size(width, height)
-//                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
-//                    visible: status === Image.Ready
-//                    asynchronous: true
-//                }
+                Image {
+                    id: acticityIcon
+                    width: 16
+                    height: 16
+                    sourceSize: Qt.size(width, height)
+                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
+                    visible: status === Image.Ready
+                    asynchronous: true
+                }
 
                 Label {
                     id: acticityLabel
                     text: acticity.title
                     visible: text
+                    Layout.fillHeight: true
                 }
             }
         }
