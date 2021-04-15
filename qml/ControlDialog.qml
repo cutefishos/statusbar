@@ -18,7 +18,7 @@ ControlCenterDialog {
     minimumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
     maximumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
 
-    property var margin: 4 * FishUI.Units.devicePixelRatio
+    property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
 
     onWidthChanged: adjustCorrectLocation()
