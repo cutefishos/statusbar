@@ -64,7 +64,7 @@ ControlCenterDialog {
         anchors.fill: parent
         radius: control.height * 0.05
         color: FishUI.Theme.backgroundColor
-        backgroundOpacity: FishUI.Theme.darkMode ? 0.3 : 0.4
+        backgroundOpacity: 0.4
     }
 
     FishUI.WindowShadow {
@@ -211,7 +211,7 @@ ControlCenterDialog {
                 id: brightnessItemBg
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
                                              : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
                 opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
@@ -254,7 +254,7 @@ ControlCenterDialog {
                 id: volumeItemBg
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
                                              : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
                 opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
