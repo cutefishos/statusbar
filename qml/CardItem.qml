@@ -14,10 +14,12 @@ Item {
 
     signal clicked
 
-    property var hoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2)
+    property var backgroundColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                                                        : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+    property var hoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 3)
                                                    : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.3)
-    property var pressedColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 1.8)
-                                                     : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.5)
+    property var pressedColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                                                     : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.4)
 
     property var highlightHoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
                                                             : Qt.darker(FishUI.Theme.highlightColor, 1.1)
@@ -42,11 +44,10 @@ Item {
         }
     }
 
-    FishUI.RoundedRect {
+    Rectangle {
         anchors.fill: parent
         radius: FishUI.Theme.bigRadius
-        backgroundOpacity: control.checked ? 0.9 : 0.3
-        animationEnabled: false
+        opacity: control.checked ? 0.9 : FishUI.Theme.darkMode ? 0.3 : 0.5
 
         color: {
             if (control.checked) {
@@ -62,7 +63,7 @@ Item {
                 else if (_mouseArea.containsMouse)
                     return hoverColor
                 else
-                    return FishUI.Theme.secondBackgroundColor
+                    return backgroundColor
             }
         }
     }

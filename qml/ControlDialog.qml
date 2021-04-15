@@ -207,13 +207,13 @@ ControlCenterDialog {
             height: 45
             visible: brightness.enabled
 
-            FishUI.RoundedRect {
+            Rectangle {
                 id: brightnessItemBg
                 anchors.fill: parent
-                anchors.margins: 0
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.backgroundColor
-                backgroundOpacity: 0.3
+                color: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                                             : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+                opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
 
             RowLayout {
@@ -250,13 +250,13 @@ ControlCenterDialog {
             height: 45
             visible: volume.isValid
 
-            FishUI.RoundedRect {
+            Rectangle {
                 id: volumeItemBg
                 anchors.fill: parent
-                anchors.margins: 0
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.backgroundColor
-                backgroundOpacity: 0.3
+                color: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.secondBackgroundColor, 2.5)
+                                             : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+                opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
 
             RowLayout {
