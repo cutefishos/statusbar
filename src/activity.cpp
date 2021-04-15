@@ -66,7 +66,9 @@ void Activity::onActiveWindowChanged()
         info.windowClassClass() == "cutefish-desktop" ||
         info.windowClassClass() == "cutefish-statusbar") {
         m_title.clear();
+        m_icon.clear();
         emit titleChanged();
+        emit iconChanged();
         return;
     }
 
