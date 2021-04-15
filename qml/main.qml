@@ -74,8 +74,10 @@ Item {
                 Label {
                     id: acticityLabel
                     text: acticity.title
+                    font.pixelSize: rootItem.height * 0.5
+                    color: FishUI.Theme.darkMode ? 'white' : 'black'
                     visible: text
-                    Layout.fillHeight: true
+                    Layout.alignment: acticityIcon.verticalCenter
                 }
             }
         }
@@ -184,12 +186,6 @@ Item {
                 RowLayout {
                     visible: battery.available
 
-                    Label {
-                        font.pointSize: 11
-                        text: battery.chargePercent + "%"
-                        visible: battery.showPercentage
-                    }
-
                     Image {
                         id: batteryIcon
                         height: rootItem.iconSize
@@ -198,22 +194,20 @@ Item {
                         source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
                     }
-                }
 
-//                Image {
-//                    id: powerIcon
-//                    height: rootItem.iconSize + 2
-//                    width: height
-//                    sourceSize: Qt.size(width, height)
-//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
-//                    Layout.alignment: Qt.AlignCenter
-//                    asynchronous: true
-//                }
+                    Label {
+                        text: battery.chargePercent + "%"
+                        font.pixelSize: rootItem.height * 0.5
+                        color: FishUI.Theme.darkMode ? 'white' : 'black'
+                        visible: battery.showPercentage
+                    }
+                }
 
                 Label {
                     id: timeLabel
                     Layout.alignment: Qt.AlignCenter
                     font.pixelSize: rootItem.height * 0.5
+                    color: FishUI.Theme.darkMode ? 'white' : 'black'
 
                     Timer {
                         interval: 1000
