@@ -65,19 +65,20 @@ Item {
                     id: acticityIcon
                     width: rootItem.iconSize
                     height: rootItem.iconSize
-                    sourceSize: Qt.size(width, height)
+                    sourceSize: Qt.size(rootItem.iconSize,
+                                        rootItem.iconSize)
                     source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
                     visible: status === Image.Ready
-                    asynchronous: true
                 }
 
                 Label {
                     id: acticityLabel
                     text: acticity.title
-                    font.pixelSize: rootItem.height * 0.5
                     color: FishUI.Theme.darkMode ? 'white' : 'black'
                     visible: text
-                    Layout.alignment: acticityIcon.verticalCenter
+                    Layout.alignment: Qt.AlignVCenter
+                    font.pointSize: parent.height ? parent.height / 3 : 1
+
                 }
             }
         }
@@ -189,7 +190,7 @@ Item {
                     Image {
                         id: batteryIcon
                         height: rootItem.iconSize
-                        width: height + 6
+                        width: height + (6 * Screen.devicePixelRatio)
                         sourceSize: Qt.size(width, height)
                         source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
@@ -197,7 +198,7 @@ Item {
 
                     Label {
                         text: battery.chargePercent + "%"
-                        font.pixelSize: rootItem.height * 0.5
+                        font.pointSize: parent.height ? parent.height / 2 : 1
                         color: FishUI.Theme.darkMode ? 'white' : 'black'
                         visible: battery.showPercentage
                     }
@@ -206,7 +207,7 @@ Item {
                 Label {
                     id: timeLabel
                     Layout.alignment: Qt.AlignCenter
-                    font.pixelSize: rootItem.height * 0.5
+                    font.pointSize: parent.height ? parent.height / 3 : 1
                     color: FishUI.Theme.darkMode ? 'white' : 'black'
 
                     Timer {
