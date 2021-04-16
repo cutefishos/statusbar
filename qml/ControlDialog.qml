@@ -212,7 +212,7 @@ ControlCenterDialog {
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
                 color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                             : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+                                             : Qt.rgba(0, 0, 0, 0.1)
                 opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
 
@@ -255,7 +255,7 @@ ControlCenterDialog {
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
                 color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                             : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+                                             : Qt.rgba(0, 0, 0, 0.1)
                 opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
             }
 

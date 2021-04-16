@@ -15,11 +15,11 @@ Item {
     signal clicked
 
     property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                                        : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.05)
+                                                        : Qt.rgba(0, 0, 0, 0.1)
     property var hoverColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.5)
-                                                   : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.3)
+                                                   : Qt.rgba(0, 0, 0, 0.2)
     property var pressedColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.3)
-                                                     : Qt.darker(FishUI.Theme.secondBackgroundColor, 1.4)
+                                                     : Qt.rgba(0, 0, 0, 0.15)
 
     property var highlightHoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
                                                             : Qt.darker(FishUI.Theme.highlightColor, 1.1)
