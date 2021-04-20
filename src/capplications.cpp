@@ -74,6 +74,12 @@ CAppItem *CApplications::find(const QString &fileName)
 CAppItem *CApplications::matchItem(quint32 pid)
 {
     QStringList commands = commandFromPid(pid);
+
+    // The value returned from the commandFromPid() may be empty.
+    // Calling first() and last() below will cause the statusbar to crash.
+    if (commands.isEmpty())
+        return nullptr;
+
     QString command = commands.first();
     QString commandName = commands.last();
 
