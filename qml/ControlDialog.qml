@@ -228,6 +228,13 @@ ControlCenterDialog {
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
                 }
 
+                Timer {
+                    id: brightnessTimer
+                    interval: 200
+                    repeat: false
+                    onTriggered: brightness.setValue(brightnessSlider.value)
+                }
+
                 Slider {
                     id: brightnessSlider
                     from: 0
@@ -236,10 +243,7 @@ ControlCenterDialog {
                     value: brightness.value
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-
-                    onMoved: {
-                        brightness.setValue(brightnessSlider.value)
-                    }
+                    onMoved: brightnessTimer.start()
                 }
             }
         }
