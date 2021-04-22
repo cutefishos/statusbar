@@ -11,7 +11,7 @@
    height="16"
    version="1.1"
    id="svg10"
-   sodipodi:docname="battery-level-40-symbolic.svg"
+   sodipodi:docname="battery-level-30-symbolic.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <metadata
      id="metadata16">
@@ -36,17 +36,24 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="2160"
-     inkscape:window-height="1277"
+     inkscape:window-height="1240"
      id="namedview12"
      showgrid="false"
      inkscape:zoom="45.9375"
      inkscape:cx="11"
      inkscape:cy="8"
      inkscape:window-x="0"
-     inkscape:window-y="30"
+     inkscape:window-y="40"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg10"
      inkscape:document-rotation="0" />
+  <rect
+     style="opacity:0.7;fill:#ffffff;fill-opacity:1;stroke-width:1.11904"
+     id="rect843"
+     width="15.355352"
+     height="8.3758783"
+     x="1.7900505"
+     y="3.8302834" />
   <rect
      x="3"
      y="5"
