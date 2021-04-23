@@ -16,7 +16,7 @@ Item {
         id: background
         anchors.fill: parent
         color: FishUI.Theme.backgroundColor
-        opacity: 0.6
+        opacity: FishUI.Theme.darkMode ? 0.6 : 0.8
 
         Behavior on color {
             ColorAnimation {
@@ -80,8 +80,7 @@ Item {
                     color: FishUI.Theme.darkMode ? 'white' : 'black'
                     visible: text
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: parent.height ? parent.height / 3 : 1
-
+                    font.pointSize: rootItem.height ? rootItem.height / 3 : 1
                 }
             }
         }
@@ -201,7 +200,7 @@ Item {
 
                     Label {
                         text: battery.chargePercent + "%"
-                        font.pointSize: parent.height ? parent.height / 2 : 1
+                        font.pointSize: rootItem.height ? rootItem.height / 3 : 1
                         color: FishUI.Theme.darkMode ? 'white' : 'black'
                         visible: battery.showPercentage
                     }
@@ -210,7 +209,7 @@ Item {
                 Label {
                     id: timeLabel
                     Layout.alignment: Qt.AlignCenter
-                    font.pointSize: parent.height ? parent.height / 3 : 1
+                    font.pointSize: rootItem.height ? rootItem.height / 3 : 1
                     color: FishUI.Theme.darkMode ? 'white' : 'black'
 
                     Timer {

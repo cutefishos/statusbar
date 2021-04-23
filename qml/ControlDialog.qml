@@ -64,7 +64,7 @@ ControlCenterDialog {
         anchors.fill: parent
         radius: control.height * 0.05
         color: FishUI.Theme.backgroundColor
-        backgroundOpacity: 0.4
+        backgroundOpacity: FishUI.Theme.darkMode ? 0.4 : 0.7
     }
 
     FishUI.WindowShadow {
