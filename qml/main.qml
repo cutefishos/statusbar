@@ -50,7 +50,8 @@ Item {
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
-            Layout.preferredWidth: acticityLayout.implicitWidth ? acticityLayout.implicitWidth + FishUI.Units.largeSpacing
+            Layout.preferredWidth: acticityLayout.implicitWidth ? Math.min(acticityLayout.implicitWidth + FishUI.Units.largeSpacing,
+                                                                           rootItem.width / 2)
                                                                 : 0
             onClicked: acticityMenu.open()
 
@@ -74,6 +75,8 @@ Item {
                 Label {
                     id: acticityLabel
                     text: acticity.title
+                    Layout.fillWidth: true
+                    elide: Qt.ElideRight
                     color: FishUI.Theme.darkMode ? 'white' : 'black'
                     visible: text
                     Layout.alignment: Qt.AlignVCenter
