@@ -36,8 +36,8 @@ Activity::Activity(QObject *parent)
     onActiveWindowChanged();
 
     connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &Activity::onActiveWindowChanged);
-    // connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged),
-    //         this, &Activity::onActiveWindowChanged);
+    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged),
+            this, &Activity::onActiveWindowChanged);
 }
 
 QString Activity::title() const
