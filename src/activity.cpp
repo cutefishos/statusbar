@@ -29,6 +29,10 @@
 #include <NETWM>
 #include <KWindowSystem>
 
+static const QStringList blockList = {"cutefish-launcher",
+                                      "cutefish-desktop",
+                                      "cutefish-statusbar"};
+
 Activity::Activity(QObject *parent)
     : QObject(parent)
     , m_cApps(CApplications::self())
@@ -55,20 +59,53 @@ void Activity::close()
     NETRootInfo(QX11Info::connection(), NET::CloseWindow).closeWindowRequest(KWindowSystem::activeWindow());
 }
 
+bool Activity::isAcceptableWindow(quint64 wid)
+{
+    QFlags<NET::WindowTypeMask> ignoreList;
+    ignoreList |= NET::DesktopMask;
+    ignoreList |= NET::DockMask;
+    ignoreList |= NET::SplashMask;
+    ignoreList |= NET::ToolbarMask;
+    ignoreList |= NET::MenuMask;
+    ignoreList |= NET::PopupMenuMask;
+    ignoreList |= NET::NotificationMask;
+
+    KWindowInfo info(wid, NET::WMWindowType | NET::WMState, NET::WM2TransientFor | NET::WM2WindowClass);
+
+    if (!info.valid())
+        return false;
+
+    if (NET::typeMatchesMask(info.windowType(NET::AllTypesMask), ignoreList))
+        return false;
+
+    if (info.hasState(NET::SkipTaskbar) || info.hasState(NET::SkipPager))
+        return false;
+
+    // WM_TRANSIENT_FOR hint not set - normal window
+    WId transFor = info.transientFor();
+    if (transFor == 0 || transFor == wid || transFor == (WId) QX11Info::appRootWindow())
+        return true;
+
+    info = KWindowInfo(transFor, NET::WMWindowType);
+
+    QFlags<NET::WindowTypeMask> normalFlag;
+    normalFlag |= NET::NormalMask;
+    normalFlag |= NET::DialogMask;
+    normalFlag |= NET::UtilityMask;
+
+    return !NET::typeMatchesMask(info.windowType(NET::AllTypesMask), normalFlag);
+}
+
 void Activity::onActiveWindowChanged()
 {
     KWindowInfo info(KWindowSystem::activeWindow(),
                      NET::WMState | NET::WMVisibleName,
                      NET::WM2WindowClass);
 
-    // Skip...
-    if (info.windowClassClass() == "cutefish-launcher" ||
-        info.windowClassClass() == "cutefish-desktop" ||
-        info.windowClassClass() == "cutefish-statusbar") {
-        m_title.clear();
-        m_icon.clear();
-        emit titleChanged();
-        emit iconChanged();
+    if (!isAcceptableWindow(KWindowSystem::activeWindow())
+            || blockList.contains(info.windowClassClass())) {
+        clearTitle();
+        clearIcon();
         return;
     }
 
@@ -91,8 +128,19 @@ void Activity::onActiveWindowChanged()
         if (title != m_title) {
             m_title = title;
             emit titleChanged();
-            m_icon.clear();
-            emit iconChanged();
+            clearIcon();
         }
     }
+}
+
+void Activity::clearTitle()
+{
+    m_title.clear();
+    emit titleChanged();
+}
+
+void Activity::clearIcon()
+{
+    m_icon.clear();
+    emit iconChanged();
 }

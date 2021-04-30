@@ -37,8 +37,13 @@ public:
 
     Q_INVOKABLE void close();
 
+    bool isAcceptableWindow(quint64 wid);
+
 private slots:
     void onActiveWindowChanged();
+
+    void clearTitle();
+    void clearIcon();
 
 signals:
     void titleChanged();
