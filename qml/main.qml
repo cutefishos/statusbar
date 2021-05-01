@@ -53,7 +53,7 @@ Item {
             Layout.preferredWidth: acticityLayout.implicitWidth ? Math.min(acticityLayout.implicitWidth + FishUI.Units.largeSpacing,
                                                                            rootItem.width / 2)
                                                                 : 0
-            onClicked: acticityMenu.open()
+            onRightClicked: acticityMenu.open()
 
             RowLayout {
                 id: acticityLayout
@@ -141,7 +141,10 @@ Item {
             Layout.fillHeight: true
             Layout.preferredWidth: _controlerLayout.implicitWidth + FishUI.Units.largeSpacing
 
-            onClicked: {
+            onClicked: toggleDialog()
+            onRightClicked: toggleDialog()
+
+            function toggleDialog() {
                 if (controlDialog.visible)
                     controlDialog.visible = false
                 else {
