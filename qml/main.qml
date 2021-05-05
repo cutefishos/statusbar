@@ -10,7 +10,7 @@ import FishUI 1.0 as FishUI
 Item {
     id: rootItem
 
-    property int iconSize: 16 * Screen.devicePixelRatio
+    property int iconSize: 16
 
     Rectangle {
         id: background
@@ -195,7 +195,7 @@ Item {
                     Image {
                         id: batteryIcon
                         height: rootItem.iconSize
-                        width: height + (6 * Screen.devicePixelRatio)
+                        width: height + 6
                         sourceSize: Qt.size(width, height)
                         source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
