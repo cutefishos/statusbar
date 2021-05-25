@@ -59,12 +59,5 @@ Item {
 
             return "transparent"
         }
-
-        Behavior on color {
-            ColorAnimation {
-                duration: 125
-                easing.type: Easing.InOutCubic
-            }
-        }
     }
 }

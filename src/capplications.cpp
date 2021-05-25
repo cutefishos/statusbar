@@ -203,6 +203,12 @@ QStringList CApplications::commandFromPid(quint32 pid)
 
             cmd.replace('\0', ' ');
             QString command = QString::fromLocal8Bit(cmd).trimmed();
+
+            // There may be parameters.
+            if (command.split(' ').size() > 1) {
+                command = command.split(' ').first();
+            }
+
             return { command, name };
         }
     }

@@ -10,13 +10,9 @@ import FishUI 1.0 as FishUI
 
 ControlCenterDialog {
     id: control
-    width: 450
-    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
 
-    minimumWidth: 450
-    maximumWidth: 450
-    minimumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
-    maximumHeight: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
+    width: 500
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
 
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
@@ -80,7 +76,7 @@ ControlCenterDialog {
         anchors.topMargin: FishUI.Units.largeSpacing * 1.5
         anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
         anchors.bottomMargin: FishUI.Units.largeSpacing
-        spacing: FishUI.Units.largeSpacing
+        spacing: FishUI.Units.largeSpacing * 1.5
 
         Item {
             id: topItem
@@ -148,7 +144,7 @@ ControlCenterDialog {
         }
 
         Item {
-            id: controlItem
+            id: cardItems
             Layout.fillWidth: true
             height: 110
             visible: wirelessItem.visible || bluetoothItem.visible
@@ -160,7 +156,7 @@ ControlCenterDialog {
                 CardItem {
                     id: wirelessItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
                                                          : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: network.wirelessHardwareEnabled
@@ -175,7 +171,7 @@ ControlCenterDialog {
                 CardItem {
                     id: bluetoothItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
                                                          : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: false
@@ -186,17 +182,13 @@ ControlCenterDialog {
                 CardItem {
                     id: darkModeItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: contentItem.width / 3 - FishUI.Units.largeSpacing * 2
+                    Layout.fillWidth: true
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
                                                          : "qrc:/images/light/dark-mode.svg"
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
                     text: FishUI.Theme.darkMode ? qsTr("On") : qsTr("Off")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
-                }
-
-                Item {
-                    Layout.fillWidth: true
                 }
             }
         }
@@ -295,8 +287,11 @@ ControlCenterDialog {
         }
 
         RowLayout {
+            spacing: 0
+
             Label {
                 id: timeLabel
+                leftPadding: FishUI.Units.smallSpacing / 2
 
                 Timer {
                     interval: 1000
@@ -341,6 +336,7 @@ ControlCenterDialog {
                     Label {
                         text: battery.chargePercent + "%"
                         color: FishUI.Theme.textColor
+                        rightPadding: FishUI.Units.smallSpacing / 2
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     }
                 }

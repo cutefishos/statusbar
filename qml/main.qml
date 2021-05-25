@@ -16,7 +16,7 @@ Item {
         id: background
         anchors.fill: parent
         color: FishUI.Theme.backgroundColor
-        opacity: FishUI.Theme.darkMode ? 0.6 : 0.8
+        opacity: FishUI.Theme.darkMode ? 0.6 : 0.7
 
         Behavior on color {
             ColorAnimation {
