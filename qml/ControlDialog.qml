@@ -11,7 +11,7 @@ import FishUI 1.0 as FishUI
 ControlCenterDialog {
     id: control
 
-    width: 500
+    width: 450
     height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
 
     property var margin: 4 * Screen.devicePixelRatio
@@ -55,18 +55,28 @@ ControlCenterDialog {
         enabled: true
     }
 
-    FishUI.RoundedRect {
-        id: _background
-        anchors.fill: parent
-        radius: control.height * 0.05
-        color: FishUI.Theme.backgroundColor
-        backgroundOpacity: FishUI.Theme.darkMode ? 0.4 : 0.7
-    }
-
     FishUI.WindowShadow {
         view: control
         geometry: Qt.rect(control.x, control.y, control.width, control.height)
         radius: _background.radius
+    }
+
+    Rectangle {
+        id: _background
+        anchors.fill: parent
+        radius: control.height * 0.05
+        color: FishUI.Theme.backgroundColor
+        opacity: FishUI.Theme.darkMode ? 0.4 : 0.7
+        antialiasing: true
+        border.width: 0
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        radius: _background.radius
+        border.color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.1)
+        antialiasing: true
     }
 
     ColumnLayout {
@@ -76,7 +86,7 @@ ControlCenterDialog {
         anchors.topMargin: FishUI.Units.largeSpacing * 1.5
         anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
         anchors.bottomMargin: FishUI.Units.largeSpacing
-        spacing: FishUI.Units.largeSpacing * 1.5
+        spacing: FishUI.Units.largeSpacing
 
         Item {
             id: topItem
@@ -151,7 +161,7 @@ ControlCenterDialog {
 
             RowLayout {
                 anchors.fill: parent
-                spacing: FishUI.Units.largeSpacing * 1.5
+                spacing: FishUI.Units.largeSpacing
 
                 CardItem {
                     id: wirelessItem
