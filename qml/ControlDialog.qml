@@ -302,6 +302,7 @@ ControlCenterDialog {
             Label {
                 id: timeLabel
                 leftPadding: FishUI.Units.smallSpacing / 2
+                color: FishUI.Theme.textColor
 
                 Timer {
                     interval: 1000
