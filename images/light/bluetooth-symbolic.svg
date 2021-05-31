@@ -12,7 +12,7 @@
    version="1.1"
    id="svg9"
    sodipodi:docname="bluetooth-symbolic.svg"
-   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -22,16 +22,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2160"
-     inkscape:window-height="1304"
+     inkscape:window-width="2087"
+     inkscape:window-height="1047"
      id="namedview11"
      showgrid="false"
      inkscape:zoom="45.9375"
      inkscape:cx="8"
      inkscape:cy="8"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-x="342"
+     inkscape:window-y="502"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg9"
      inkscape:document-rotation="0" />
   <metadata
@@ -54,9 +54,9 @@
   </defs>
   <path
      class="ColorScheme-Text"
-     d="m7.9981 2e-5v7.041l-3.293-3.293-2e-3 2e-3c-0.35575-0.35595-0.99605-0.99609-0.99605-0.99609l-0.70703 0.70703 4.5449 4.541-4.5449 4.541 0.70703 0.70703s0.64035-0.64009 0.99609-0.99609h2e-3l3.2949-3.293v7.0391h1l4-4-4-4 4-4-4-4zm1.002 1.416 2.5859 2.5859-2.5859 2.5859zm0 8 2.5859 2.5859-2.5859 2.5859z"
+     d="M 7.9981,1.0000174 V 7.1608928 L 4.7051,4.2795177 4.7031,4.281273 C 4.34735,3.9698113 3.70705,3.4096887 3.70705,3.4096887 L 3.00002,4.02834 7.54492,8.0017152 3.00002,11.97509 3.70705,12.593741 c 0,0 0.64035,-0.560079 0.99609,-0.871578 h 0.002 L 8.00004,8.8407878 V 15 h 1 l 4,-3.5 -4,-3.4999998 4,-3.5000001 L 9.00004,1 Z m 1.002,1.239 2.5859,2.2626627 -2.5859,2.2626626 z m 0,7.0000004 2.5859,2.2626632 -2.5859,2.262661 z"
      color="#363636"
      fill="#363636"
      id="path7"
-     style="fill-opacity:1;fill:#363636" />
+     style="fill:#363636;fill-opacity:1;stroke-width:0.935415" />
 </svg>
