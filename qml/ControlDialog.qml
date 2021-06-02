@@ -65,18 +65,10 @@ ControlCenterDialog {
         id: _background
         anchors.fill: parent
         radius: control.height * 0.05
-        color: FishUI.Theme.backgroundColor
-        opacity: FishUI.Theme.darkMode ? 0.4 : 0.7
+        color: FishUI.Theme.darkMode ? "#5E5E5E" : "#FFFFFF"
+        opacity: FishUI.Theme.darkMode ? 0.5 : 0.6
         antialiasing: true
         border.width: 0
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        radius: _background.radius
-        border.color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.1)
-        antialiasing: true
     }
 
     ColumnLayout {
