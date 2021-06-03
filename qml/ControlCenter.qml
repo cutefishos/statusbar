@@ -160,14 +160,14 @@ ControlCenterDialog {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
-                                                         : "qrc:/images/light/network-wireless-connected-100.svg"
-                    visible: network.wirelessHardwareEnabled
-                    checked: network.wirelessEnabled
+                                                           : "qrc:/images/light/network-wireless-connected-100.svg"
+                    visible: enabledConnections.wirelessHwEnabled
+                    checked: enabledConnections.wirelessEnabled
                     label: qsTr("Wi-Fi")
-                    text: network.wirelessEnabled ? network.wirelessConnectionName ?
-                                                        network.wirelessConnectionName :
-                                                        qsTr("On") : qsTr("Off")
-                    onClicked: network.wirelessEnabled = !network.wirelessEnabled
+                    text: enabledConnections.wirelessEnabled ? activeConnection.wirelessName ?
+                                                               activeConnection.wirelessName :
+                                                               qsTr("On") : qsTr("Off")
+                    onClicked: nmHandler.enableWireless(!checked)
                 }
 
                 CardItem {

@@ -145,13 +145,13 @@ Item {
             onRightClicked: toggleDialog()
 
             function toggleDialog() {
-                if (controlDialog.visible)
-                    controlDialog.visible = false
+                if (controlCenter.visible)
+                    controlCenter.visible = false
                 else {
                     // 先初始化，用户可能会通过Alt鼠标左键移动位置
-                    controlDialog.position = Qt.point(0, 0)
-                    controlDialog.visible = true
-                    controlDialog.position = Qt.point(mapToGlobal(0, 0).x, mapToGlobal(0, 0).y)
+                    controlCenter.position = Qt.point(0, 0)
+                    controlCenter.visible = true
+                    controlCenter.position = Qt.point(mapToGlobal(0, 0).x, mapToGlobal(0, 0).y)
                 }
             }
 
@@ -179,12 +179,12 @@ Item {
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
-                    source: network.wirelessIconName ? "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + network.wirelessIconName + ".svg" : ""
+                    source: activeConnection.wirelessIcon ? "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + activeConnection.wirelessIcon + ".svg" : ""
                     asynchronous: true
                     Layout.alignment: Qt.AlignCenter
-                    visible: network.enabled &&
-                             network.wirelessEnabled &&
-                             network.wirelessConnectionName !== "" &&
+                    visible: enabledConnections.wirelessHwEnabled &&
+                             enabledConnections.wirelessEnabled &&
+                             activeConnection.wirelessName &&
                              wirelessIcon.status === Image.Ready
                 }
 
@@ -230,8 +230,8 @@ Item {
     }
 
     // Components
-    ControlDialog {
-        id: controlDialog
+    ControlCenter {
+        id: controlCenter
     }
 
     Volume {
@@ -242,11 +242,15 @@ Item {
         id: battery
     }
 
-    NM.ConnectionIcon {
-        id: connectionIconProvider
+    NM.ActiveConnection {
+        id: activeConnection
     }
 
-    NM.Network {
-        id: network
+    NM.EnabledConnections {
+        id: enabledConnections
+    }
+
+    NM.Handler {
+        id: nmHandler
     }
 }

@@ -98,7 +98,7 @@
         <file>images/media-playback-start-symbolic.svg</file>
         <file>images/media-skip-backward-symbolic.svg</file>
         <file>images/media-skip-forward-symbolic.svg</file>
-        <file>qml/ControlDialog.qml</file>
+        <file>qml/ControlCenter.qml</file>
         <file>qml/CardItem.qml</file>
         <file>qml/IconButton.qml</file>
         <file>images/dark/down.svg</file>
