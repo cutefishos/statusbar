@@ -132,10 +132,9 @@ void StatusNotifierItemSource::scroll(int delta, const QString &direction)
 void StatusNotifierItemSource::contextMenu(int x, int y)
 {
     if (m_menuImporter) {
-        m_menuImporter->updateMenu();
-
         // Popup menu
         if (m_menuImporter->menu()) {
+            m_menuImporter->updateMenu();
             m_menuImporter->menu()->popup(QPoint(x, y));
         }
     } else {
@@ -148,7 +147,9 @@ void StatusNotifierItemSource::contextMenu(int x, int y)
 
 void StatusNotifierItemSource::contextMenuReady()
 {
-    emit contextMenuReady(m_menuImporter->menu());
+    if (m_menuImporter && m_menuImporter->menu()) {
+        emit contextMenuReady(m_menuImporter->menu());
+    }
 }
 
 void StatusNotifierItemSource::refreshTitle()

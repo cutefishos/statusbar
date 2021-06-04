@@ -15,8 +15,8 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: FishUI.Theme.backgroundColor
-        opacity: FishUI.Theme.darkMode ? 0.6 : 0.7
+        color: FishUI.Theme.darkMode ? "#828286" : "#FFFFFF"
+        opacity: FishUI.Theme.darkMode ? 0.5 : 0.7
 
         Behavior on color {
             ColorAnimation {
