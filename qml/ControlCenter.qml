@@ -93,7 +93,7 @@ ControlCenterDialog {
                 Image {
                     id: userIcon
                     Layout.fillHeight: true
-                    width: height
+                    Layout.preferredWidth: height
                     sourceSize: Qt.size(width, height)
                     source: currentUser.iconFileName ? "file:///" + currentUser.iconFileName : "image://icontheme/default-user"
 
