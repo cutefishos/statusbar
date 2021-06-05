@@ -13,7 +13,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 CONFIG REQUIRED Widgets DBus X11Extras Concurrent Svg LinguistTools QuickControls2)
 find_package(KF5WindowSystem REQUIRED)
-find_package(dbusmenu-qt5 REQUIRED)
 find_package(FishUI REQUIRED)
 
 set(SRCS
@@ -34,6 +33,11 @@ set(SRCS
     src/systemtray/systemtraymodel.cpp
     src/systemtray/statusnotifierwatcher.cpp
 
+    src/libdbusmenuqt/dbusmenuimporter.cpp
+    src/libdbusmenuqt/dbusmenushortcut_p.cpp
+    src/libdbusmenuqt/dbusmenutypes_p.cpp
+    src/libdbusmenuqt/utils.cpp
+
     qml.qrc
 )
 
@@ -52,7 +56,15 @@ qt5_add_dbus_interface(SRCS ${statusnotifieritem_xml} statusnotifieritem_interfa
 qt5_add_dbus_adaptor(SRCS src/systemtray/org.kde.StatusNotifierWatcher.xml
                      src/systemtray/statusnotifierwatcher.h StatusNotifierWatcher)
 
-add_executable(cutefish-statusbar ${SRCS})
+# libdbusmenuqt
+set_source_files_properties(src/libdbusmenuqt/com.canonical.dbusmenu.xml PROPERTIES
+   NO_NAMESPACE true
+   INCLUDE "src/libdbusmenuqt/dbusmenutypes_p.h"
+   CLASSNAME DBusMenuInterface
+)
+qt_add_dbus_interface(libdbusmenu_SRCS src/libdbusmenuqt/com.canonical.dbusmenu.xml dbusmenu_interface)
+
+add_executable(cutefish-statusbar ${SRCS} ${libdbusmenu_SRCS})
 
 target_link_libraries(cutefish-statusbar
   PRIVATE
@@ -68,7 +80,6 @@ target_link_libraries(cutefish-statusbar
   FishUI
 
   KF5::WindowSystem
-  dbusmenu-qt5
 )
 
 file(GLOB TS_FILES translations/*.ts)

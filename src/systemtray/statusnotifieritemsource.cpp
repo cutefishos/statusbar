@@ -1,8 +1,31 @@
+/***************************************************************************
+ *                                                                         *
+ *   Copyright (C) 2021 Reion Wong <aj@cutefishos.com>                     *
+ *   Copyright (C) 2009 Marco Martin <notmart@gmail.com>                   *
+ *   Copyright (C) 2009 Matthieu Gallien <matthieu_gallien@yahoo.fr>       *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ ***************************************************************************/
+
 #include "statusnotifieritemsource.h"
 #include "systemtraytypes.h"
 
+#include "../libdbusmenuqt/dbusmenuimporter.h"
+
 #include <QDebug>
-#include <dbusmenuimporter.h>
 #include <netinet/in.h>
 
 class MenuImporter : public DBusMenuImporter
@@ -67,7 +90,8 @@ StatusNotifierItemSource::StatusNotifierItemSource(const QString &notifierItemId
 
 StatusNotifierItemSource::~StatusNotifierItemSource()
 {
-    delete m_statusNotifierItemInterface;
+    if (m_statusNotifierItemInterface)
+        delete m_statusNotifierItemInterface;
 }
 
 QString StatusNotifierItemSource::id() const
@@ -133,10 +157,10 @@ void StatusNotifierItemSource::contextMenu(int x, int y)
 {
     if (m_menuImporter) {
         // Popup menu
-        if (m_menuImporter->menu()) {
-            m_menuImporter->updateMenu();
+        m_menuImporter->updateMenu();
+
+        if (m_menuImporter->menu())
             m_menuImporter->menu()->popup(QPoint(x, y));
-        }
     } else {
         qWarning() << "Could not find DBusMenu interface, falling back to calling ContextMenu()";
         if (m_statusNotifierItemInterface && m_statusNotifierItemInterface->isValid()) {
@@ -245,6 +269,11 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
                 } else {
                     m_menuImporter = new MenuImporter(m_statusNotifierItemInterface->service(),
                                                       menuObjectPath, this);
+                    connect(m_menuImporter, &MenuImporter::menuUpdated, this, [this](QMenu *menu) {
+                        if (menu == m_menuImporter->menu()) {
+                            contextMenuReady();
+                        }
+                    });
                 }
             }
         }
