@@ -90,7 +90,7 @@ QVariant SystemTrayModel::data(const QModelIndex &index, int role) const
 
 int SystemTrayModel::indexOf(const QString &id)
 {
-    for (StatusNotifierItemSource *item : m_items) {
+    for (StatusNotifierItemSource *item : qAsConst(m_items)) {
         if (item->id() == id)
             return m_items.indexOf(item);
     }

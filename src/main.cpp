@@ -24,6 +24,8 @@
 #include "statusbar.h"
 #include "controlcenterdialog.h"
 #include "systemtray/systemtraymodel.h"
+#include "appmenu/appmenumodel.h"
+#include "appmenu/appmenuapplet.h"
 
 #include "appearance.h"
 #include "brightness.h"
@@ -52,6 +54,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<Brightness>(uri, 1, 0, "Brightness");
     qmlRegisterType<Battery>(uri, 1, 0, "Battery");
     qmlRegisterType<VolumeManager>(uri, 1, 0, "Volume");
+    qmlRegisterType<AppMenuModel>(uri, 1, 0, "AppMenuModel");
+    qmlRegisterType<AppMenuApplet>(uri, 1, 0, "AppMenuApplet");
 
     StatusBar bar;
 

@@ -14,6 +14,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 CONFIG REQUIRED Widgets DBus X11Extras Concurrent Svg LinguistTools QuickControls2)
 find_package(KF5WindowSystem REQUIRED)
 find_package(FishUI REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(XCB_LIBS REQUIRED xcb)
 
 set(SRCS
     src/main.cpp
@@ -37,6 +40,20 @@ set(SRCS
     src/libdbusmenuqt/dbusmenushortcut_p.cpp
     src/libdbusmenuqt/dbusmenutypes_p.cpp
     src/libdbusmenuqt/utils.cpp
+
+    src/appmenu/kdbusimporter.h
+    src/appmenu/appmenu.h
+    src/appmenu/appmenu.cpp
+    src/appmenu/appmenudbus.h
+    src/appmenu/appmenudbus.cpp
+    src/appmenu/verticalmenu.h
+    src/appmenu/verticalmenu.cpp
+    src/appmenu/menuimporter.h
+    src/appmenu/menuimporter.cpp
+    src/appmenu/appmenumodel.h
+    src/appmenu/appmenumodel.cpp
+    src/appmenu/appmenuapplet.h
+    src/appmenu/appmenuapplet.cpp
 
     qml.qrc
 )
@@ -64,8 +81,15 @@ set_source_files_properties(src/libdbusmenuqt/com.canonical.dbusmenu.xml PROPERT
 )
 qt_add_dbus_interface(libdbusmenu_SRCS src/libdbusmenuqt/com.canonical.dbusmenu.xml dbusmenu_interface)
 
-add_executable(cutefish-statusbar ${SRCS} ${libdbusmenu_SRCS})
+## appmenu
+qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.canonical.AppMenu.Registrar.xml
+    src/appmenu/menuimporter.h MenuImporter menuimporteradaptor MenuImporterAdaptor)
+qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/org.cutefish.cappmenu.xml
+    src/appmenu/appmenudbus.h AppmenuDBus appmenuadaptor AppmenuAdaptor)
 
+add_executable(cutefish-statusbar ${SRCS} ${libdbusmenu_SRCS} ${appmenu_SRCS})
+
+target_include_directories(cutefish-statusbar PUBLIC ${XCB_LIBS_INCLUDE_DIRS})
 target_link_libraries(cutefish-statusbar
   PRIVATE
   Qt5::Core
@@ -80,6 +104,7 @@ target_link_libraries(cutefish-statusbar
   FishUI
 
   KF5::WindowSystem
+  ${XCB_LIBS_LIBRARIES}
 )
 
 file(GLOB TS_FILES translations/*.ts)

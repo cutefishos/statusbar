@@ -28,7 +28,7 @@
 #include <QDebug>
 #include <netinet/in.h>
 
-class MenuImporter : public DBusMenuImporter
+class TrayMenuImporter : public DBusMenuImporter
 {
 public:
     using DBusMenuImporter::DBusMenuImporter;
@@ -157,10 +157,10 @@ void StatusNotifierItemSource::contextMenu(int x, int y)
 {
     if (m_menuImporter) {
         // Popup menu
-        m_menuImporter->updateMenu();
-
-        if (m_menuImporter->menu())
+        if (m_menuImporter->menu()) {
+            m_menuImporter->updateMenu();
             m_menuImporter->menu()->popup(QPoint(x, y));
+        }
     } else {
         qWarning() << "Could not find DBusMenu interface, falling back to calling ContextMenu()";
         if (m_statusNotifierItemInterface && m_statusNotifierItemInterface->isValid()) {
@@ -267,9 +267,9 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
                     // KStatusNotifierItem::setContextMenu().
                     qWarning() << "DBusMenu disabled for this application";
                 } else {
-                    m_menuImporter = new MenuImporter(m_statusNotifierItemInterface->service(),
+                    m_menuImporter = new TrayMenuImporter(m_statusNotifierItemInterface->service(),
                                                       menuObjectPath, this);
-                    connect(m_menuImporter, &MenuImporter::menuUpdated, this, [this](QMenu *menu) {
+                    connect(m_menuImporter, &TrayMenuImporter::menuUpdated, this, [this](QMenu *menu) {
                         if (menu == m_menuImporter->menu()) {
                             contextMenuReady();
                         }

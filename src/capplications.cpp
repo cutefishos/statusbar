@@ -90,7 +90,10 @@ CAppItem *CApplications::matchItem(quint32 pid)
         if (item->fullExec == command ||
             item->exec == command ||
             item->fullExec == commandName ||
-            item->exec == commandName) {
+            item->exec == commandName ||
+            // FileName
+            item->fileName == command ||
+            item->fileName == commandName) {
             return item;
         }
     }
@@ -172,6 +175,7 @@ void CApplications::addApplication(const QString &filePath)
     item->icon = desktop.value("Icon").toString();
     item->fullExec = desktop.value("Exec").toString();
     item->exec = simplifiedExec;
+    item->fileName = QFileInfo(filePath).baseName();
     m_items.append(item);
 }
 

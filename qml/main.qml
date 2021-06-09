@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2021 CutefishOS Team.
+ *
+ * Author:     Reion Wong <aj@cutefishos.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
@@ -47,6 +66,7 @@ Item {
         anchors.rightMargin: FishUI.Units.smallSpacing
         spacing: FishUI.Units.smallSpacing
 
+        // App name
         StandardItem {
             id: acticityItem
             Layout.fillHeight: true
@@ -85,8 +105,67 @@ Item {
             }
         }
 
+        // App menu
         Item {
+            id: appMenuItem
+            Layout.fillHeight: true
             Layout.fillWidth: true
+
+            ListView {
+                id: appMenuView
+                anchors.fill: parent
+                orientation: Qt.Horizontal
+                spacing: FishUI.Units.smallSpacing
+                visible: appMenuModel.visible
+                interactive: false
+                clip: true
+
+                model: appMenuModel
+
+                delegate: StandardItem {
+                    id: _menuItem
+                    width: _actionText.width + FishUI.Units.largeSpacing
+                    height: ListView.view.height
+
+                    onClicked: {
+                        appMenuApplet.trigger(_menuItem, index)
+                    }
+
+                    Text {
+                        id: _actionText
+                        anchors.centerIn: parent
+                        color: FishUI.Theme.textColor
+                        text: {
+                            var text = activeMenu
+                            text = text.replace(/([^&]*)&(.)([^&]*)/g, function (match, p1, p2, p3) {
+                                return p1.concat(p2, p3)
+                            })
+                            return text
+                        }
+                    }
+
+                    // QMenu opens on press, so we'll replicate that here
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: appMenuApplet.currentIndex !== -1
+                        onPressed: parent.clicked()
+                        onEntered: parent.clicked()
+                    }
+                }
+
+                AppMenuModel {
+                    id: appMenuModel
+                    onRequestActivateIndex: appMenuApplet.requestActivateIndex(appMenuView.currentIndex)
+                    Component.onCompleted: {
+                        appMenuView.model = appMenuModel
+                    }
+                }
+
+                AppMenuApplet {
+                    id: appMenuApplet
+                    model: appMenuModel
+                }
+            }
         }
 
         ListView {
@@ -98,8 +177,8 @@ Item {
             clip: true
             spacing: FishUI.Units.smallSpacing
 
-            property var itemSize: rootItem.height * 0.8
-            property var itemWidth: itemSize + FishUI.Units.smallSpacing
+            property real itemSize: rootItem.height * 0.8
+            property real itemWidth: itemSize + FishUI.Units.smallSpacing
 
             Layout.fillHeight: true
             Layout.preferredWidth: (itemWidth + (count - 1) * FishUI.Units.smallSpacing) * count

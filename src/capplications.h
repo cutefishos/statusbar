@@ -33,6 +33,7 @@ public:
     QString icon;
     QString fullExec;
     QString exec;
+    QString fileName;
 };
 
 class CApplications : public QObject

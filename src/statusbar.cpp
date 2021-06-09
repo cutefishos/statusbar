@@ -19,6 +19,7 @@
 
 #include "statusbar.h"
 #include "processprovider.h"
+#include "appmenu/appmenu.h"
 
 #include <QQmlEngine>
 #include <QQmlContext>
@@ -40,6 +41,8 @@ StatusBar::StatusBar(QQuickView *parent)
     KWindowSystem::setOnDesktop(winId(), NET::OnAllDesktops);
     KWindowSystem::setType(winId(), NET::Dock);
     KWindowEffects::slideWindow(winId(), KWindowEffects::TopEdge);
+
+    new AppMenu(this);
 
     engine()->rootContext()->setContextProperty("acticity", m_acticity);
     engine()->rootContext()->setContextProperty("process", new ProcessProvider);
