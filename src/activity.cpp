@@ -30,7 +30,6 @@
 #include <KWindowSystem>
 
 static const QStringList blockList = {"cutefish-launcher",
-                                      "cutefish-desktop",
                                       "cutefish-statusbar"};
 
 Activity::Activity(QObject *parent)

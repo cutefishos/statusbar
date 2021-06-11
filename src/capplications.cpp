@@ -205,6 +205,9 @@ QStringList CApplications::commandFromPid(quint32 pid)
 
             QString name = QString::fromLocal8Bit(cmd.mid(processNameStart, zeroIndex - processNameStart));
 
+            // reion: Remove parameters
+            name = name.split(' ').first();
+
             cmd.replace('\0', ' ');
             QString command = QString::fromLocal8Bit(cmd).trimmed();
 
