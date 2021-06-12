@@ -126,15 +126,20 @@ Item {
                     id: _menuItem
                     width: _actionText.width + FishUI.Units.largeSpacing
                     height: ListView.view.height
+                    checked: appMenuApplet.currentIndex === index
 
                     onClicked: {
                         appMenuApplet.trigger(_menuItem, index)
+
+                        checked = Qt.binding(function() {
+                            return appMenuApplet.currentIndex === index
+                        })
                     }
 
                     Text {
                         id: _actionText
                         anchors.centerIn: parent
-                        color: FishUI.Theme.textColor
+                        color: FishUI.Theme.darkMode ? 'white' : 'black'
                         text: {
                             var text = activeMenu
                             text = text.replace(/([^&]*)&(.)([^&]*)/g, function (match, p1, p2, p3) {
