@@ -84,7 +84,7 @@ ControlCenterDialog {
         id: _background
         anchors.fill: parent
         radius: control.height * 0.05
-        color: FishUI.Theme.darkMode ? "#828286" : "#FFFFFF"
+        color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
         opacity: FishUI.Theme.darkMode ? 0.5 : 0.7
         antialiasing: true
         border.width: 0

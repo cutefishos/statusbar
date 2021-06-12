@@ -214,21 +214,30 @@ bool AppMenuApplet::eventFilter(QObject *watched, QEvent *event)
             return false;
         }
 
-        // FIXME the panel margin breaks Fitt's law :(
         const QPointF &windowLocalPos = m_buttonGrid->window()->mapFromGlobal(e->globalPos());
         const QPointF &buttonGridLocalPos = m_buttonGrid->mapFromScene(windowLocalPos);
-        auto *item = m_buttonGrid->childAt(buttonGridLocalPos.x(), buttonGridLocalPos.y());
-        if (!item) {
-            return false;
-        }
 
-        bool ok;
-        const int buttonIndex = item->property("buttonIndex").toInt(&ok);
-        if (!ok) {
+        if (buttonGridLocalPos.x() < m_buttonGrid->window()->x() ||
+            buttonGridLocalPos.y() > m_buttonGrid->window()->height())
             return false;
-        }
 
-        emit requestActivateIndex(buttonIndex);
+        emit mousePosChanged(buttonGridLocalPos.x(), buttonGridLocalPos.y());
+
+        // FIXME the panel margin breaks Fitt's law :(
+//        const QPointF &windowLocalPos = m_buttonGrid->window()->mapFromGlobal(e->globalPos());
+//        const QPointF &buttonGridLocalPos = m_buttonGrid->mapFromScene(windowLocalPos);
+//        auto *item = m_buttonGrid->childAt(buttonGridLocalPos.x(), buttonGridLocalPos.y());
+//        if (!item) {
+//            return false;
+//        }
+
+//        bool ok;
+//        const int buttonIndex = item->property("index").toInt(&ok);
+//        if (!ok) {
+//            return false;
+//        }
+
+//        emit requestActivateIndex(buttonIndex);
     }
 
     return false;

@@ -34,7 +34,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: FishUI.Theme.darkMode ? "#828286" : "#FFFFFF"
+        color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
         opacity: FishUI.Theme.darkMode ? 0.5 : 0.7
 
         Behavior on color {
@@ -164,6 +164,26 @@ Item {
                 AppMenuApplet {
                     id: appMenuApplet
                     model: appMenuModel
+                }
+
+                Component.onCompleted: {
+                    appMenuApplet.buttonGrid = appMenuView
+
+                    // Handle left and right shortcut keys.
+                    appMenuApplet.requestActivateIndex.connect(function (index) {
+                        var idx = Math.max(0, Math.min(appMenuView.count - 1, index))
+                        var button = appMenuView.itemAtIndex(index)
+                        if (button) {
+                            button.clicked()
+                        }
+                    });
+
+                    // Handle mouse movement.
+                    appMenuApplet.mousePosChanged.connect(function (x, y) {
+                        var item = itemAt(x, y)
+                        if (item)
+                            item.clicked();
+                    });
                 }
             }
         }

@@ -54,6 +54,7 @@ Q_SIGNALS:
     void currentIndexChanged();
     void buttonGridChanged();
     void requestActivateIndex(int index);
+    void mousePosChanged(int x, int y);
 
 public slots:
     Q_INVOKABLE void trigger(QQuickItem *ctx, int idx);
