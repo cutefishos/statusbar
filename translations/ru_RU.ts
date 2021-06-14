@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/ControlDialog.qml" line="178"/>
         <source>Wi-Fi</source>
-        <translation type="unfinished"></translation>
+        <translation>Wi-Fi</translation>
     </message>
     <message>
         <location filename="../qml/ControlDialog.qml" line="181"/>
@@ -24,12 +24,12 @@
     <message>
         <location filename="../qml/ControlDialog.qml" line="192"/>
         <source>Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../qml/ControlDialog.qml" line="203"/>
         <source>Dark Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Темный режим</translation>
     </message>
 </context>
 </TS>
