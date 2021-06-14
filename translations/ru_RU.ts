@@ -12,14 +12,14 @@
         <location filename="../qml/ControlDialog.qml" line="181"/>
         <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкл.</translation>
     </message>
     <message>
         <location filename="../qml/ControlDialog.qml" line="181"/>
         <location filename="../qml/ControlDialog.qml" line="193"/>
         <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Выкл.</translation>
     </message>
     <message>
         <location filename="../qml/ControlDialog.qml" line="192"/>
