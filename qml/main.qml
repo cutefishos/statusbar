@@ -35,7 +35,7 @@ Item {
         id: background
         anchors.fill: parent
         color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
-        opacity: FishUI.Theme.darkMode ? 0.5 : 0.7
+        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
 
         Behavior on color {
             ColorAnimation {
@@ -43,6 +43,10 @@ Item {
                 easing.type: Easing.Linear
             }
         }
+    }
+
+    FishUI.WindowHelper {
+        id: windowHelper
     }
 
     FishUI.PopupTips {

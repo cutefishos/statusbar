@@ -83,9 +83,9 @@ ControlCenterDialog {
     Rectangle {
         id: _background
         anchors.fill: parent
-        radius: control.height * 0.05
+        radius: windowHelper.compositing ? control.height * 0.05 : 0
         color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
-        opacity: FishUI.Theme.darkMode ? 0.5 : 0.7
+        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
         antialiasing: true
         border.width: 0
     }
