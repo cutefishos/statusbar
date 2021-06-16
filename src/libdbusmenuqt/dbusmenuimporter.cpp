@@ -43,7 +43,7 @@
 #include "utils.h"
 
 // Generated
-#include "dbusmenu_interface.h"
+#include "../appmenu/dbusmenu_interface.h"
 
 //#define BENCHMARK
 #ifdef BENCHMARK

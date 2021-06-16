@@ -54,6 +54,8 @@ set(SRCS
     src/appmenu/appmenumodel.cpp
     src/appmenu/appmenuapplet.h
     src/appmenu/appmenuapplet.cpp
+    src/appmenu/dbusmenu_interface.cpp
+    src/appmenu/dbusmenu_interface.h
 
     qml.qrc
 )
@@ -79,7 +81,9 @@ set_source_files_properties(src/libdbusmenuqt/com.canonical.dbusmenu.xml PROPERT
    INCLUDE "src/libdbusmenuqt/dbusmenutypes_p.h"
    CLASSNAME DBusMenuInterface
 )
-qt_add_dbus_interface(libdbusmenu_SRCS src/libdbusmenuqt/com.canonical.dbusmenu.xml dbusmenu_interface)
+
+# The interface was added on Qt5.15
+# qt_add_dbus_interface(libdbusmenu_SRCS src/libdbusmenuqt/com.canonical.dbusmenu.xml dbusmenu_interface)
 
 ## appmenu
 qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.canonical.AppMenu.Registrar.xml
@@ -87,7 +91,7 @@ qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.canonical.AppMenu.Registrar.xml
 qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/org.cutefish.cappmenu.xml
     src/appmenu/appmenudbus.h AppmenuDBus appmenuadaptor AppmenuAdaptor)
 
-add_executable(cutefish-statusbar ${SRCS} ${libdbusmenu_SRCS} ${appmenu_SRCS})
+add_executable(cutefish-statusbar ${SRCS} ${appmenu_SRCS})
 
 target_include_directories(cutefish-statusbar PUBLIC ${XCB_LIBS_INCLUDE_DIRS})
 target_link_libraries(cutefish-statusbar
