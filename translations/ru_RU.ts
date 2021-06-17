@@ -60,7 +60,7 @@
     <message>
         <location filename="../qml/main.qml" line="65"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 </TS>
