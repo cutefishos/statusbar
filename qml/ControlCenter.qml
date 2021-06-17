@@ -42,6 +42,9 @@ ControlCenterDialog {
 
     color: "transparent"
 
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     Appearance {
         id: appearance
     }

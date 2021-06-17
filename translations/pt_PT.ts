@@ -2,34 +2,65 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pt">
 <context>
+    <name>ControlCenter</name>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="188"/>
+        <source>Wi-Fi</source>
+        <translation type="unfinished">Wifi</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="191"/>
+        <location filename="../qml/ControlCenter.qml" line="214"/>
+        <source>On</source>
+        <translation type="unfinished">Ligar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="191"/>
+        <location filename="../qml/ControlCenter.qml" line="203"/>
+        <location filename="../qml/ControlCenter.qml" line="214"/>
+        <source>Off</source>
+        <translation type="unfinished">Desligar</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="202"/>
+        <source>Bluetooth</source>
+        <translation type="unfinished">Bluetooth</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="213"/>
+        <source>Dark Mode</source>
+        <translation type="unfinished">Modo escuro</translation>
+    </message>
+</context>
+<context>
     <name>ControlDialog</name>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="178"/>
         <source>Wi-Fi</source>
-        <translation>Wifi</translation>
+        <translation type="vanished">Wifi</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>On</source>
-        <translation>Ligar</translation>
+        <translation type="vanished">Ligar</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="193"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>Off</source>
-        <translation>Desligar</translation>
+        <translation type="vanished">Desligar</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="192"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation type="vanished">Bluetooth</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="203"/>
         <source>Dark Mode</source>
-        <translation>Modo escuro</translation>
+        <translation type="vanished">Modo escuro</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/main.qml" line="65"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

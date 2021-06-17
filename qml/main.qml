@@ -31,6 +31,9 @@ Item {
 
     property int iconSize: 16
 
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     Rectangle {
         id: background
         anchors.fill: parent

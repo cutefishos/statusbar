@@ -2,34 +2,65 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="eo">
 <context>
+    <name>ControlCenter</name>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="188"/>
+        <source>Wi-Fi</source>
+        <translation type="unfinished">Wi-Fi</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="191"/>
+        <location filename="../qml/ControlCenter.qml" line="214"/>
+        <source>On</source>
+        <translation type="unfinished">Ŝaltu</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="191"/>
+        <location filename="../qml/ControlCenter.qml" line="203"/>
+        <location filename="../qml/ControlCenter.qml" line="214"/>
+        <source>Off</source>
+        <translation type="unfinished">Malŝalti</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="202"/>
+        <source>Bluetooth</source>
+        <translation type="unfinished">Bluetooth</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="213"/>
+        <source>Dark Mode</source>
+        <translation type="unfinished">malhela reĝimo</translation>
+    </message>
+</context>
+<context>
     <name>ControlDialog</name>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="178"/>
         <source>Wi-Fi</source>
-        <translation>Wi-Fi</translation>
+        <translation type="vanished">Wi-Fi</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>On</source>
-        <translation>Ŝaltu</translation>
+        <translation type="vanished">Ŝaltu</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="181"/>
-        <location filename="../qml/ControlDialog.qml" line="193"/>
-        <location filename="../qml/ControlDialog.qml" line="204"/>
         <source>Off</source>
-        <translation>Malŝalti</translation>
+        <translation type="vanished">Malŝalti</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="192"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation type="vanished">Bluetooth</translation>
     </message>
     <message>
-        <location filename="../qml/ControlDialog.qml" line="203"/>
         <source>Dark Mode</source>
-        <translation>malhela reĝimo</translation>
+        <translation type="vanished">malhela reĝimo</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/main.qml" line="65"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
