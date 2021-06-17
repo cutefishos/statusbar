@@ -6,30 +6,30 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation type="unfinished">无线网络</translation>
+        <translation>无线网络</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation type="unfinished">打开</translation>
+        <translation>打开</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
         <source>Bluetooth</source>
-        <translation type="unfinished">蓝牙</translation>
+        <translation>蓝牙</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation type="unfinished">深色模式</translation>
+        <translation>深色模式</translation>
     </message>
 </context>
 <context>
