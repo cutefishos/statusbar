@@ -129,6 +129,12 @@ Item {
 
                 model: appMenuModel
 
+                // Initialize the current index
+                onVisibleChanged: {
+                    if (!visible)
+                        appMenuView.currentIndex = -1
+                }
+
                 delegate: StandardItem {
                     id: _menuItem
                     width: _actionText.width + FishUI.Units.largeSpacing
