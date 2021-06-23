@@ -43,6 +43,11 @@ Activity::Activity(QObject *parent)
             this, &Activity::onActiveWindowChanged);
 }
 
+bool Activity::launchPad() const
+{
+    return m_launchPad;
+}
+
 QString Activity::title() const
 {
     return m_title;
@@ -100,6 +105,9 @@ void Activity::onActiveWindowChanged()
     KWindowInfo info(KWindowSystem::activeWindow(),
                      NET::WMState | NET::WMVisibleName,
                      NET::WM2WindowClass);
+
+    m_launchPad = (info.windowClassClass() == "cutefish-launcher");
+    emit launchPadChanged();
 
     if (!isAcceptableWindow(KWindowSystem::activeWindow())
             || blockList.contains(info.windowClassClass())) {

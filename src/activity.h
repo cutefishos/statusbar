@@ -28,9 +28,12 @@ class Activity : public QObject
     Q_OBJECT
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
+    Q_PROPERTY(bool launchPad READ launchPad NOTIFY launchPadChanged)
 
 public:
     explicit Activity(QObject *parent = nullptr);
+
+    bool launchPad() const;
 
     QString title() const;
     QString icon() const;
@@ -48,6 +51,7 @@ private slots:
 signals:
     void titleChanged();
     void iconChanged();
+    void launchPadChanged();
 
 private:
     CApplications *m_cApps;
@@ -55,6 +59,8 @@ private:
     QString m_icon;
     QString m_windowClass;
     quint32 m_pid;
+
+    bool m_launchPad;
 };
 
 #endif // ACTIVITY_H

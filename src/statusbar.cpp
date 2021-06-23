@@ -53,6 +53,10 @@ StatusBar::StatusBar(QQuickView *parent)
     updateGeometry();
     setVisible(true);
 
+    connect(m_acticity, &Activity::launchPadChanged, this, [=] {
+        setVisible(!m_acticity->launchPad());
+    });
+
     connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
     connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
 }
