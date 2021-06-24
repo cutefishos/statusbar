@@ -33,6 +33,9 @@ public:
     void updateGeometry();
     void updateViewStruts();
 
+signals:
+    void launchPadChanged();
+
 private:
     Activity *m_acticity;
 };

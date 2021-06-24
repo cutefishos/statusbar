@@ -34,6 +34,12 @@ Item {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
+    property bool darkMode: FishUI.Theme.darkMode
+    property color textColor: rootItem.darkMode ? "#FFFFFF" : "#000000";
+
+    // Hide if launchpad is encountered
+    opacity: acticity.launchPad && windowHelper.compositing ? 0 : 1
+
     Rectangle {
         id: background
         anchors.fill: parent
@@ -104,7 +110,7 @@ Item {
                     text: acticity.title
                     Layout.fillWidth: true
                     elide: Qt.ElideRight
-                    color: FishUI.Theme.darkMode ? 'white' : 'black'
+                    color: rootItem.textColor
                     visible: text
                     Layout.alignment: Qt.AlignVCenter
                     font.pointSize: rootItem.height ? rootItem.height / 3 : 1
@@ -152,7 +158,7 @@ Item {
                     Text {
                         id: _actionText
                         anchors.centerIn: parent
-                        color: FishUI.Theme.darkMode ? 'white' : 'black'
+                        color: rootItem.textColor
                         text: {
                             var text = activeMenu
                             text = text.replace(/([^&]*)&(.)([^&]*)/g, function (match, p1, p2, p3) {
@@ -229,7 +235,7 @@ Item {
                 width: trayView.itemWidth
                 height: ListView.view.height
 
-                property bool darkMode: FishUI.Theme.darkMode
+                property bool darkMode: rootItem.darkMode
                 onDarkModeChanged: updateTimer.restart()
 
                 Timer {
@@ -283,7 +289,7 @@ Item {
                 Image {
                     id: volumeIcon
                     visible: volume.isValid && status === Image.Ready
-                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
+                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
@@ -296,7 +302,7 @@ Item {
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
-                    source: activeConnection.wirelessIcon ? "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + activeConnection.wirelessIcon + ".svg" : ""
+                    source: activeConnection.wirelessIcon ? "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + activeConnection.wirelessIcon + ".svg" : ""
                     asynchronous: true
                     Layout.alignment: Qt.AlignCenter
                     visible: enabledConnections.wirelessHwEnabled &&
@@ -314,14 +320,14 @@ Item {
                         height: rootItem.iconSize
                         width: height + 6
                         sourceSize: Qt.size(width, height)
-                        source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
+                        source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
                     }
 
                     Label {
                         text: battery.chargePercent + "%"
                         font.pointSize: rootItem.height ? rootItem.height / 3 : 1
-                        color: FishUI.Theme.darkMode ? 'white' : 'black'
+                        color: rootItem.textColor
                         visible: battery.showPercentage
                     }
                 }
@@ -330,7 +336,7 @@ Item {
                     id: timeLabel
                     Layout.alignment: Qt.AlignCenter
                     font.pointSize: rootItem.height ? rootItem.height / 3 : 1
-                    color: FishUI.Theme.darkMode ? 'white' : 'black'
+                    color: rootItem.textColor
 
                     Timer {
                         interval: 1000
