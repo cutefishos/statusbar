@@ -37,11 +37,14 @@ class Battery : public QObject
     Q_PROPERTY(QString iconSource READ iconSource NOTIFY iconSourceChanged)
 
 public:
+    static Battery *self();
     explicit Battery(QObject *parent = nullptr);
 
     bool available() const;
     bool onBattery() const;
+
     bool showPercentage() const;
+    void setShowPercentage(bool enabled);
 
     int chargeState() const;
     int chargePercent() const;
@@ -70,6 +73,7 @@ private:
     QDBusInterface m_interface;
     bool m_available;
     bool m_onBattery;
+    bool m_showPercentage;
 };
 
 #endif // BATTERY_H

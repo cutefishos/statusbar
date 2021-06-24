@@ -91,7 +91,12 @@ qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.canonical.AppMenu.Registrar.xml
 qt_add_dbus_adaptor(appmenu_SRCS src/appmenu/org.cutefish.cappmenu.xml
     src/appmenu/appmenudbus.h AppmenuDBus appmenuadaptor AppmenuAdaptor)
 
-add_executable(cutefish-statusbar ${SRCS} ${appmenu_SRCS})
+## statusbar dbus
+qt5_add_dbus_adaptor(DBUS_SOURCES
+                     src/org.cutefish.Statusbar.xml
+                     src/statusbar.h StatusBar)
+
+add_executable(cutefish-statusbar ${SRCS} ${appmenu_SRCS} ${DBUS_SOURCES})
 
 target_include_directories(cutefish-statusbar PUBLIC ${XCB_LIBS_INCLUDE_DIRS})
 target_link_libraries(cutefish-statusbar

@@ -30,6 +30,8 @@ class StatusBar : public QQuickView
 public:
     explicit StatusBar(QQuickView *parent = nullptr);
 
+    void setBatteryPercentage(bool enabled);
+
     void updateGeometry();
     void updateViewStruts();
 

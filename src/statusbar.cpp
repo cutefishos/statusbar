@@ -18,12 +18,15 @@
  */
 
 #include "statusbar.h"
+#include "battery.h"
 #include "processprovider.h"
 #include "appmenu/appmenu.h"
+#include "statusbaradaptor.h"
 
 #include <QQmlEngine>
 #include <QQmlContext>
 
+#include <QDBusConnection>
 #include <QApplication>
 #include <QScreen>
 
@@ -42,10 +45,12 @@ StatusBar::StatusBar(QQuickView *parent)
     KWindowSystem::setType(winId(), NET::Dock);
     KWindowEffects::slideWindow(winId(), KWindowEffects::TopEdge);
 
+    new StatusbarAdaptor(this);
     new AppMenu(this);
 
     engine()->rootContext()->setContextProperty("acticity", m_acticity);
     engine()->rootContext()->setContextProperty("process", new ProcessProvider);
+    engine()->rootContext()->setContextProperty("battery", Battery::self());
 
     setSource(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     setResizeMode(QQuickView::SizeRootObjectToView);
@@ -55,6 +60,11 @@ StatusBar::StatusBar(QQuickView *parent)
 
     connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
     connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
+}
+
+void StatusBar::setBatteryPercentage(bool enabled)
+{
+    Battery::self()->setShowPercentage(enabled);
 }
 
 void StatusBar::updateGeometry()

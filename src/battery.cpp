@@ -18,10 +18,21 @@
  */
 
 #include "battery.h"
+#include <QSettings>
 
 static const QString s_sServer = "org.cutefish.Settings";
 static const QString s_sPath = "/PrimaryBattery";
 static const QString s_sInterface = "org.cutefish.PrimaryBattery";
+
+static Battery *SELF = nullptr;
+
+Battery *Battery::self()
+{
+    if (!SELF)
+        SELF = new Battery;
+
+    return SELF;
+}
 
 Battery::Battery(QObject *parent)
     : QObject(parent)
@@ -35,10 +46,15 @@ Battery::Battery(QObject *parent)
                   QDBusConnection::sessionBus())
     , m_available(false)
     , m_onBattery(false)
+    , m_showPercentage(false)
 {
     m_available = m_interface.isValid() && !m_interface.lastError().isValid();
 
     if (m_available) {
+        QSettings settings("cutefishos", "statusbar");
+        settings.setDefaultFormat(QSettings::IniFormat);
+        m_showPercentage = settings.value("BatteryPercentage", true).toBool();
+
         QDBusConnection::sessionBus().connect(s_sServer, s_sPath, s_sInterface, "chargeStateChanged", this, SLOT(chargeStateChanged(int)));
         QDBusConnection::sessionBus().connect(s_sServer, s_sPath, s_sInterface, "chargePercentChanged", this, SLOT(chargePercentChanged(int)));
         QDBusConnection::sessionBus().connect(s_sServer, s_sPath, s_sInterface, "lastChargedPercentChanged", this, SLOT(lastChargedPercentChanged()));
@@ -76,8 +92,21 @@ bool Battery::onBattery() const
 
 bool Battery::showPercentage() const
 {
-    // TODO
-    return true;
+    return m_showPercentage;
+}
+
+void Battery::setShowPercentage(bool enabled)
+{
+    if (enabled == m_showPercentage)
+        return;
+
+    m_showPercentage = enabled;
+
+    QSettings settings("cutefishos", "statusbar");
+    settings.setDefaultFormat(QSettings::IniFormat);
+    settings.setValue("BatteryPercentage", m_showPercentage);
+
+    emit showPercentageChanged();
 }
 
 int Battery::chargeState() const

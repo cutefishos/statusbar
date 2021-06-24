@@ -361,10 +361,6 @@ Item {
         id: volume
     }
 
-    Battery {
-        id: battery
-    }
-
     NM.ActiveConnection {
         id: activeConnection
     }
