@@ -98,7 +98,7 @@ Item {
             Layout.preferredHeight: control.height * 0.3
             sourceSize: Qt.size(width, height)
             asynchronous: true
-            Layout.alignment: Qt.AlignCenter
+            Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: FishUI.Units.largeSpacing
 
 //            ColorOverlay {
@@ -129,7 +129,7 @@ Item {
             elide: Label.ElideRight
             Layout.preferredHeight: control.height * 0.1
             Layout.alignment: Qt.AlignHCenter
-            // Layout.fillWidth: true
+            Layout.maximumWidth: control.width - FishUI.Units.largeSpacing
             Layout.bottomMargin: FishUI.Units.largeSpacing
         }
 
