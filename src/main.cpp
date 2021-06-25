@@ -47,16 +47,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<AppMenuModel>(uri, 1, 0, "AppMenuModel");
     qmlRegisterType<AppMenuApplet>(uri, 1, 0, "AppMenuApplet");
 
-    StatusBar bar;
-
-    if (!QDBusConnection::sessionBus().registerService("org.cutefish.Statusbar")) {
-        return -1;
-    }
-
-    if (!QDBusConnection::sessionBus().registerObject("/Statusbar", &bar)) {
-        return -1;
-    }
-
     QString qmFilePath = QString("%1/%2.qm").arg("/usr/share/cutefish-statusbar/translations/").arg(QLocale::system().name());
     if (QFile::exists(qmFilePath)) {
         QTranslator *translator = new QTranslator(QApplication::instance());
@@ -65,6 +55,16 @@ int main(int argc, char *argv[])
         } else {
             translator->deleteLater();
         }
+    }
+
+    StatusBar bar;
+
+    if (!QDBusConnection::sessionBus().registerService("org.cutefish.Statusbar")) {
+        return -1;
+    }
+
+    if (!QDBusConnection::sessionBus().registerObject("/Statusbar", &bar)) {
+        return -1;
     }
 
     return app.exec();
