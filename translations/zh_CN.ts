@@ -33,32 +33,9 @@
     </message>
 </context>
 <context>
-    <name>ControlDialog</name>
-    <message>
-        <source>Wi-Fi</source>
-        <translation type="vanished">无线网络</translation>
-    </message>
-    <message>
-        <source>On</source>
-        <translation type="vanished">打开</translation>
-    </message>
-    <message>
-        <source>Off</source>
-        <translation type="vanished">关闭</translation>
-    </message>
-    <message>
-        <source>Bluetooth</source>
-        <translation type="vanished">蓝牙</translation>
-    </message>
-    <message>
-        <source>Dark Mode</source>
-        <translation type="vanished">深色模式</translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="65"/>
+        <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>

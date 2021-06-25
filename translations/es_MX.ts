@@ -33,32 +33,9 @@
     </message>
 </context>
 <context>
-    <name>ControlDialog</name>
-    <message>
-        <source>Wi-Fi</source>
-        <translation type="vanished">Wi-Fi</translation>
-    </message>
-    <message>
-        <source>On</source>
-        <translation type="vanished">Encendido</translation>
-    </message>
-    <message>
-        <source>Off</source>
-        <translation type="vanished">Apagado</translation>
-    </message>
-    <message>
-        <source>Bluetooth</source>
-        <translation type="vanished">Bluetooth</translation>
-    </message>
-    <message>
-        <source>Dark Mode</source>
-        <translation type="vanished">Modo Oscuro</translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="65"/>
+        <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>

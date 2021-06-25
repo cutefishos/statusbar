@@ -35,7 +35,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="65"/>
+        <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
         <translation>Yopish</translation>
     </message>
