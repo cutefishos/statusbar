@@ -43,7 +43,6 @@ StatusBar::StatusBar(QQuickView *parent)
 
     KWindowSystem::setOnDesktop(winId(), NET::OnAllDesktops);
     KWindowSystem::setType(winId(), NET::Dock);
-    KWindowEffects::slideWindow(winId(), KWindowEffects::TopEdge);
 
     new StatusbarAdaptor(this);
     new AppMenu(this);
