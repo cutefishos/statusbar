@@ -73,11 +73,12 @@ Item {
         }
     }
 
+    // Main layout
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: FishUI.Units.smallSpacing
         anchors.rightMargin: FishUI.Units.smallSpacing
-        spacing: FishUI.Units.smallSpacing
+        spacing: FishUI.Units.smallSpacing / 2
 
         // App name
         StandardItem {
@@ -93,7 +94,7 @@ Item {
                 anchors.fill: parent
                 anchors.leftMargin: FishUI.Units.smallSpacing
                 anchors.rightMargin: FishUI.Units.smallSpacing
-                spacing: FishUI.Units.smallSpacing * 1.5
+                spacing: FishUI.Units.smallSpacing
 
                 Image {
                     id: acticityIcon
@@ -212,6 +213,7 @@ Item {
             }
         }
 
+        // System tray(Right)
         ListView {
             id: trayView
 
@@ -219,10 +221,9 @@ Item {
             layoutDirection: Qt.RightToLeft
             interactive: false
             clip: true
-            spacing: FishUI.Units.smallSpacing
+            spacing: FishUI.Units.smallSpacing / 2
 
-            property real itemSize: rootItem.height * 0.8
-            property real itemWidth: itemSize + FishUI.Units.smallSpacing
+            property real itemWidth: rootItem.iconSize + FishUI.Units.largeSpacing
 
             Layout.fillHeight: true
             Layout.preferredWidth: (itemWidth + (count - 1) * FishUI.Units.smallSpacing) * count
@@ -331,6 +332,19 @@ Item {
                         visible: battery.showPercentage
                     }
                 }
+            }
+        }
+
+        // Pop-up notification center and calendar
+        StandardItem {
+            id: datetimeItem
+
+            Layout.fillHeight: true
+            Layout.preferredWidth: _dateTimeLayout.implicitWidth + FishUI.Units.smallSpacing
+
+            RowLayout {
+                id: _dateTimeLayout
+                anchors.fill: parent
 
                 Label {
                     id: timeLabel
@@ -350,6 +364,7 @@ Item {
                 }
             }
         }
+
     }
 
     // Components
