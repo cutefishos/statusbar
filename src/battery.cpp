@@ -53,7 +53,7 @@ Battery::Battery(QObject *parent)
     if (m_available) {
         QSettings settings("cutefishos", "statusbar");
         settings.setDefaultFormat(QSettings::IniFormat);
-        m_showPercentage = settings.value("BatteryPercentage", true).toBool();
+        m_showPercentage = settings.value("BatteryPercentage", false).toBool();
 
         QDBusConnection::sessionBus().connect(s_sServer, s_sPath, s_sInterface, "chargeStateChanged", this, SLOT(chargeStateChanged(int)));
         QDBusConnection::sessionBus().connect(s_sServer, s_sPath, s_sInterface, "chargePercentChanged", this, SLOT(chargePercentChanged(int)));
