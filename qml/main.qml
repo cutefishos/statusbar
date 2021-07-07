@@ -264,6 +264,7 @@ Item {
         StandardItem {
             id: controler
 
+            checked: controlCenter.visible
             animationEnabled: true
             Layout.fillHeight: true
             Layout.preferredWidth: _controlerLayout.implicitWidth + FishUI.Units.largeSpacing

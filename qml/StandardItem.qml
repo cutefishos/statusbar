@@ -39,6 +39,12 @@ Item {
     signal clicked
     signal rightClicked
 
+    onCheckedChanged: {
+        _bgRect.x = 0
+        _bgRect.y = 0
+        _bgRect.state = checked ? "shown" : "hidden"
+    }
+
     MouseArea {
         id: _mouseArea
         anchors.fill: parent
@@ -46,12 +52,18 @@ Item {
         hoverEnabled: true
 
         onEntered: {
+            if (checked)
+                return
+
             _bgRect.x = mouseX
             _bgRect.y = mouseY
             _bgRect.state = "shown"
         }
 
         onExited: {
+            if (checked)
+                return
+
             control.moveX = mouseX
             control.moveY = mouseY
             _bgRect.state = "hidden"
