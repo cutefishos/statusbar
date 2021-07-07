@@ -233,10 +233,12 @@ Item {
             }
 
             delegate: StandardItem {
+                property bool darkMode: rootItem.darkMode
+
                 width: trayView.itemWidth
                 height: ListView.view.height
+                animationEnabled: true
 
-                property bool darkMode: rootItem.darkMode
                 onDarkModeChanged: updateTimer.restart()
 
                 Timer {
@@ -262,6 +264,7 @@ Item {
         StandardItem {
             id: controler
 
+            animationEnabled: true
             Layout.fillHeight: true
             Layout.preferredWidth: _controlerLayout.implicitWidth + FishUI.Units.largeSpacing
 
@@ -339,6 +342,7 @@ Item {
         StandardItem {
             id: datetimeItem
 
+            animationEnabled: true
             Layout.fillHeight: true
             Layout.preferredWidth: _dateTimeLayout.implicitWidth + FishUI.Units.smallSpacing
 
