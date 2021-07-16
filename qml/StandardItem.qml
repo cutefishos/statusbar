@@ -40,8 +40,6 @@ Item {
     signal rightClicked
 
     onCheckedChanged: {
-        _bgRect.x = 0
-        _bgRect.y = 0
         _bgRect.state = checked ? "shown" : "hidden"
     }
 
@@ -70,6 +68,9 @@ Item {
         }
 
         onClicked: {
+            control.moveX = mouseX
+            control.moveY = mouseY
+
             if (mouse.button == Qt.LeftButton)
                 control.clicked()
             else if (mouse.button == Qt.RightButton)
