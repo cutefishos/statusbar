@@ -24,6 +24,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
 import Cutefish.Accounts 1.0 as Accounts
+import Cutefish.Bluez 1.0 as Bluez
 import Cutefish.StatusBar 1.0
 import FishUI 1.0 as FishUI
 
@@ -36,6 +37,12 @@ ControlCenterDialog {
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
 
+    property bool bluetoothDisConnected: Bluez.Manager.bluetoothBlocked
+
+    onBluetoothDisConnectedChanged: {
+        bluetoothItem.checked = !bluetoothDisConnected
+    }
+
     onWidthChanged: adjustCorrectLocation()
     onHeightChanged: adjustCorrectLocation()
     onPositionChanged: adjustCorrectLocation()
@@ -47,6 +54,16 @@ ControlCenterDialog {
 
     Appearance {
         id: appearance
+    }
+
+    function toggleBluetooth() {
+        const enable = !control.bluetoothDisConnected
+        Bluez.Manager.bluetoothBlocked = enable
+
+        for (var i = 0; i < Bluez.Manager.adapters.length; ++i) {
+            var adapter = Bluez.Manager.adapters[i]
+            adapter.powered = enable
+        }
     }
 
     function adjustCorrectLocation() {
@@ -198,9 +215,11 @@ ControlCenterDialog {
                     Layout.fillWidth: true
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
                                                          : "qrc:/images/light/bluetooth-symbolic.svg"
-                    checked: false
+                    checked: !control.bluetoothDisConnected
                     label: qsTr("Bluetooth")
-                    text: qsTr("Off")
+                    text: checked ? qsTr("On") : qsTr("Off")
+                    visible: Bluez.Manager.adapters.length
+                    onClicked: control.toggleBluetooth()
                 }
 
                 CardItem {
