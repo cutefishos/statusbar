@@ -53,8 +53,8 @@ ControlCenterDialog {
         var posX = control.position.x
         var posY = control.position.y
 
-        if (posX + control.width >= Screen.width)
-            posX = Screen.width - control.width - control.margin
+        if (posX + control.width >= StatusBar.screenRect.x + StatusBar.screenRect.width)
+            posX = StatusBar.screenRect.x + StatusBar.screenRect.width - control.width - control.margin
 
         posY = rootItem.y + rootItem.height + control.margin
 

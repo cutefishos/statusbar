@@ -47,6 +47,7 @@ StatusBar::StatusBar(QQuickView *parent)
     new StatusbarAdaptor(this);
     new AppMenu(this);
 
+    engine()->rootContext()->setContextProperty("StatusBar", this);
     engine()->rootContext()->setContextProperty("acticity", m_acticity);
     engine()->rootContext()->setContextProperty("process", new ProcessProvider);
     engine()->rootContext()->setContextProperty("battery", Battery::self());
@@ -59,6 +60,14 @@ StatusBar::StatusBar(QQuickView *parent)
 
     connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
     connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
+
+    // Always show on the main screen
+    connect(qApp, &QApplication::primaryScreenChanged, this, &StatusBar::onPrimaryScreenChanged);
+}
+
+QRect StatusBar::screenRect()
+{
+    return m_screenRect;
 }
 
 void StatusBar::setBatteryPercentage(bool enabled)
@@ -69,6 +78,12 @@ void StatusBar::setBatteryPercentage(bool enabled)
 void StatusBar::updateGeometry()
 {
     const QRect rect = qApp->primaryScreen()->geometry();
+
+    if (m_screenRect != rect) {
+        m_screenRect = rect;
+        emit screenRectChanged();
+    }
+
     QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 28);
     setGeometry(windowRect);
     updateViewStruts();
@@ -81,7 +96,7 @@ void StatusBar::updateViewStruts()
     const QRect windowRect = geometry();
     NETExtendedStrut strut;
 
-    strut.top_width = windowRect.height();
+    strut.top_width = windowRect.height() - 1;
     strut.top_start = x();
     strut.top_end = x() + windowRect.width();
 
@@ -98,4 +113,10 @@ void StatusBar::updateViewStruts()
                                  strut.bottom_width,
                                  strut.bottom_start,
                                  strut.bottom_end);
+}
+
+void StatusBar::onPrimaryScreenChanged(QScreen *screen)
+{
+    setScreen(screen);
+    updateGeometry();
 }

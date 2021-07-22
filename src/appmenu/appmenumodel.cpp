@@ -148,7 +148,7 @@ void AppMenuModel::onActiveWindowChanged()
         setVisible(true);
         emit modelNeedsUpdate();
     } else {
-        setMenuAvailable(false);
+        // setMenuAvailable(false);
         setVisible(false);
     }
 }
