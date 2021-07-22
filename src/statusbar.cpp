@@ -77,7 +77,7 @@ void StatusBar::setBatteryPercentage(bool enabled)
 
 void StatusBar::updateGeometry()
 {
-    const QRect rect = qApp->primaryScreen()->geometry();
+    const QRect rect = screen()->geometry();
 
     if (m_screenRect != rect) {
         m_screenRect = rect;
@@ -93,12 +93,14 @@ void StatusBar::updateGeometry()
 
 void StatusBar::updateViewStruts()
 {
-    const QRect windowRect = geometry();
-    NETExtendedStrut strut;
+    const QRect wholeScreen(QPoint(0, 0), screen()->virtualSize());
+    const QRect rect = geometry();
+    const int topOffset = screen()->geometry().top();
 
-    strut.top_width = windowRect.height() - 1;
-    strut.top_start = x();
-    strut.top_end = x() + windowRect.width();
+    NETExtendedStrut strut;
+    strut.top_width = rect.height() + topOffset - 1;
+    strut.top_start = rect.x();
+    strut.top_end = rect.x() + rect.width() - 1;
 
     KWindowSystem::setExtendedStrut(winId(),
                                  strut.left_width,
