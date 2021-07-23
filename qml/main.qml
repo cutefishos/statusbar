@@ -80,6 +80,7 @@ Item {
         // App name
         StandardItem {
             id: acticityItem
+            animationEnabled: true
             Layout.fillHeight: true
             Layout.preferredWidth: acticityLayout.implicitWidth ? Math.min(acticityLayout.implicitWidth + FishUI.Units.largeSpacing,
                                                                            rootItem.width / 2)
