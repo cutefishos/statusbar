@@ -71,13 +71,13 @@ CAppItem *CApplications::find(const QString &fileName)
     return nullptr;
 }
 
-CAppItem *CApplications::matchItem(quint32 pid)
+CAppItem *CApplications::matchItem(quint32 pid, const QString &windowClass)
 {
     QStringList commands = commandFromPid(pid);
 
     // The value returned from the commandFromPid() may be empty.
     // Calling first() and last() below will cause the statusbar to crash.
-    if (commands.isEmpty())
+    if (commands.isEmpty() || windowClass.isEmpty())
         return nullptr;
 
     QString command = commands.first();
@@ -87,15 +87,35 @@ CAppItem *CApplications::matchItem(quint32 pid)
         return nullptr;
 
     for (CAppItem *item : m_items) {
+        bool founded = false;
+
+        // Command name
         if (item->fullExec == command ||
-            item->exec == command ||
-            item->fullExec == commandName ||
-            item->exec == commandName ||
-            // FileName
-            item->fileName == command ||
-            item->fileName == commandName) {
+                item->exec == command ||
+                item->fullExec == commandName ||
+                item->exec == commandName)
+            founded = true;
+
+        // Desktop name
+        if (!founded && (item->fileName == command
+                         || item->fileName == commandName))
+            founded = true;
+
+        if (!founded && item->fileName.startsWith(windowClass, Qt::CaseInsensitive))
+            founded = true;
+
+        // Try matching mapped name against 'Name'.
+        if (!founded && item->name.startsWith(windowClass, Qt::CaseInsensitive))
+            founded = true;
+
+        // Icon Name
+        if (!founded && item->icon == command)
+            founded = true;
+
+        if (founded)
             return item;
-        }
+        else
+            continue;
     }
 
     return nullptr;

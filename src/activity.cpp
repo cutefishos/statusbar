@@ -39,7 +39,7 @@ Activity::Activity(QObject *parent)
     onActiveWindowChanged();
 
     connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &Activity::onActiveWindowChanged);
-    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged),
+    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId id, NET::Properties properties, NET::Properties2 properties2)>(&KWindowSystem::windowChanged),
             this, &Activity::onActiveWindowChanged);
 }
 
@@ -119,7 +119,7 @@ void Activity::onActiveWindowChanged()
     m_pid = info.pid();
     m_windowClass = info.windowClassClass().toLower();
 
-    CAppItem *item = m_cApps->matchItem(m_pid);
+    CAppItem *item = m_cApps->matchItem(m_pid, m_windowClass);
 
     if (item) {
         m_title = item->localName;

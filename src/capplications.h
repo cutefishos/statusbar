@@ -46,7 +46,7 @@ public:
     ~CApplications();
 
     CAppItem *find(const QString &fileName);
-    CAppItem *matchItem(quint32 pid);
+    CAppItem *matchItem(quint32 pid, const QString &windowClass);
 
 private:
     void refresh();
