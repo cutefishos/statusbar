@@ -57,6 +57,9 @@ StatusBar::StatusBar(QQuickView *parent)
     setScreen(qApp->primaryScreen());
     updateGeometry();
     setVisible(true);
+    initState();
+
+    connect(m_acticity, &Activity::launchPadChanged, this, &StatusBar::initState);
 
     connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
     connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
@@ -115,6 +118,12 @@ void StatusBar::updateViewStruts()
                                  strut.bottom_width,
                                  strut.bottom_start,
                                  strut.bottom_end);
+}
+
+void StatusBar::initState()
+{
+    // Remain below the face launchpad.
+    KWindowSystem::setState(winId(), m_acticity->launchPad() ? NET::KeepBelow : NET::KeepAbove);
 }
 
 void StatusBar::onPrimaryScreenChanged(QScreen *screen)

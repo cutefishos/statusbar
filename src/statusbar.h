@@ -43,6 +43,7 @@ signals:
     void launchPadChanged();
 
 private slots:
+    void initState();
     void onPrimaryScreenChanged(QScreen *screen);
 
 private:

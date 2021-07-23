@@ -37,9 +37,6 @@ Item {
     property bool darkMode: FishUI.Theme.darkMode
     property color textColor: rootItem.darkMode ? "#FFFFFF" : "#000000";
 
-    // Hide if launchpad is encountered
-    opacity: acticity.launchPad && windowHelper.compositing ? 0 : 1
-
     Rectangle {
         id: background
         anchors.fill: parent
