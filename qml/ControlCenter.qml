@@ -104,7 +104,7 @@ ControlCenterDialog {
         id: _background
         anchors.fill: parent
         radius: windowHelper.compositing ? control.height * 0.05 : 0
-        color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
+        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
         opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
         antialiasing: true
         border.width: 0
@@ -131,9 +131,12 @@ ControlCenterDialog {
 
                 Image {
                     id: userIcon
-                    height: 40
-                    width: height
-                    sourceSize: Qt.size(width, width)
+
+                    property int iconSize: 40
+
+                    Layout.preferredHeight: iconSize
+                    Layout.preferredWidth: iconSize
+                    sourceSize: source === "image://icontheme/default-user" ? Qt.size(iconSize, iconSize) : undefined
                     source: currentUser.iconFileName ? "file:///" + currentUser.iconFileName : "image://icontheme/default-user"
 
                     layer.enabled: true

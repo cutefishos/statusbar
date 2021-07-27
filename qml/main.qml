@@ -40,7 +40,7 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: FishUI.Theme.darkMode ? "#333333" : "#FFFFFF"
+        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
         opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
 
         Behavior on color {
@@ -57,8 +57,8 @@ Item {
 
     FishUI.PopupTips {
         id: popupTips
-        backgroundColor: FishUI.Theme.backgroundColor
-        backgroundOpacity: FishUI.Theme.darkMode ? 0.3 : 0.4
+        backgroundColor: background.color
+        backgroundOpacity: background.opacity
     }
 
     FishUI.DesktopMenu {
