@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_Hant">
+<TS version="2.1" language="si">
 <context>
     <name>ControlCenter</name>
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation>無線網路</translation>
+        <translation>වයි-ෆයි</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation>開</translation>
+        <translation>සක්‍රීයයි</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation>關</translation>
+        <translation>අක්‍රීයයි</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
         <source>Bluetooth</source>
-        <translation>藍芽</translation>
+        <translation>බ්ලූටූත්</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation>暗黑模式</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
-        <translation>關閉</translation>
+        <translation>වසන්න</translation>
     </message>
 </context>
 </TS>
