@@ -39,6 +39,11 @@ public:
     QString icon() const;
 
     Q_INVOKABLE void close();
+    Q_INVOKABLE void minimize();
+    Q_INVOKABLE void restore();
+    Q_INVOKABLE void maximize();
+    Q_INVOKABLE void toggleMaximize();
+    Q_INVOKABLE void move();
 
     bool isAcceptableWindow(quint64 wid);
 

@@ -20,6 +20,7 @@
 #include "activity.h"
 
 #include <QFile>
+#include <QCursor>
 #include <QDebug>
 #include <QX11Info>
 #include <QDirIterator>
@@ -61,6 +62,58 @@ QString Activity::icon() const
 void Activity::close()
 {
     NETRootInfo(QX11Info::connection(), NET::CloseWindow).closeWindowRequest(KWindowSystem::activeWindow());
+}
+
+void Activity::minimize()
+{
+    KWindowSystem::minimizeWindow(KWindowSystem::activeWindow());
+}
+
+void Activity::restore()
+{
+    KWindowSystem::clearState(KWindowSystem::activeWindow(), NET::Max);
+}
+
+void Activity::maximize()
+{
+    KWindowSystem::setState(KWindowSystem::activeWindow(), NET::Max);
+}
+
+void Activity::toggleMaximize()
+{
+    KWindowInfo info(KWindowSystem::activeWindow(), NET::WMState);
+    bool isWindow = !info.hasState(NET::SkipTaskbar) ||
+                     info.windowType(NET::UtilityMask) != NET::Utility ||
+                     info.windowType(NET::DesktopMask) != NET::Desktop;
+
+    if (!isWindow)
+        return;
+
+    bool isMaximized = info.hasState(NET::Max);
+    isMaximized ? restore() : maximize();
+}
+
+void Activity::move()
+{
+    WId winId = KWindowSystem::activeWindow();
+    KWindowInfo info(winId, NET::WMState | NET::WMGeometry | NET::WMDesktop);
+    bool window = !info.hasState(NET::SkipTaskbar) ||
+                     info.windowType(NET::UtilityMask) != NET::Utility ||
+                     info.windowType(NET::DesktopMask) != NET::Desktop;
+
+    if (!window)
+        return;
+
+    bool onCurrent = info.isOnCurrentDesktop();
+    if (!onCurrent) {
+        KWindowSystem::setCurrentDesktop(info.desktop());
+        KWindowSystem::forceActiveWindow(winId);
+    }
+
+    NETRootInfo ri(QX11Info::connection(), NET::WMMoveResize);
+    ri.moveResizeRequest(winId,
+                         QCursor::pos().x(),
+                         QCursor::pos().y(), NET::Move);
 }
 
 bool Activity::isAcceptableWindow(quint64 wid)

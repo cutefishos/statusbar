@@ -370,6 +370,51 @@ Item {
 
     }
 
+    MouseArea {
+        id: _sliding
+        anchors.fill: parent
+        z: -1
+
+        property int startY: -1
+        property bool activated: false
+
+        onActivatedChanged: {
+            // TODO
+//            if (activated)
+//                acticity.move()
+        }
+
+        onPressed: {
+            startY = mouse.y
+        }
+
+        onReleased: {
+            startY = -1
+        }
+
+        onDoubleClicked: {
+            acticity.toggleMaximize()
+        }
+
+        onMouseYChanged: {
+            if (startY === parseInt(mouse.y)) {
+                activated = false
+                return
+            }
+
+            // Up
+            if (startY > parseInt(mouse.y)) {
+                activated = false
+                return
+            }
+
+            if (mouse.y > rootItem.height)
+                activated = true
+            else
+                activated = false
+        }
+    }
+
     // Components
     ControlCenter {
         id: controlCenter
