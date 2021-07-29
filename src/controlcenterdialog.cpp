@@ -20,24 +20,37 @@
 #include "controlcenterdialog.h"
 #include <KWindowSystem>
 
-ControlCenterDialog::ControlCenterDialog(QQuickView *parent)
-    : QQuickView(parent)
+ControlCenterDialog::ControlCenterDialog(QQuickWindow *parent)
+    : QQuickWindow(parent)
 {
-    setFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-
-    connect(this, &QQuickView::activeChanged, this, [=] {
-        if (!isActive())
-            hide();
-    });
+    setFlags(Qt::Popup);
+    setColor(Qt::transparent);
+    installEventFilter(this);
 }
 
-void ControlCenterDialog::showEvent(QShowEvent *event)
+void ControlCenterDialog::open()
 {
-    KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::SkipSwitcher);
-    QQuickView::showEvent(event);
+    setVisible(true);
+    setMouseGrabEnabled(true);
+    setKeyboardGrabEnabled(true);
 }
 
-void ControlCenterDialog::hideEvent(QHideEvent *event)
+bool ControlCenterDialog::eventFilter(QObject *object, QEvent *event)
 {
-    QQuickView::hideEvent(event);
+    if (event->type() == QEvent::MouseButtonPress) {
+        if (QWindow *w = qobject_cast<QWindow*>(object)) {
+            if (!w->geometry().contains(static_cast<QMouseEvent*>(event)->globalPos())) {
+                ControlCenterDialog::setVisible(false);
+            }
+        }
+    } else if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        if (keyEvent->key() == Qt::Key_Escape) {
+            ControlCenterDialog::setVisible(false);
+        }
+    } else if (event->type() == QEvent::Show) {
+        KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::SkipSwitcher);
+    }
+
+    return QObject::eventFilter(object, event);
 }

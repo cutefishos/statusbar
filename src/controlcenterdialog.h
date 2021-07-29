@@ -20,19 +20,20 @@
 #ifndef CONTROLCENTERDIALOG_H
 #define CONTROLCENTERDIALOG_H
 
-#include <QQuickView>
+#include <QQuickWindow>
 #include <QTimer>
 
-class ControlCenterDialog : public QQuickView
+class ControlCenterDialog : public QQuickWindow
 {
     Q_OBJECT
 
 public:
-    ControlCenterDialog(QQuickView *view = nullptr);
+    ControlCenterDialog(QQuickWindow *view = nullptr);
+
+    Q_INVOKABLE void open();
 
 protected:
-    void showEvent(QShowEvent *event) override;
-    void hideEvent(QHideEvent *event) override;
+    bool eventFilter(QObject *object, QEvent *event);
 };
 
 #endif // CONTROLCENTERDIALOG_H

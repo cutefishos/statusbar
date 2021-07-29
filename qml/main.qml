@@ -272,12 +272,12 @@ Item {
 
             function toggleDialog() {
                 if (controlCenter.visible)
-                    controlCenter.visible = false
+                    controlCenter.close()
                 else {
                     // 先初始化，用户可能会通过Alt鼠标左键移动位置
                     controlCenter.position = Qt.point(0, 0)
-                    controlCenter.visible = true
                     controlCenter.position = mapToGlobal(0, 0)
+                    controlCenter.open()
                 }
             }
 
@@ -380,8 +380,8 @@ Item {
 
         onActivatedChanged: {
             // TODO
-//            if (activated)
-//                acticity.move()
+            // if (activated)
+            //     acticity.move()
         }
 
         onPressed: {
