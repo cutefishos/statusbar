@@ -53,6 +53,9 @@ Item {
             if (checked)
                 return
 
+            _bgRect.width = 0
+            _bgRect.height = 0
+
             _bgRect.x = mouseX
             _bgRect.y = mouseY
             _bgRect.state = "shown"
