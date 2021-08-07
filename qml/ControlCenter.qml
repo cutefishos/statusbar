@@ -140,6 +140,8 @@ ControlCenterDialog {
                     Layout.preferredWidth: iconSize
                     sourceSize: String(source) === "image://icontheme/default-user" ? Qt.size(iconSize, iconSize) : undefined
                     source: currentUser.iconFileName ? "file:///" + currentUser.iconFileName : "image://icontheme/default-user"
+                    antialiasing: true
+                    smooth: false
 
                     layer.enabled: true
                     layer.effect: OpacityMask {
@@ -380,6 +382,8 @@ ControlCenterDialog {
                         source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + battery.iconSource
                         asynchronous: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        antialiasing: true
+                        smooth: false
                     }
 
                     Label {

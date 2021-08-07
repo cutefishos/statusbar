@@ -100,6 +100,8 @@ Item {
             asynchronous: true
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: FishUI.Units.largeSpacing
+            antialiasing: true
+            smooth: true
 
 //            ColorOverlay {
 //                anchors.fill: _image

@@ -103,5 +103,6 @@
         <file>qml/IconButton.qml</file>
         <file>images/dark/down.svg</file>
         <file>images/light/down.svg</file>
+        <file>qml/SystemTray.qml</file>
     </qresource>
 </RCC>

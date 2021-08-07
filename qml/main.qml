@@ -102,6 +102,8 @@ Item {
                                         rootItem.iconSize)
                     source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
                     visible: status === Image.Ready
+                    antialiasing: true
+                    smooth: false
                 }
 
                 Label {
@@ -251,6 +253,8 @@ Item {
                     width: rootItem.iconSize
                     height: width
                     source: model.iconName ? model.iconName : model.icon
+                    antialiasing: true
+                    smooth: false
                 }
 
                 onClicked: trayModel.leftButtonClick(model.id)
@@ -269,6 +273,12 @@ Item {
 
             onClicked: toggleDialog()
             onRightClicked: toggleDialog()
+
+            Behavior on Layout.preferredWidth {
+                NumberAnimation {
+                    duration: 100
+                }
+            }
 
             function toggleDialog() {
                 if (controlCenter.visible)
@@ -298,6 +308,8 @@ Item {
                     sourceSize: Qt.size(width, height)
                     asynchronous: true
                     Layout.alignment: Qt.AlignCenter
+                    antialiasing: true
+                    smooth: false
                 }
 
                 Image {
@@ -312,6 +324,8 @@ Item {
                              enabledConnections.wirelessEnabled &&
                              activeConnection.wirelessName &&
                              wirelessIcon.status === Image.Ready
+                    antialiasing: true
+                    smooth: false
                 }
 
                 // Battery Item
@@ -325,6 +339,8 @@ Item {
                         sourceSize: Qt.size(width, height)
                         source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + battery.iconSource
                         Layout.alignment: Qt.AlignCenter
+                        antialiasing: true
+                        smooth: false
                     }
 
                     Label {

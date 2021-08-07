@@ -72,5 +72,7 @@ Item {
         sourceSize.height: height
         source: control.source
         asynchronous: true
+        antialiasing: true
+        smooth: false
     }
 }
