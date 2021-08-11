@@ -6,30 +6,30 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation type="unfinished">Wifi</translation>
+        <translation>Wi-Fi</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation type="unfinished">Ligar</translation>
+        <translation>Ligar</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation type="unfinished">Desligar</translation>
+        <translation>Desligar</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
         <source>Bluetooth</source>
-        <translation type="unfinished">Bluetooth</translation>
+        <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation type="unfinished">Modo escuro</translation>
+        <translation>Modo Escuro</translation>
     </message>
 </context>
 <context>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 </TS>
