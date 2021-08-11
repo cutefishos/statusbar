@@ -104,5 +104,7 @@
         <file>images/dark/down.svg</file>
         <file>images/light/down.svg</file>
         <file>qml/SystemTray.qml</file>
+        <file>qml/MprisItem.qml</file>
+        <file>images/media-cover.svg</file>
     </qresource>
 </RCC>

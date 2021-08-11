@@ -243,6 +243,11 @@ ControlCenterDialog {
             }
         }
 
+        MprisItem {
+            height: 100
+            Layout.fillWidth: true
+        }
+
         Item {
             id: brightnessItem
             Layout.fillWidth: true
