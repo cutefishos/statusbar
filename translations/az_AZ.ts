@@ -12,7 +12,7 @@
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>üzərində</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
