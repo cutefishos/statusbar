@@ -31,6 +31,15 @@ import FishUI 1.0 as FishUI
 ControlCenterDialog {
     id: control
 
+    width: 450
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
+
+    Behavior on height {
+        NumberAnimation {
+            duration: 150
+        }
+    }
+
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
 
@@ -48,11 +57,6 @@ ControlCenterDialog {
 
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
-
-    onVisibleChanged: {
-        control.width = 450
-        control.height = _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
-    }
 
     Appearance {
         id: appearance

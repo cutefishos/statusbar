@@ -274,12 +274,6 @@ Item {
             onClicked: toggleDialog()
             onRightClicked: toggleDialog()
 
-            Behavior on Layout.preferredWidth {
-                NumberAnimation {
-                    duration: 100
-                }
-            }
-
             function toggleDialog() {
                 if (controlCenter.visible)
                     controlCenter.close()
