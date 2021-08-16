@@ -11,7 +11,7 @@ sudo apt install libkf5windowsystem-dev -y
 ## Build
 
 ```bash
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
 make
 sudo make install
 ```
