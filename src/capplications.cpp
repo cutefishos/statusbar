@@ -124,8 +124,9 @@ CAppItem *CApplications::matchItem(quint32 pid, const QString &windowClass)
 void CApplications::refresh()
 {
     QStringList addedEntries;
-    for (CAppItem *item : m_items)
+    for (CAppItem *item : qAsConst(m_items)) {
         addedEntries.append(item->path);
+    }
 
     QStringList allEntries;
     QDirIterator it(s_systemAppFolder, { "*.desktop" }, QDir::NoFilter, QDirIterator::Subdirectories);
@@ -145,11 +146,14 @@ void CApplications::refresh()
         }
     }
 
-    for (CAppItem *item : m_items) {
+    QList<CAppItem *> removeItems;
+    for (CAppItem *item : qAsConst(m_items)) {
         if (!allEntries.contains(item->path)) {
-            removeApplication(item);
+            removeItems.append(item);
         }
     }
+
+    removeApplications(removeItems);
 }
 
 void CApplications::addApplication(const QString &filePath)
@@ -201,8 +205,20 @@ void CApplications::addApplication(const QString &filePath)
 
 void CApplications::removeApplication(CAppItem *item)
 {
-    m_items.removeOne(item);
+    int index = m_items.indexOf(item);
+    if (index < 0 || index > m_items.size())
+        return;
+
+    m_items.removeAt(index);
     delete item;
+}
+
+void CApplications::removeApplications(QList<CAppItem *> items)
+{
+    for (CAppItem *item : items) {
+        m_items.removeOne(item);
+        delete item;
+    }
 }
 
 QStringList CApplications::commandFromPid(quint32 pid)

@@ -52,6 +52,7 @@ private:
     void refresh();
     void addApplication(const QString &filePath);
     void removeApplication(CAppItem *item);
+    void removeApplications(QList<CAppItem *> items);
 
     QStringList commandFromPid(quint32 pid);
 
