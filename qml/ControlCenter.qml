@@ -31,7 +31,7 @@ import FishUI 1.0 as FishUI
 ControlCenterDialog {
     id: control
 
-    width: 450
+    width: 420
     height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
 
     Behavior on height {
@@ -120,8 +120,8 @@ ControlCenterDialog {
         id: _mainLayout
         anchors.fill: parent
         anchors.leftMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.topMargin: FishUI.Units.largeSpacing * 1.5
         anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
+        anchors.topMargin: FishUI.Units.largeSpacing
         anchors.bottomMargin: FishUI.Units.largeSpacing
         spacing: FishUI.Units.largeSpacing
 
@@ -198,7 +198,7 @@ ControlCenterDialog {
         Item {
             id: cardItems
             Layout.fillWidth: true
-            height: 110
+            height: 100
             visible: wirelessItem.visible || bluetoothItem.visible
 
             RowLayout {
@@ -248,7 +248,7 @@ ControlCenterDialog {
         }
 
         MprisItem {
-            height: 100
+            height: 96
             Layout.fillWidth: true
         }
 
@@ -277,6 +277,8 @@ ControlCenterDialog {
                     height: parent.height * 0.8
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
+                    smooth: false
+                    antialiasing: true
                 }
 
                 Timer {
@@ -324,6 +326,8 @@ ControlCenterDialog {
                     height: parent.height * 0.8
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
+                    smooth: false
+                    antialiasing: true
                 }
 
                 Slider {
