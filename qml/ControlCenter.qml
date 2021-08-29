@@ -34,12 +34,6 @@ ControlCenterDialog {
     width: 420
     height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
 
-    Behavior on height {
-        NumberAnimation {
-            duration: 150
-        }
-    }
-
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
 
