@@ -344,6 +344,19 @@ Item {
                         visible: battery.showPercentage
                     }
                 }
+
+                Image {
+                    id: shutdownIcon
+                    width: rootItem.iconSize
+                    height: width
+                    sourceSize: Qt.size(width, height)
+                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+                    asynchronous: true
+                    Layout.alignment: Qt.AlignCenter
+                    visible: !volumeIcon.visible && !batteryIcon.visible && !wirelessIcon.visible
+                    antialiasing: true
+                    smooth: false
+                }
             }
         }
 
