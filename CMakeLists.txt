@@ -13,7 +13,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 CONFIG REQUIRED Widgets DBus X11Extras Concurrent LinguistTools QuickControls2)
 find_package(KF5WindowSystem REQUIRED)
-find_package(FishUI REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(XCB_LIBS REQUIRED xcb)
@@ -108,9 +107,6 @@ target_link_libraries(cutefish-statusbar
   Qt5::X11Extras
   Qt5::Concurrent
   Qt5::DBus
-
-  FishUI
-
   KF5::WindowSystem
   ${XCB_LIBS_LIBRARIES}
 )
