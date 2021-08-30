@@ -245,10 +245,21 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
         m_title = properties[QStringLiteral("Title")].toString();
         m_iconName = properties[QStringLiteral("IconName")].toString();
 
+        // Reion: For icon theme path
+        QString iconThemePath = properties[QStringLiteral("IconThemePath")].toString();
+        if (!iconThemePath.isEmpty()) {
+            QIcon::setFallbackSearchPaths(QStringList() << iconThemePath);
+        }
+
         // ToolTip
         KDbusToolTipStruct toolTip;
         properties[QStringLiteral("ToolTip")].value<QDBusArgument>() >> toolTip;
         m_tooltip = toolTip.title;
+
+        // Use ID as an alternative :)
+        if (m_tooltip.isEmpty() && m_title.isEmpty()) {
+            m_tooltip = properties[QStringLiteral("Id")].toString();
+        }
 
         // Icon
         KDbusImageVector image;
