@@ -41,8 +41,6 @@ class AppMenuModel : public QAbstractListModel
     Q_PROPERTY(bool menuAvailable READ menuAvailable WRITE setMenuAvailable NOTIFY menuAvailableChanged)
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
 
-    Q_PROPERTY(QRect screenGeometry READ screenGeometry WRITE setScreenGeometry NOTIFY screenGeometryChanged)
-
 public:
     explicit AppMenuModel(QObject *parent = nullptr);
     ~AppMenuModel() override;
@@ -63,9 +61,6 @@ public:
 
     bool visible() const;
 
-    QRect screenGeometry() const;
-    void setScreenGeometry(QRect geometry);
-
 Q_SIGNALS:
     void requestActivateIndex(int index);
 
@@ -77,7 +72,6 @@ private Q_SLOTS:
 Q_SIGNALS:
     void menuAvailableChanged();
     void modelNeedsUpdate();
-    void screenGeometryChanged();
     void visibleChanged();
 
 private:

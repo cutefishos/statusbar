@@ -31,10 +31,43 @@
 #include <QGuiApplication>
 #include <QMenu>
 
+#include <QX11Info>
+
 #include <KWindowSystem>
 
 #include "../libdbusmenuqt/dbusmenuimporter.h"
 #include <QDebug>
+
+#include <xcb/xcb.h>
+
+static QByteArray getWindowPropertyString(WId id, const QByteArray &name)
+{
+    xcb_connection_t *c = QX11Info::connection();
+    QByteArray value;
+
+    const xcb_intern_atom_cookie_t atomCookie = xcb_intern_atom(c, false, name.length(), name.constData());
+    QScopedPointer<xcb_intern_atom_reply_t, QScopedPointerPodDeleter> atomReply(xcb_intern_atom_reply(c, atomCookie, Q_NULLPTR));
+    if (atomReply.isNull()) {
+        return value;
+    }
+
+    static const long MAX_PROP_SIZE = 10000;
+    auto propertyCookie = xcb_get_property(c, false, id, atomReply->atom, XCB_ATOM_STRING, 0, MAX_PROP_SIZE);
+    QScopedPointer<xcb_get_property_reply_t, QScopedPointerPodDeleter> propertyReply(xcb_get_property_reply(c, propertyCookie, NULL));
+    if (propertyReply.isNull()) {
+        return value;
+    }
+
+    if (propertyReply->type == XCB_ATOM_STRING && propertyReply->format == 8 && propertyReply->value_len > 0) {
+        const char *data = (const char *) xcb_get_property_value(propertyReply.data());
+        int len = propertyReply->value_len;
+        if (data) {
+            value = QByteArray(data, data[len - 1] ? len : len - 1);
+        }
+    }
+
+    return value;
+}
 
 class CDBusMenuImporter : public DBusMenuImporter
 {
@@ -107,16 +140,6 @@ void AppMenuModel::setVisible(bool visible)
     }
 }
 
-QRect AppMenuModel::screenGeometry() const
-{
-//    return m_tasksModel->screenGeometry();
-}
-
-void AppMenuModel::setScreenGeometry(QRect geometry)
-{
-//    m_tasksModel->setScreenGeometry(geometry);
-}
-
 int AppMenuModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
@@ -136,11 +159,15 @@ void AppMenuModel::update()
 
 void AppMenuModel::onActiveWindowChanged()
 {
-    KWindowInfo info(KWindowSystem::activeWindow(),
-                     NET::WMState | NET::WMVisibleName,
-                     NET::WM2AppMenuObjectPath | NET::WM2AppMenuServiceName);
-    const QString objectPath = info.applicationMenuObjectPath();
-    const QString serviceName = info.applicationMenuServiceName();
+    // 为了兼容旧版本，不使用新的 API
+//    KWindowInfo info(KWindowSystem::activeWindow(),
+//                     NET::WMState | NET::WMVisibleName,
+//                     NET::WM2AppMenuObjectPath | NET::WM2AppMenuServiceName);
+//    const QString objectPath = info.applicationMenuObjectPath();
+//    const QString serviceName = info.applicationMenuServiceName();
+
+    const QString objectPath = QString::fromUtf8(getWindowPropertyString(KWindowSystem::activeWindow(), "_KDE_NET_WM_APPMENU_OBJECT_PATH"));
+    const QString serviceName = QString::fromUtf8(getWindowPropertyString(KWindowSystem::activeWindow(), "_KDE_NET_WM_APPMENU_SERVICE_NAME"));
 
     if (!objectPath.isEmpty() && !serviceName.isEmpty()) {
         setMenuAvailable(true);
