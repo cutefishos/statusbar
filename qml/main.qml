@@ -345,15 +345,47 @@ Item {
                     }
                 }
 
+//                Image {
+//                    id: shutdownIcon
+//                    width: rootItem.iconSize
+//                    height: width
+//                    sourceSize: Qt.size(width, height)
+//                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+//                    asynchronous: true
+//                    Layout.alignment: Qt.AlignCenter
+//                    visible: !volumeIcon.visible && !batteryIcon.visible && !wirelessIcon.visible
+//                    antialiasing: true
+//                    smooth: false
+//                }
+            }
+        }
+
+        StandardItem {
+            id: shutdownItem
+
+            visible: !batteryIcon.visible
+            animationEnabled: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: shutdownLayout.implicitWidth + FishUI.Units.largeSpacing
+
+            onClicked: process.startDetached("cutefish-shutdown")
+
+            RowLayout {
+                id: shutdownLayout
+                anchors.fill: parent
+                anchors.leftMargin: FishUI.Units.smallSpacing
+                anchors.rightMargin: FishUI.Units.smallSpacing
+
+                spacing: 0
+
                 Image {
-                    id: shutdownIcon
+                    id: _shutdownIcon
+                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
                     asynchronous: true
                     Layout.alignment: Qt.AlignCenter
-                    visible: !volumeIcon.visible && !batteryIcon.visible && !wirelessIcon.visible
                     antialiasing: true
                     smooth: false
                 }
