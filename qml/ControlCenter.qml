@@ -357,7 +357,7 @@ ControlCenterDialog {
                     running: true
                     triggeredOnStart: true
                     onTriggered: {
-                        timeLabel.text = new Date().toLocaleString(Qt.locale(), Locale.ShortFormat)
+                        timeLabel.text = new Date().toLocaleDateString(Qt.locale(), Locale.LongFormat)
                     }
                 }
             }
