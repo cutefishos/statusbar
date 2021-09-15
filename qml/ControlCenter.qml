@@ -202,7 +202,7 @@ ControlCenterDialog {
                 CardItem {
                     id: wirelessItem
                     Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    Layout.preferredWidth: 120
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
                                                            : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: enabledConnections.wirelessHwEnabled
@@ -217,7 +217,7 @@ ControlCenterDialog {
                 CardItem {
                     id: bluetoothItem
                     Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    Layout.preferredWidth: 120
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
                                                          : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: !control.bluetoothDisConnected
@@ -230,13 +230,17 @@ ControlCenterDialog {
                 CardItem {
                     id: darkModeItem
                     Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    Layout.preferredWidth: 120
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
                                                          : "qrc:/images/light/dark-mode.svg"
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
                     text: FishUI.Theme.darkMode ? qsTr("On") : qsTr("Off")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
+                }
+
+                Item {
+                    Layout.fillWidth: true
                 }
             }
         }
