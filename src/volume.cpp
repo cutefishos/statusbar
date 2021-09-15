@@ -25,9 +25,9 @@
 #include <QDBusServiceWatcher>
 #include <QDBusPendingCall>
 
-static const QString Service = "org.cutefish.Settings";
+static const QString Service = "com.cutefish.Settings";
 static const QString ObjectPath = "/Audio";
-static const QString Interface = "org.cutefish.Audio";
+static const QString Interface = "com.cutefish.Audio";
 
 static VolumeManager *SELF = nullptr;
 

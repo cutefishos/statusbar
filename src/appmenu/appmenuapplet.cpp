@@ -36,7 +36,7 @@ int AppMenuApplet::s_refs = 0;
 
 static QString viewService()
 {
-    return QStringLiteral("org.cutefish.cappmenuview");
+    return QStringLiteral("com.cutefish.cappmenuview");
 }
 
 AppMenuApplet::AppMenuApplet(QObject *parent)

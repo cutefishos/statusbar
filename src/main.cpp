@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
     StatusBar bar;
 
-    if (!QDBusConnection::sessionBus().registerService("org.cutefish.Statusbar")) {
+    if (!QDBusConnection::sessionBus().registerService("com.cutefish.Statusbar")) {
         return -1;
     }
 

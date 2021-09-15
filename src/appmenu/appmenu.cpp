@@ -57,7 +57,7 @@ AppMenu::AppMenu(QObject *parent)
     connect(this, &AppMenu::menuHidden, m_appmenuDBus, &AppmenuDBus::menuHidden);
     connect(this, &AppMenu::menuShown, m_appmenuDBus, &AppmenuDBus::menuShown);
 
-    m_menuViewWatcher = new QDBusServiceWatcher(QStringLiteral("org.cutefish.cappmenuview"),
+    m_menuViewWatcher = new QDBusServiceWatcher(QStringLiteral("com.cutefish.cappmenuview"),
                                                 QDBusConnection::sessionBus(),
                                                 QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration,
                                                 this);

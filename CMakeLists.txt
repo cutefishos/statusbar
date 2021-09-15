@@ -87,12 +87,12 @@ set_source_files_properties(src/libdbusmenuqt/com.canonical.dbusmenu.xml PROPERT
 ## appmenu
 qt5_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.canonical.AppMenu.Registrar.xml
     src/appmenu/menuimporter.h MenuImporter menuimporteradaptor MenuImporterAdaptor)
-qt5_add_dbus_adaptor(appmenu_SRCS src/appmenu/org.cutefish.cappmenu.xml
+qt5_add_dbus_adaptor(appmenu_SRCS src/appmenu/com.cutefish.cappmenu.xml
     src/appmenu/appmenudbus.h AppmenuDBus appmenuadaptor AppmenuAdaptor)
 
 ## statusbar dbus
 qt5_add_dbus_adaptor(DBUS_SOURCES
-                     src/org.cutefish.Statusbar.xml
+                     src/com.cutefish.Statusbar.xml
                      src/statusbar.h StatusBar)
 
 add_executable(cutefish-statusbar ${SRCS} ${appmenu_SRCS} ${DBUS_SOURCES})
