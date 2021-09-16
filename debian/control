@@ -1,7 +1,7 @@
 Source: cutefish-statusbar
 Section: devel
 Priority: optional
-Maintainer: CutefishOS <cutefishos@foxmail.com>
+Maintainer: CutefishOS <support@cutefishos.com>
 Build-Depends: cmake,
                debhelper (>= 9),
                extra-cmake-modules,
@@ -14,7 +14,7 @@ Build-Depends: cmake,
                qttools5-dev-tools,
                pkg-config
 Standards-Version: 4.5.0
-Homepage: https://github.com/cutefishos/terminal
+Homepage: https://cutefishos.com
 
 Package: cutefish-statusbar
 Architecture: any
