@@ -122,7 +122,7 @@ ControlCenterDialog {
         Item {
             id: topItem
             Layout.fillWidth: true
-            height: 44
+            height: 36
 
             RowLayout {
                 id: topItemLayout
@@ -165,8 +165,8 @@ ControlCenterDialog {
 
                 IconButton {
                     id: settingsButton
-                    implicitWidth: topItem.height * 0.8
-                    implicitHeight: topItem.height * 0.8
+                    implicitWidth: topItem.height
+                    implicitHeight: topItem.height
                     Layout.alignment: Qt.AlignTop
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
                     onLeftButtonClicked: {
@@ -177,8 +177,8 @@ ControlCenterDialog {
 
                 IconButton {
                     id: shutdownButton
-                    implicitWidth: topItem.height * 0.8
-                    implicitHeight: topItem.height * 0.8
+                    implicitWidth: topItem.height
+                    implicitHeight: topItem.height
                     Layout.alignment: Qt.AlignTop
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
                     onLeftButtonClicked: {
