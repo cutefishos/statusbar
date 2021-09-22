@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs">
+<TS version="2.1" language="sr">
 <context>
     <name>ControlCenter</name>
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation>Wi-FI</translation>
+        <translation>Wi-Fi</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation>Zapnout</translation>
+        <translation>Uključeno</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation>Vypnout</translation>
+        <translation>Isključeno</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation>Tmavý vzhled</translation>
+        <translation>Tamni način rada</translation>
     </message>
 </context>
 <context>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
-        <translation>Zavřít</translation>
+        <translation>Zatvori</translation>
     </message>
 </context>
 </TS>
