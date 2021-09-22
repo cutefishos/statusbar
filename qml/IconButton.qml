@@ -49,14 +49,15 @@ Item {
     Rectangle {
         anchors.fill: parent
         anchors.margins: 1
-        radius: parent.height * 0.2
+        // radius: parent.height * 0.2
+        radius: parent.height / 2
 
         color: {
             if (mouseArea.containsMouse) {
                 if (mouseArea.containsPress)
-                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.3)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.2)
                 else
-                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.2)
+                    return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.2) : Qt.rgba(0, 0, 0, 0.1)
             }
 
             return "transparent"

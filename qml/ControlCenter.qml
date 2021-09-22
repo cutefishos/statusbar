@@ -122,7 +122,7 @@ ControlCenterDialog {
         Item {
             id: topItem
             Layout.fillWidth: true
-            height: 48
+            height: 44
 
             RowLayout {
                 id: topItemLayout
@@ -132,7 +132,7 @@ ControlCenterDialog {
                 Image {
                     id: userIcon
 
-                    property int iconSize: 40
+                    property int iconSize: 36
 
                     Layout.preferredHeight: iconSize
                     Layout.preferredWidth: iconSize
@@ -253,7 +253,7 @@ ControlCenterDialog {
         Item {
             id: brightnessItem
             Layout.fillWidth: true
-            height: 45
+            height: 40
             visible: brightness.enabled
 
             Rectangle {
@@ -302,7 +302,7 @@ ControlCenterDialog {
         Item {
             id: volumeItem
             Layout.fillWidth: true
-            height: 45
+            height: 40
             visible: volume.isValid
 
             Rectangle {
