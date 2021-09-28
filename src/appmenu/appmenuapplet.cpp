@@ -44,11 +44,11 @@ AppMenuApplet::AppMenuApplet(QObject *parent)
 {
     ++s_refs;
     // if we're the first, register the service
-    if (s_refs == 1) {
-        QDBusConnection::sessionBus().interface()->registerService(viewService(),
-                                                                   QDBusConnectionInterface::QueueService,
-                                                                   QDBusConnectionInterface::DontAllowReplacement);
-    }
+//    if (s_refs == 1) {
+//        QDBusConnection::sessionBus().interface()->registerService(viewService(),
+//                                                                   QDBusConnectionInterface::QueueService,
+//                                                                   QDBusConnectionInterface::DontAllowReplacement);
+//    }
     /*it registers or unregisters the service when the destroyed value of the applet change,
       and not in the dtor, because:
       when we "delete" an applet, it just hides it for about a minute setting its status

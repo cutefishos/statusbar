@@ -43,19 +43,19 @@ static const QByteArray s_x11AppMenuObjectPathPropertyName = QByteArrayLiteral("
 
 AppMenu::AppMenu(QObject *parent)
     : QObject(parent)
-    , m_appmenuDBus(new AppmenuDBus(this))
+//    , m_appmenuDBus(new AppmenuDBus(this))
 {
     reconfigure();
 
-    m_appmenuDBus->connectToBus();
+//    m_appmenuDBus->connectToBus();
 
-    connect(m_appmenuDBus, &AppmenuDBus::appShowMenu, this, &AppMenu::slotShowMenu);
-    connect(m_appmenuDBus, &AppmenuDBus::reconfigured, this, &AppMenu::reconfigure);
+//    connect(m_appmenuDBus, &AppmenuDBus::appShowMenu, this, &AppMenu::slotShowMenu);
+//    connect(m_appmenuDBus, &AppmenuDBus::reconfigured, this, &AppMenu::reconfigure);
 
-    // transfer our signals to dbus
-    connect(this, &AppMenu::showRequest, m_appmenuDBus, &AppmenuDBus::showRequest);
-    connect(this, &AppMenu::menuHidden, m_appmenuDBus, &AppmenuDBus::menuHidden);
-    connect(this, &AppMenu::menuShown, m_appmenuDBus, &AppmenuDBus::menuShown);
+//    // transfer our signals to dbus
+//    connect(this, &AppMenu::showRequest, m_appmenuDBus, &AppmenuDBus::showRequest);
+//    connect(this, &AppMenu::menuHidden, m_appmenuDBus, &AppmenuDBus::menuHidden);
+//    connect(this, &AppMenu::menuShown, m_appmenuDBus, &AppmenuDBus::menuShown);
 
     m_menuViewWatcher = new QDBusServiceWatcher(QStringLiteral("com.cutefish.cappmenuview"),
                                                 QDBusConnection::sessionBus(),

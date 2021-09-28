@@ -267,12 +267,15 @@ ControlCenterDialog {
 
             RowLayout {
                 anchors.fill: brightnessItemBg
-                anchors.margins: FishUI.Units.largeSpacing
+                anchors.leftMargin: FishUI.Units.largeSpacing
+                anchors.rightMargin: FishUI.Units.largeSpacing
+                anchors.topMargin: FishUI.Units.smallSpacing
+                anchors.bottomMargin: FishUI.Units.smallSpacing
                 spacing: FishUI.Units.largeSpacing
 
                 Image {
-                    width: parent.height * 0.8
-                    height: parent.height * 0.8
+                    height: 16
+                    width: height
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/brightness.svg"
                     smooth: false
@@ -316,12 +319,15 @@ ControlCenterDialog {
 
             RowLayout {
                 anchors.fill: volumeItemBg
-                anchors.margins: FishUI.Units.largeSpacing
+                anchors.leftMargin: FishUI.Units.largeSpacing
+                anchors.rightMargin: FishUI.Units.largeSpacing
+                anchors.topMargin: FishUI.Units.smallSpacing
+                anchors.bottomMargin: FishUI.Units.smallSpacing
                 spacing: FishUI.Units.largeSpacing
 
                 Image {
-                    width: parent.height * 0.8
-                    height: parent.height * 0.8
+                    height: 16
+                    width: height
                     sourceSize: Qt.size(width, height)
                     source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
                     smooth: false
