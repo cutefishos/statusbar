@@ -160,6 +160,7 @@ Item {
                         id: _actionText
                         anchors.centerIn: parent
                         color: rootItem.textColor
+                        font.pointSize: rootItem.height ? rootItem.height / 3 : 1
                         text: {
                             var text = activeMenu
                             text = text.replace(/([^&]*)&(.)([^&]*)/g, function (match, p1, p2, p3) {

@@ -87,7 +87,7 @@ void StatusBar::updateGeometry()
         emit screenRectChanged();
     }
 
-    QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 28);
+    QRect windowRect = QRect(rect.x(), rect.y(), rect.width(), 25);
     setGeometry(windowRect);
     updateViewStruts();
 
