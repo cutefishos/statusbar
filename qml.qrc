@@ -106,5 +106,9 @@
         <file>qml/SystemTray.qml</file>
         <file>qml/MprisItem.qml</file>
         <file>images/media-cover.svg</file>
+        <file>images/light/notification-new-symbolic.svg</file>
+        <file>images/light/notification-symbolic.svg</file>
+        <file>images/dark/notification-new-symbolic.svg</file>
+        <file>images/dark/notification-symbolic.svg</file>
     </qresource>
 </RCC>

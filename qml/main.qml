@@ -369,9 +369,24 @@ Item {
             Layout.fillHeight: true
             Layout.preferredWidth: _dateTimeLayout.implicitWidth + FishUI.Units.smallSpacing
 
+            onClicked: {
+                process.startDetached("cutefish-notificationd", ["-s"])
+            }
+
             RowLayout {
                 id: _dateTimeLayout
                 anchors.fill: parent
+
+//                Image {
+//                    width: rootItem.iconSize
+//                    height: width
+//                    sourceSize: Qt.size(width, height)
+//                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "notification-symbolic.svg"
+//                    asynchronous: true
+//                    Layout.alignment: Qt.AlignCenter
+//                    antialiasing: true
+//                    smooth: false
+//                }
 
                 Label {
                     id: timeLabel
