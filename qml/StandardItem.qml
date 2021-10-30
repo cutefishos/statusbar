@@ -36,8 +36,12 @@ Item {
     property bool checked: false
     property bool animationEnabled: false
 
+    property alias mouseArea: _mouseArea
+
+    signal positionChanged
     signal clicked
     signal rightClicked
+    signal released
 
     onCheckedChanged: {
         _bgRect.state = checked ? "shown" : "hidden"
@@ -84,6 +88,10 @@ Item {
             popupTips.hide()
         }
 
+        onReleased: {
+            control.released()
+        }
+
         onContainsMouseChanged: {
             if (containsMouse && control.popupText !== "") {
                 popupTips.popupText = control.popupText
@@ -93,6 +101,10 @@ Item {
             } else {
                 popupTips.hide()
             }
+        }
+
+        onPositionChanged: {
+            control.positionChanged()
         }
     }
 

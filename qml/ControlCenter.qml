@@ -32,7 +32,7 @@ ControlCenterDialog {
     id: control
 
     width: 420
-    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 3
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2.5
 
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
@@ -103,7 +103,7 @@ ControlCenterDialog {
     Rectangle {
         id: _background
         anchors.fill: parent
-        radius: windowHelper.compositing ? control.height * 0.05 : 0
+        radius: windowHelper.compositing ? FishUI.Theme.bigRadius * 1.5 : 0
         color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
         opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
         antialiasing: true
@@ -115,7 +115,7 @@ ControlCenterDialog {
         anchors.fill: parent
         anchors.leftMargin: FishUI.Units.largeSpacing * 1.5
         anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.topMargin: FishUI.Units.largeSpacing
+        anchors.topMargin: FishUI.Units.largeSpacing * 1.5
         anchors.bottomMargin: FishUI.Units.largeSpacing
         spacing: FishUI.Units.largeSpacing
 

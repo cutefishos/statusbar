@@ -127,6 +127,21 @@ void SystemTrayModel::rightButtonClick(const QString &id)
     }
 }
 
+void SystemTrayModel::move(int from, int to)
+{
+    if (from == to)
+        return;
+
+    m_items.move(from, to);
+
+    if (from < to)
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to + 1);
+    else
+        beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
+
+    endMoveRows();
+}
+
 void SystemTrayModel::onItemAdded(const QString &service)
 {
     StatusNotifierItemSource *source = new StatusNotifierItemSource(service, this);

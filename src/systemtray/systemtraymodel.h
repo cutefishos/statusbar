@@ -53,6 +53,8 @@ public:
     Q_INVOKABLE void leftButtonClick(const QString &id);
     Q_INVOKABLE void rightButtonClick(const QString &id);
 
+    Q_INVOKABLE void move(int from, int to);
+
 private slots:
     void onItemAdded(const QString &service);
     void onItemRemoved(const QString &service);

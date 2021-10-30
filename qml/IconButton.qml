@@ -48,7 +48,6 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.margins: 1
         // radius: parent.height * 0.2
         radius: parent.height / 2
 
@@ -67,7 +66,7 @@ Item {
     Image {
         id: iconImage
         anchors.centerIn: parent
-        width: parent.height * 0.8
+        width: parent.height * 0.75
         height: width
         sourceSize.width: width
         sourceSize.height: height
