@@ -27,13 +27,16 @@ class StatusBar : public QQuickView
 {
     Q_OBJECT
     Q_PROPERTY(QRect screenRect READ screenRect NOTIFY screenRectChanged)
+    Q_PROPERTY(bool twentyFourTime READ twentyFourTime NOTIFY twentyFourTimeChanged)
 
 public:
     explicit StatusBar(QQuickView *parent = nullptr);
 
     QRect screenRect();
+    bool twentyFourTime();
 
     void setBatteryPercentage(bool enabled);
+    void setTwentyFourTime(bool t);
 
     void updateGeometry();
     void updateViewStruts();
@@ -41,6 +44,7 @@ public:
 signals:
     void screenRectChanged();
     void launchPadChanged();
+    void twentyFourTimeChanged();
 
 private slots:
     void initState();
@@ -49,6 +53,7 @@ private slots:
 private:
     QRect m_screenRect;
     Activity *m_acticity;
+    bool m_twentyFourTime;
 };
 
 #endif // STATUSBAR_H

@@ -28,6 +28,7 @@
 
 #include <QDBusConnection>
 #include <QApplication>
+#include <QSettings>
 #include <QScreen>
 
 #include <NETWM>
@@ -38,6 +39,9 @@ StatusBar::StatusBar(QQuickView *parent)
     : QQuickView(parent)
     , m_acticity(new Activity)
 {
+    QSettings settings("cutefish", "locale");
+    m_twentyFourTime = settings.value("twentyFour", false).toBool();
+
     setFlags(Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus);
     setColor(Qt::transparent);
 
@@ -73,9 +77,22 @@ QRect StatusBar::screenRect()
     return m_screenRect;
 }
 
+bool StatusBar::twentyFourTime()
+{
+    return m_twentyFourTime;
+}
+
 void StatusBar::setBatteryPercentage(bool enabled)
 {
     Battery::self()->setShowPercentage(enabled);
+}
+
+void StatusBar::setTwentyFourTime(bool t)
+{
+    if (m_twentyFourTime != t) {
+        m_twentyFourTime = t;
+        emit twentyFourTimeChanged();
+    }
 }
 
 void StatusBar::updateGeometry()

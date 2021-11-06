@@ -37,6 +37,8 @@ Item {
     property bool darkMode: FishUI.Theme.darkMode
     property color textColor: rootItem.darkMode ? "#FFFFFF" : "#000000";
 
+    property var timeFormat: StatusBar.twentyFourTime ? "HH:mm" : "h:mm ap"
+
     Rectangle {
         id: background
         anchors.fill: parent
@@ -453,7 +455,7 @@ Item {
                         running: true
                         triggeredOnStart: true
                         onTriggered: {
-                            timeLabel.text = new Date().toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
+                            timeLabel.text = new Date().toLocaleTimeString(Qt.locale(), rootItem.timeFormat)
                         }
                     }
                 }

@@ -4,5 +4,8 @@
     <method name="setBatteryPercentage">
         <arg name="batteryPercentage" type="b" direction="in"/>
     </method>
+    <method name="setTwentyFourTime">
+        <arg name="t" type="b" direction="in"/>
+    </method>
   </interface>
 </node>
