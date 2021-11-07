@@ -39,6 +39,10 @@ Item {
 
     property var timeFormat: StatusBar.twentyFourTime ? "HH:mm" : "h:mm ap"
 
+    onTimeFormatChanged: {
+        timeTimer.restart()
+    }
+
     Rectangle {
         id: background
         anchors.fill: parent
@@ -450,6 +454,7 @@ Item {
                     color: rootItem.textColor
 
                     Timer {
+                        id: timeTimer
                         interval: 1000
                         repeat: true
                         running: true
