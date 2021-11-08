@@ -36,6 +36,7 @@ Item {
 
     property bool darkMode: FishUI.Theme.darkMode
     property color textColor: rootItem.darkMode ? "#FFFFFF" : "#000000";
+    property var fontSize: rootItem.height ? rootItem.height / 3 : 1
 
     property var timeFormat: StatusBar.twentyFourTime ? "HH:mm" : "h:mm ap"
 
@@ -120,7 +121,7 @@ Item {
                     color: rootItem.textColor
                     visible: text
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: rootItem.height ? rootItem.height / 3 : 1
+                    font.pointSize: rootItem.fontSize
                 }
             }
         }
@@ -166,7 +167,7 @@ Item {
                         id: _actionText
                         anchors.centerIn: parent
                         color: rootItem.textColor
-                        font.pointSize: rootItem.height ? rootItem.height / 3 : 1
+                        font.pointSize: rootItem.fontSize
                         text: {
                             var text = activeMenu
                             text = text.replace(/([^&]*)&(.)([^&]*)/g, function (match, p1, p2, p3) {
@@ -399,7 +400,7 @@ Item {
 
                     Label {
                         text: battery.chargePercent + "%"
-                        font.pointSize: rootItem.height ? rootItem.height / 3 : 1
+                        font.pointSize: rootItem.fontSize
                         color: rootItem.textColor
                         visible: battery.showPercentage
                     }
@@ -450,7 +451,7 @@ Item {
                 Label {
                     id: timeLabel
                     Layout.alignment: Qt.AlignCenter
-                    font.pointSize: rootItem.height ? rootItem.height / 3 : 1
+                    font.pointSize: rootItem.fontSize
                     color: rootItem.textColor
 
                     Timer {

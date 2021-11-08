@@ -108,6 +108,13 @@ ControlCenterDialog {
         opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
         antialiasing: true
         border.width: 0
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.Linear
+            }
+        }
     }
 
     ColumnLayout {
