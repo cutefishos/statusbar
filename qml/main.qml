@@ -437,16 +437,16 @@ Item {
                 id: _dateTimeLayout
                 anchors.fill: parent
 
-//                Image {
-//                    width: rootItem.iconSize
-//                    height: width
-//                    sourceSize: Qt.size(width, height)
-//                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "notification-symbolic.svg"
-//                    asynchronous: true
-//                    Layout.alignment: Qt.AlignCenter
-//                    antialiasing: true
-//                    smooth: false
-//                }
+                Image {
+                    width: rootItem.iconSize
+                    height: width
+                    sourceSize: Qt.size(width, height)
+                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "notification-symbolic.svg"
+                    asynchronous: true
+                    Layout.alignment: Qt.AlignCenter
+                    antialiasing: true
+                    smooth: false
+                }
 
                 Label {
                     id: timeLabel
