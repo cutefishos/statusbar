@@ -219,6 +219,10 @@ ControlCenterDialog {
                                                                activeConnection.wirelessName :
                                                                qsTr("On") : qsTr("Off")
                     onClicked: nmHandler.enableWireless(!checked)
+                    onPressAndHold: {
+                        control.visible = false
+                        process.startDetached("cutefish-settings", ["-m", "wlan"])
+                    }
                 }
 
                 CardItem {
@@ -232,6 +236,10 @@ ControlCenterDialog {
                     text: checked ? qsTr("On") : qsTr("Off")
                     visible: Bluez.Manager.adapters.length
                     onClicked: control.toggleBluetooth()
+                    onPressAndHold: {
+                        control.visible = false
+                        process.startDetached("cutefish-settings", ["-m", "bluetooth"])
+                    }
                 }
 
                 CardItem {

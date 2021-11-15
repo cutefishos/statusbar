@@ -32,6 +32,7 @@ Item {
     property alias text: _label.text
 
     signal clicked
+    signal pressAndHold
 
     property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
                                                         : Qt.rgba(0, 0, 0, 0.1)
@@ -54,6 +55,10 @@ Item {
 
         onPressedChanged: {
             control.scale = pressed ? 0.95 : 1.0
+        }
+
+        onPressAndHold: {
+            control.pressAndHold()
         }
     }
 
