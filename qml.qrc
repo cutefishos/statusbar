@@ -110,5 +110,6 @@
         <file>images/light/notification-symbolic.svg</file>
         <file>images/dark/notification-new-symbolic.svg</file>
         <file>images/dark/notification-symbolic.svg</file>
+        <file>images/logo.svg</file>
     </qresource>
 </RCC>

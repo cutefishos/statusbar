@@ -156,11 +156,21 @@ bool Activity::isAcceptableWindow(quint64 wid)
 void Activity::onActiveWindowChanged()
 {
     KWindowInfo info(KWindowSystem::activeWindow(),
-                     NET::WMState | NET::WMVisibleName,
+                     NET::WMState | NET::WMVisibleName | NET::WMWindowType,
                      NET::WM2WindowClass);
 
     m_launchPad = (info.windowClassClass() == "cutefish-launcher");
     emit launchPadChanged();
+
+    if (NET::typeMatchesMask(info.windowType(NET::AllTypesMask), NET::DesktopMask)) {
+        m_title = tr("Desktop");
+        m_icon = "";
+
+        emit titleChanged();
+        emit iconChanged();
+
+        return;
+    }
 
     if (!isAcceptableWindow(KWindowSystem::activeWindow())
             || blockList.contains(info.windowClassClass())) {

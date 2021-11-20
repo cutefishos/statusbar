@@ -106,7 +106,7 @@ Item {
                     width: rootItem.iconSize
                     height: rootItem.iconSize
                     sourceSize: Qt.size(rootItem.iconSize,
-                                        rootItem.iconSize)
+                                        rootItem.iconSize)                    
                     source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
                     visible: status === Image.Ready
                     antialiasing: true
