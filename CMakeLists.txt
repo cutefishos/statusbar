@@ -24,7 +24,6 @@ set(SRCS
     src/brightness.cpp
     src/battery.cpp
     src/appearance.cpp
-    src/volume.cpp
     src/processprovider.cpp
     src/activity.cpp
     src/capplications.cpp

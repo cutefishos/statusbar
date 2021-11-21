@@ -30,7 +30,6 @@
 #include "appearance.h"
 #include "brightness.h"
 #include "battery.h"
-#include "volume.h"
 
 int main(int argc, char *argv[])
 {
@@ -43,7 +42,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<Appearance>(uri, 1, 0, "Appearance");
     qmlRegisterType<Brightness>(uri, 1, 0, "Brightness");
     qmlRegisterType<Battery>(uri, 1, 0, "Battery");
-    qmlRegisterType<VolumeManager>(uri, 1, 0, "Volume");
     qmlRegisterType<AppMenuModel>(uri, 1, 0, "AppMenuModel");
     qmlRegisterType<AppMenuApplet>(uri, 1, 0, "AppMenuApplet");
 

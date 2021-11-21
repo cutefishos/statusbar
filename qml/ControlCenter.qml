@@ -26,6 +26,7 @@ import QtGraphicalEffects 1.0
 import Cutefish.Accounts 1.0 as Accounts
 import Cutefish.Bluez 1.0 as Bluez
 import Cutefish.StatusBar 1.0
+import Cutefish.Audio 1.0
 import FishUI 1.0 as FishUI
 
 ControlCenterDialog {
@@ -38,6 +39,19 @@ ControlCenterDialog {
     property point position: Qt.point(0, 0)
 
     property bool bluetoothDisConnected: Bluez.Manager.bluetoothBlocked
+
+    property var defaultSinkValue: defaultSink ? defaultSink.volume / PulseAudio.NormalVolume * 100.0: -1
+
+    property var volumeIconName: {
+        if (defaultSinkValue <= 0)
+            return "audio-volume-muted-symbolic"
+        else if (defaultSinkValue <= 25)
+            return "audio-volume-low-symbolic"
+        else if (defaultSinkValue <= 75)
+            return "audio-volume-medium-symbolic"
+        else
+            return "audio-volume-high-symbolic"
+    }
 
     onBluetoothDisConnectedChanged: {
         bluetoothItem.checked = !bluetoothDisConnected
@@ -54,6 +68,18 @@ ControlCenterDialog {
 
     Appearance {
         id: appearance
+    }
+
+    property var defaultSink: paSinkModel.defaultSink
+
+    SinkModel {
+        id: paSinkModel
+
+        onDefaultSinkChanged: {
+            if (!defaultSink) {
+                return
+            }
+        }
     }
 
     function toggleBluetooth() {
@@ -321,7 +347,7 @@ ControlCenterDialog {
             id: volumeItem
             Layout.fillWidth: true
             height: 40
-            visible: volume.isValid
+            visible: defaultSink
 
             Rectangle {
                 id: volumeItemBg
@@ -344,25 +370,30 @@ ControlCenterDialog {
                     height: 16
                     width: height
                     sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + volume.iconName + ".svg"
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark" : "light") + "/" + control.volumeIconName + ".svg"
                     smooth: false
                     antialiasing: true
                 }
 
                 Slider {
-                    id: slider
-                    from: 0
-                    to: 100
-                    stepSize: 1
-                    value: volume.volume
+                    id: volumeSlider
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    onValueChanged: {
-                        volume.setVolume(value)
+                    from: PulseAudio.MinimalVolume
+                    to: PulseAudio.NormalVolume
 
-                        if (volume.isMute && value > 0)
-                            volume.setMute(false)
+                    stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
+
+                    value: defaultSink ? defaultSink.volume : 0
+
+                    onValueChanged: {
+                        if (!defaultSink)
+                            return
+
+                        defaultSink.volume = value
+                        defaultSink.muted = (value === 0)
                     }
                 }
             }

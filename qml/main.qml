@@ -356,8 +356,8 @@ Item {
 
                 Image {
                     id: volumeIcon
-                    visible: volume.isValid && status === Image.Ready
-                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + volume.iconName + ".svg"
+                    visible: controlCenter.defaultSink
+                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + controlCenter.volumeIconName + ".svg"
                     width: rootItem.iconSize
                     height: width
                     sourceSize: Qt.size(width, height)
@@ -518,10 +518,6 @@ Item {
     // Components
     ControlCenter {
         id: controlCenter
-    }
-
-    Volume {
-        id: volume
     }
 
     NM.ActiveConnection {
