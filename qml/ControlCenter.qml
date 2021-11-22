@@ -332,7 +332,7 @@ ControlCenterDialog {
 
                 Slider {
                     id: brightnessSlider
-                    from: 0
+                    from: 1
                     to: 100
                     stepSize: 1
                     value: brightness.value
