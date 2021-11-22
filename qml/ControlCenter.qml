@@ -70,6 +70,18 @@ ControlCenterDialog {
         id: appearance
     }
 
+    VolumeFeedback {
+        id: feedback
+    }
+
+    Timer {
+        id: volumeFeedBackTimer
+        interval: 200
+        onTriggered: {
+            playFeedback()
+        }
+    }
+
     property var defaultSink: paSinkModel.defaultSink
 
     SinkModel {
@@ -80,6 +92,18 @@ ControlCenterDialog {
                 return
             }
         }
+    }
+
+    function playFeedback(sinkIndex) {
+        if (!feedback.valid) {
+            return
+        }
+
+        if (sinkIndex === undefined) {
+            sinkIndex = 0
+        }
+
+        feedback.play(sinkIndex)
     }
 
     function toggleBluetooth() {
@@ -394,6 +418,9 @@ ControlCenterDialog {
 
                         defaultSink.volume = value
                         defaultSink.muted = (value === 0)
+
+                        volumeFeedBackTimer.stop()
+                        volumeFeedBackTimer.restart()
                     }
                 }
             }
