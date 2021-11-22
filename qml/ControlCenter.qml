@@ -37,10 +37,10 @@ ControlCenterDialog {
 
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
+    property var defaultSink: paSinkModel.defaultSink
 
     property bool bluetoothDisConnected: Bluez.Manager.bluetoothBlocked
-
-    property var defaultSinkValue: defaultSink ? defaultSink.volume / PulseAudio.NormalVolume * 100.0: -1
+    property var defaultSinkValue: defaultSink ? defaultSink.volume / PulseAudio.NormalVolume * 100.0 : -1
 
     property var volumeIconName: {
         if (defaultSinkValue <= 0)
@@ -70,20 +70,6 @@ ControlCenterDialog {
         id: appearance
     }
 
-    VolumeFeedback {
-        id: feedback
-    }
-
-    Timer {
-        id: volumeFeedBackTimer
-        interval: 200
-        onTriggered: {
-            playFeedback()
-        }
-    }
-
-    property var defaultSink: paSinkModel.defaultSink
-
     SinkModel {
         id: paSinkModel
 
@@ -92,18 +78,6 @@ ControlCenterDialog {
                 return
             }
         }
-    }
-
-    function playFeedback(sinkIndex) {
-        if (!feedback.valid) {
-            return
-        }
-
-        if (sinkIndex === undefined) {
-            sinkIndex = 0
-        }
-
-        feedback.play(sinkIndex)
     }
 
     function toggleBluetooth() {
@@ -418,9 +392,6 @@ ControlCenterDialog {
 
                         defaultSink.volume = value
                         defaultSink.muted = (value === 0)
-
-                        volumeFeedBackTimer.stop()
-                        volumeFeedBackTimer.restart()
                     }
                 }
             }
