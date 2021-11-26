@@ -461,7 +461,8 @@ Item {
                         running: true
                         triggeredOnStart: true
                         onTriggered: {
-                            timeLabel.text = new Date().toLocaleTimeString(Qt.locale(), rootItem.timeFormat)
+                            timeLabel.text = new Date().toLocaleTimeString(Qt.locale(), StatusBar.twentyFourTime ? rootItem.timeFormat
+                                                                                                                 : Locale.ShortFormat)
                         }
                     }
                 }
