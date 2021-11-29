@@ -33,6 +33,7 @@ set(SRCS
     src/systemtray/systemtraytypedefs.h
     src/systemtray/systemtraymodel.cpp
     src/systemtray/statusnotifierwatcher.cpp
+    src/systemtray/statusnotifieritemhost.cpp
 
     src/libdbusmenuqt/dbusmenuimporter.cpp
     src/libdbusmenuqt/dbusmenushortcut_p.cpp

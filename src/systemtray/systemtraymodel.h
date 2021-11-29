@@ -27,6 +27,7 @@
 #include <QQuickWindow>
 
 #include "statusnotifierwatcher.h"
+#include "statusnotifieritemhost.h"
 #include "statusnotifieritemsource.h"
 
 class SystemTrayModel : public QAbstractListModel
@@ -73,6 +74,7 @@ private slots:
 
 private:
     StatusNotifierWatcher *m_watcher;
+    StatusNotifierItemHost *m_sniHost;
     QList<StatusNotifierItemSource *> m_items;
     QString m_hostName;
 };

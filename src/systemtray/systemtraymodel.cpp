@@ -23,25 +23,25 @@
 #include <QApplication>
 #include <QDebug>
 
+#include <KWindowSystem>
+
 SystemTrayModel::SystemTrayModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_hostName = "org.kde.StatusNotifierHost-" + QString::number(QCoreApplication::applicationPid());
-    QDBusConnection::sessionBus().interface()->registerService(m_hostName, QDBusConnectionInterface::DontQueueService);
-
     m_watcher = new StatusNotifierWatcher;
-    m_watcher->RegisterStatusNotifierHost(m_hostName);
-    m_watcher->moveToThread(QApplication::instance()->thread());
+    m_sniHost = StatusNotifierItemHost::self();
 
-    connect(m_watcher, &StatusNotifierWatcher::StatusNotifierItemRegistered, this, &SystemTrayModel::onItemAdded);
-    connect(m_watcher, &StatusNotifierWatcher::StatusNotifierItemUnregistered, this, &SystemTrayModel::onItemRemoved);
+    connect(m_sniHost, &StatusNotifierItemHost::itemAdded, this, &SystemTrayModel::onItemAdded);
+    connect(m_sniHost, &StatusNotifierItemHost::itemRemoved, this, &SystemTrayModel::onItemRemoved);
+
+    for (auto service : m_sniHost->services()) {
+        onItemAdded(service);
+    }
 }
 
 SystemTrayModel::~SystemTrayModel()
 {
     QDBusConnection::sessionBus().unregisterService(m_hostName);
-
-    delete m_watcher;
 }
 
 int SystemTrayModel::rowCount(const QModelIndex &parent) const
