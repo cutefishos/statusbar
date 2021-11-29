@@ -108,22 +108,28 @@ StatusNotifierItemSource *SystemTrayModel::findItemById(const QString &id)
     return m_items.at(index);
 }
 
-void SystemTrayModel::leftButtonClick(const QString &id)
+void SystemTrayModel::leftButtonClick(const QString &id, int x, int y)
 {
     StatusNotifierItemSource *item = findItemById(id);
 
     if (item) {
-        QPoint p(QCursor::pos());
-        item->activate(p.x(), p.y());
+        item->activate(x, y);
     }
 }
 
-void SystemTrayModel::rightButtonClick(const QString &id)
+void SystemTrayModel::rightButtonClick(const QString &id, int x, int y)
 {
     StatusNotifierItemSource *item = findItemById(id);
     if (item) {
-        QPoint p(QCursor::pos());
-        item->contextMenu(p.x(), p.y());
+        item->contextMenu(x, y);
+    }
+}
+
+void SystemTrayModel::middleButtonClick(const QString &id, int x, int y)
+{
+    StatusNotifierItemSource *item = findItemById(id);
+    if (item) {
+        item->secondaryActivate(x, y);
     }
 }
 
@@ -140,6 +146,23 @@ void SystemTrayModel::move(int from, int to)
         beginMoveRows(QModelIndex(), from, from, QModelIndex(), to);
 
     endMoveRows();
+}
+
+QPointF SystemTrayModel::popupPosition(QQuickItem *visualParent, int x, int y)
+{
+    if (!visualParent) {
+        return QPointF(0, 0);
+    }
+
+    QPointF pos = visualParent->mapToScene(QPointF(x, y));
+
+    if (visualParent->window() && visualParent->window()->screen()) {
+        pos = visualParent->window()->mapToGlobal(pos.toPoint());
+    } else {
+        return QPoint();
+    }
+
+    return pos;
 }
 
 void SystemTrayModel::onItemAdded(const QString &service)

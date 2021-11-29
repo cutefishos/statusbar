@@ -23,6 +23,9 @@
 
 #include <QAbstractListModel>
 
+#include <QQuickItem>
+#include <QQuickWindow>
+
 #include "statusnotifierwatcher.h"
 #include "statusnotifieritemsource.h"
 
@@ -50,10 +53,18 @@ public:
     int indexOf(const QString &id);
     StatusNotifierItemSource *findItemById(const QString &id);
 
-    Q_INVOKABLE void leftButtonClick(const QString &id);
-    Q_INVOKABLE void rightButtonClick(const QString &id);
+    Q_INVOKABLE void leftButtonClick(const QString &id, int x, int y);
+    Q_INVOKABLE void rightButtonClick(const QString &id, int x, int y);
+    Q_INVOKABLE void middleButtonClick(const QString &id, int x, int y);
 
     Q_INVOKABLE void move(int from, int to);
+
+    /**
+     * Find out global coordinates for a popup given local MouseArea
+     * coordinates
+     * from plasma-workspace/applets/systemtray/systemtray.cpp
+     */
+    Q_INVOKABLE QPointF popupPosition(QQuickItem *visualParent, int x, int y);
 
 private slots:
     void onItemAdded(const QString &service);

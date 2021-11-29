@@ -38,9 +38,12 @@ Item {
 
     property alias mouseArea: _mouseArea
 
+    signal clicked(var mouse)
+    signal pressed(var mouse)
+    signal wheel(var wheel)
+    signal contextMenu(var mouse)
+
     signal positionChanged
-    signal clicked
-    signal rightClicked
     signal released
 
     onCheckedChanged: {
@@ -50,7 +53,7 @@ Item {
     MouseArea {
         id: _mouseArea
         anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         hoverEnabled: true
 
         onEntered: {
@@ -77,15 +80,17 @@ Item {
         onClicked: {
             control.moveX = mouseX
             control.moveY = mouseY
-
-            if (mouse.button == Qt.LeftButton)
-                control.clicked()
-            else if (mouse.button == Qt.RightButton)
-                control.rightClicked()
+            control.clicked(mouse)
         }
 
         onPressed: {
             popupTips.hide()
+            control.pressed(mouse)
+        }
+
+        onWheel: {
+            control.wheel(wheel)
+            wheel.accepted = false
         }
 
         onReleased: {

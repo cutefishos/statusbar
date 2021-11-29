@@ -92,7 +92,10 @@ Item {
             Layout.preferredWidth: acticityLayout.implicitWidth ? Math.min(acticityLayout.implicitWidth + FishUI.Units.largeSpacing,
                                                                            rootItem.width / 2)
                                                                 : 0
-            onRightClicked: acticityMenu.open()
+            onClicked: {
+                if (mouse.button === Qt.RightButton)
+                    acticityMenu.open()
+            }
 
             RowLayout {
                 id: acticityLayout
@@ -181,8 +184,8 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: appMenuApplet.currentIndex !== -1
-                        onPressed: parent.clicked()
-                        onEntered: parent.clicked()
+                        onPressed: parent.clicked(null)
+                        onEntered: parent.clicked(null)
                     }
                 }
 
@@ -207,7 +210,7 @@ Item {
                         var idx = Math.max(0, Math.min(appMenuView.count - 1, index))
                         var button = appMenuView.itemAtIndex(index)
                         if (button) {
-                            button.clicked()
+                            button.clicked(null)
                         }
                     });
 
@@ -215,7 +218,7 @@ Item {
                     appMenuApplet.mousePosChanged.connect(function (x, y) {
                         var item = itemAt(x, y)
                         if (item)
-                            item.clicked();
+                            item.clicked(null)
                     });
                 }
             }
@@ -318,8 +321,18 @@ Item {
                     visible: !dragStarted
                 }
 
-                onClicked: trayModel.leftButtonClick(model.id)
-                onRightClicked: trayModel.rightButtonClick(model.id)
+                onClicked: {
+                    var pos = trayModel.popupPosition(_trayItem, mouse.x, mouse.y)
+
+                    if (mouse.button === Qt.LeftButton) {
+                        trayModel.leftButtonClick(model.id, pos.x, pos.y)
+                    } else if (mouse.button === Qt.RightButton) {
+                        trayModel.rightButtonClick(model.id, pos.x, pos.y)
+                    } else if (mouse.button === Qt.MiddleButton) {
+                        trayModel.middleButtonClick(model.id, pos.x, pos.y)
+                    }
+                }
+
                 popupText: model.toolTip ? model.toolTip : model.title
             }
         }
@@ -332,8 +345,9 @@ Item {
             Layout.fillHeight: true
             Layout.preferredWidth: _controlerLayout.implicitWidth + FishUI.Units.largeSpacing
 
-            onClicked: toggleDialog()
-            onRightClicked: toggleDialog()
+            onClicked: {
+                toggleDialog()
+            }
 
             function toggleDialog() {
                 if (controlCenter.visible)
