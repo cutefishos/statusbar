@@ -255,11 +255,7 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
         KDbusToolTipStruct toolTip;
         properties[QStringLiteral("ToolTip")].value<QDBusArgument>() >> toolTip;
         m_tooltip = toolTip.title;
-
-        // Use ID as an alternative :)
-        if (m_tooltip.isEmpty() && m_title.isEmpty()) {
-            m_tooltip = properties[QStringLiteral("Id")].toString();
-        }
+        m_subTitle = toolTip.subTitle;
 
         // Icon
         KDbusImageVector image;

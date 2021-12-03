@@ -197,6 +197,6 @@ void SystemTrayModel::updated(StatusNotifierItemSource *item)
 
     // update
     if (idx != -1) {
-        dataChanged(index(idx, 0), index(idx, 0));
+        emit dataChanged(index(idx, 0), index(idx, 0));
     }
 }
