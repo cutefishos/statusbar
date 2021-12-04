@@ -113,23 +113,29 @@ void SystemTrayModel::leftButtonClick(const QString &id, int x, int y)
     StatusNotifierItemSource *item = findItemById(id);
 
     if (item) {
-        item->activate(x, y);
+        item->activate(x * qApp->devicePixelRatio(),
+                       y * qApp->devicePixelRatio());
     }
 }
 
-void SystemTrayModel::rightButtonClick(const QString &id, int x, int y)
+void SystemTrayModel::rightButtonClick(const QString &id, QQuickItem *iconItem, int x, int y)
 {
     StatusNotifierItemSource *item = findItemById(id);
+
     if (item) {
-        item->contextMenu(x, y);
+        item->contextMenu(x * qApp->devicePixelRatio(),
+                          y * qApp->devicePixelRatio(),
+                          iconItem);
     }
 }
 
 void SystemTrayModel::middleButtonClick(const QString &id, int x, int y)
 {
     StatusNotifierItemSource *item = findItemById(id);
+
     if (item) {
-        item->secondaryActivate(x, y);
+        item->secondaryActivate(x * qApp->devicePixelRatio(),
+                                y * qApp->devicePixelRatio());
     }
 }
 
@@ -167,7 +173,7 @@ QPointF SystemTrayModel::popupPosition(QQuickItem *visualParent, int x, int y)
 
 void SystemTrayModel::onItemAdded(const QString &service)
 {
-    StatusNotifierItemSource *source = new StatusNotifierItemSource(service, this);
+    StatusNotifierItemSource *source = m_sniHost->itemForService(service);
 
     connect(source, &StatusNotifierItemSource::updated, this, &SystemTrayModel::updated);
 

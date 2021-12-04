@@ -153,13 +153,30 @@ void StatusNotifierItemSource::scroll(int delta, const QString &direction)
     }
 }
 
-void StatusNotifierItemSource::contextMenu(int x, int y)
+void StatusNotifierItemSource::contextMenu(int x, int y, QQuickItem *item)
 {
     if (m_menuImporter) {
         // Popup menu
-        if (m_menuImporter->menu()) {
+        QMenu *menu = m_menuImporter->menu();
+
+        if (menu) {
             m_menuImporter->updateMenu();
-            m_menuImporter->menu()->popup(QPoint(x, y));
+
+            menu->winId();
+
+            if (item) {
+                QRect screenItemRect(item->mapToScene(QPointF(0, 0)).toPoint(), QSize(item->width(), item->height()));
+
+                if (item->window()) {
+                    screenItemRect.moveTopLeft(item->window()->mapToGlobal(screenItemRect.topLeft()));
+                    menu->windowHandle()->setTransientParent(item->window());
+                }
+
+                menu->popup(QPoint(screenItemRect.left(),
+                                   screenItemRect.bottom() + 5));
+            } else {
+                menu->popup(QPoint(x, y + 5));
+            }
         }
     } else {
         qWarning() << "Could not find DBusMenu interface, falling back to calling ContextMenu()";

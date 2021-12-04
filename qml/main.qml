@@ -89,9 +89,8 @@ Item {
             id: acticityItem
             animationEnabled: true
             Layout.fillHeight: true
-            Layout.preferredWidth: acticityLayout.implicitWidth ? Math.min(acticityLayout.implicitWidth + FishUI.Units.largeSpacing,
-                                                                           rootItem.width / 2)
-                                                                : 0
+            Layout.preferredWidth: Math.min(rootItem.width / 3,
+                                            acticityLayout.implicitWidth + FishUI.Units.largeSpacing)
             onClicked: {
                 if (mouse.button === Qt.RightButton)
                     acticityMenu.open()
@@ -260,7 +259,7 @@ Item {
 
                 width: trayView.itemWidth
                 height: ListView.view.height
-                animationEnabled: true
+                animationEnabled: false
 
                 onDarkModeChanged: updateTimer.restart()
 
@@ -327,7 +326,7 @@ Item {
                     if (mouse.button === Qt.LeftButton) {
                         trayModel.leftButtonClick(model.id, pos.x, pos.y)
                     } else if (mouse.button === Qt.RightButton) {
-                        trayModel.rightButtonClick(model.id, pos.x, pos.y)
+                        trayModel.rightButtonClick(model.id, _trayItem, pos.x, pos.y)
                     } else if (mouse.button === Qt.MiddleButton) {
                         trayModel.middleButtonClick(model.id, pos.x, pos.y)
                     }

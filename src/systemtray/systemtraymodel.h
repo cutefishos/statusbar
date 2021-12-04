@@ -55,7 +55,7 @@ public:
     StatusNotifierItemSource *findItemById(const QString &id);
 
     Q_INVOKABLE void leftButtonClick(const QString &id, int x, int y);
-    Q_INVOKABLE void rightButtonClick(const QString &id, int x, int y);
+    Q_INVOKABLE void rightButtonClick(const QString &id, QQuickItem *iconItem, int x, int y);
     Q_INVOKABLE void middleButtonClick(const QString &id, int x, int y);
 
     Q_INVOKABLE void move(int from, int to);

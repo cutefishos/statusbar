@@ -27,6 +27,10 @@
 #include <QMenu>
 #include <QDBusPendingCallWatcher>
 
+#include <QQuickWindow>
+#include <QQuickItem>
+#include <QWindow>
+
 #include "statusnotifieritem_interface.h"
 
 class DBusMenuImporter;
@@ -48,7 +52,7 @@ public:
     void activate(int x, int y);
     void secondaryActivate(int x, int y);
     void scroll(int delta, const QString &direction);
-    void contextMenu(int x, int y);
+    void contextMenu(int x, int y, QQuickItem *item);
 
 signals:
     void contextMenuReady(QMenu *menu);
