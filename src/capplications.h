@@ -34,6 +34,7 @@ public:
     QString fullExec;
     QString exec;
     QString fileName;
+    QString startupWMClass;
 };
 
 class CApplications : public QObject

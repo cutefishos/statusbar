@@ -89,6 +89,11 @@ CAppItem *CApplications::matchItem(quint32 pid, const QString &windowClass)
     for (CAppItem *item : m_items) {
         bool founded = false;
 
+        // StartupWMClass
+        if (item->startupWMClass.startsWith(windowClass, Qt::CaseInsensitive)) {
+            founded = true;
+        }
+
         // Command name
         if (item->fullExec == command ||
                 item->exec == command ||
@@ -200,6 +205,7 @@ void CApplications::addApplication(const QString &filePath)
     item->fullExec = desktop.value("Exec").toString();
     item->exec = simplifiedExec;
     item->fileName = QFileInfo(filePath).baseName();
+    item->startupWMClass = desktop.value("StartupWMClass").toString();
     m_items.append(item);
 }
 
