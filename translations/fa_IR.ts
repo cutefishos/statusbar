@@ -6,25 +6,25 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation type="unfinished">وای-فای</translation>
+        <translation>وای-فای</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation type="unfinished">فعال</translation>
+        <translation>فعال</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation type="unfinished">غیرفعال</translation>
+        <translation>غیرفعال</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
         <source>Bluetooth</source>
-        <translation type="unfinished">بلوتوث</translation>
+        <translation>بلوتوث</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>

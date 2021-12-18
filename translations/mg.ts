@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<TS version="2.1" language="mg">
 <context>
     <name>ControlCenter</name>
     <message>
         <location filename="../qml/ControlCenter.qml" line="188"/>
         <source>Wi-Fi</source>
-        <translation>Wi-Fi</translation>
+        <translation>Wifi</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>On</source>
-        <translation>オン</translation>
+        <translation>Mandefa</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="191"/>
         <location filename="../qml/ControlCenter.qml" line="203"/>
         <location filename="../qml/ControlCenter.qml" line="214"/>
         <source>Off</source>
-        <translation>オフ</translation>
+        <translation>Mamono</translation>
     </message>
     <message>
         <location filename="../qml/ControlCenter.qml" line="202"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation>ダークモード</translation>
+        <translation>Fanamaintisana</translation>
     </message>
 </context>
 <context>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../qml/main.qml" line="71"/>
         <source>Close</source>
-        <translation>閉じる</translation>
+        <translation>Hidiana</translation>
     </message>
 </context>
 </TS>
