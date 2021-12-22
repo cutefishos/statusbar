@@ -64,8 +64,6 @@ Item {
 
     FishUI.PopupTips {
         id: popupTips
-        backgroundColor: background.color
-        backgroundOpacity: background.opacity
     }
 
     FishUI.DesktopMenu {
