@@ -40,7 +40,7 @@ ControlCenterDialog {
     property var defaultSink: paSinkModel.defaultSink
 
     property bool bluetoothDisConnected: Bluez.Manager.bluetoothBlocked
-    property var defaultSinkValue: defaultSink ? defaultSink.volume / PulseAudio.NormalVolume * 100.0 : -1
+    property var defaultSinkValue: defaultSink ? defaultSink.volume / PulseAudio.MaximalVolume * 100.0 : -1
 
     property var borderColor: windowHelper.compositing ? FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.3)
                                                                   : Qt.rgba(0, 0, 0, 0.2) : FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.15)
@@ -386,9 +386,9 @@ ControlCenterDialog {
                     Layout.fillHeight: true
 
                     from: PulseAudio.MinimalVolume
-                    to: PulseAudio.NormalVolume
+                    to: PulseAudio.MaximalVolume
 
-                    stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
+                    stepSize: to / (to / PulseAudio.MaximalVolume * 100.0)
 
                     value: defaultSink ? defaultSink.volume : 0
 
