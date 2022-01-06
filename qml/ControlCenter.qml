@@ -305,9 +305,8 @@ ControlCenterDialog {
                 id: brightnessItemBg
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                             : Qt.rgba(0, 0, 0, 0.1)
-                opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
+                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
+                                             : Qt.rgba(0, 0, 0, 0.05)
             }
 
             RowLayout {
@@ -357,9 +356,8 @@ ControlCenterDialog {
                 id: volumeItemBg
                 anchors.fill: parent
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                             : Qt.rgba(0, 0, 0, 0.1)
-                opacity: FishUI.Theme.darkMode ? 0.3 : 0.5
+                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
+                                             : Qt.rgba(0, 0, 0, 0.05)
             }
 
             RowLayout {

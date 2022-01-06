@@ -34,11 +34,11 @@ Item {
     signal clicked
     signal pressAndHold
 
-    property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.4)
-                                                        : Qt.rgba(0, 0, 0, 0.1)
-    property var hoverColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.5)
-                                                   : Qt.rgba(0, 0, 0, 0.2)
-    property var pressedColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.3)
+    property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
+                                                        : Qt.rgba(0, 0, 0, 0.05)
+    property var hoverColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.15)
+                                                   : Qt.rgba(0, 0, 0, 0.1)
+    property var pressedColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.2)
                                                      : Qt.rgba(0, 0, 0, 0.15)
 
     property var highlightHoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
@@ -72,7 +72,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: FishUI.Theme.bigRadius
-        opacity: control.checked ? 0.9 : FishUI.Theme.darkMode ? 0.3 : 0.5
+        opacity: 1
 
         color: {
             if (control.checked) {
