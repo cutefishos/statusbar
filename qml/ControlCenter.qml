@@ -212,17 +212,17 @@ ControlCenterDialog {
                     }
                 }
 
-                IconButton {
-                    id: shutdownButton
-                    implicitWidth: topItem.height
-                    implicitHeight: topItem.height
-                    Layout.alignment: Qt.AlignTop
-                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
-                    onLeftButtonClicked: {
-                        control.visible = false
-                        process.startDetached("cutefish-shutdown")
-                    }
-                }
+//                IconButton {
+//                    id: shutdownButton
+//                    implicitWidth: topItem.height
+//                    implicitHeight: topItem.height
+//                    Layout.alignment: Qt.AlignTop
+//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+//                    onLeftButtonClicked: {
+//                        control.visible = false
+//                        process.startDetached("cutefish-shutdown")
+//                    }
+//                }
             }
         }
 

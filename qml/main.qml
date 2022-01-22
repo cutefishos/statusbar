@@ -257,7 +257,7 @@ Item {
 
                 width: trayView.itemWidth
                 height: ListView.view.height
-                animationEnabled: false
+                animationEnabled: true
 
                 onDarkModeChanged: updateTimer.restart()
 
@@ -416,19 +416,32 @@ Item {
                         visible: battery.showPercentage
                     }
                 }
+            }
+        }
 
-                Image {
-                    id: shutdownIcon
-                    width: rootItem.iconSize
-                    height: width
-                    sourceSize: Qt.size(width, height)
-                    source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
-                    asynchronous: true
-                    Layout.alignment: Qt.AlignCenter
-                    visible: !batteryIcon.visible
-                    antialiasing: true
-                    smooth: false
-                }
+        StandardItem {
+            id: shutdownItem
+
+            animationEnabled: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: shutdownIcon.implicitWidth + FishUI.Units.smallSpacing
+
+            onClicked: {
+                shutdownDialog.position = Qt.point(0, 0)
+                shutdownDialog.position = mapToGlobal(0, 0)
+                shutdownDialog.open()
+            }
+
+            Image {
+                id: shutdownIcon
+                anchors.centerIn: parent
+                width: rootItem.iconSize
+                height: width
+                sourceSize: Qt.size(width, height)
+                source: "qrc:/images/" + (rootItem.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+                asynchronous: true
+                antialiasing: true
+                smooth: false
             }
         }
 
@@ -530,6 +543,10 @@ Item {
     // Components
     ControlCenter {
         id: controlCenter
+    }
+
+    ShutdownDialog {
+        id: shutdownDialog
     }
 
     NM.ActiveConnection {

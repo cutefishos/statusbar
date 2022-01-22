@@ -28,7 +28,6 @@ Item {
 
     property bool checked: false
     property alias icon: _image.source
-    property alias label: _titleLabel.text
     property alias text: _label.text
 
     signal clicked
@@ -105,9 +104,9 @@ Item {
 
         Image {
             id: _image
-            Layout.preferredWidth: 28
-            Layout.preferredHeight: 28
-            sourceSize: Qt.size(28, 28)
+            Layout.preferredWidth: 32
+            Layout.preferredHeight: 32
+            sourceSize: Qt.size(32, 32)
             asynchronous: true
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: FishUI.Units.largeSpacing
@@ -121,22 +120,15 @@ Item {
 //            }
         }
 
-        Label {
-            id: _titleLabel
-            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
-            Layout.preferredHeight: control.height * 0.15
-            Layout.alignment: Qt.AlignHCenter
-            visible: text
+        Item {
+            Layout.fillHeight: true
         }
 
         Label {
             id: _label
             color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
-            elide: Label.ElideRight
-            Layout.preferredHeight: control.height * 0.1
+            Layout.preferredHeight: control.height * 0.15
             Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: control.width - FishUI.Units.largeSpacing
-            Layout.bottomMargin: FishUI.Units.largeSpacing
             visible: text
         }
 

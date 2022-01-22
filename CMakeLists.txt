@@ -56,6 +56,8 @@ set(SRCS
     src/appmenu/dbusmenu_interface.cpp
     src/appmenu/dbusmenu_interface.h
 
+    src/poweractions.cpp
+
     qml.qrc
 )
 

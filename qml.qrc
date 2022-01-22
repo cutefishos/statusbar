@@ -111,5 +111,17 @@
         <file>images/dark/notification-new-symbolic.svg</file>
         <file>images/dark/notification-symbolic.svg</file>
         <file>images/logo.svg</file>
+        <file>qml/ShutdownDialog.qml</file>
+        <file>images/light/system-lock-screen.svg</file>
+        <file>images/light/system-log-out.svg</file>
+        <file>images/light/system-reboot.svg</file>
+        <file>images/light/system-shutdown.svg</file>
+        <file>images/light/system-suspend.svg</file>
+        <file>images/dark/system-lock-screen.svg</file>
+        <file>images/dark/system-log-out.svg</file>
+        <file>images/dark/system-reboot.svg</file>
+        <file>images/dark/system-shutdown.svg</file>
+        <file>images/dark/system-suspend.svg</file>
+        <file>qml/StandardCard.qml</file>
     </qresource>
 </RCC>
