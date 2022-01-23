@@ -11,8 +11,8 @@ ListView {
     orientation: Qt.Horizontal
     layoutDirection: Qt.RightToLeft
     interactive: false
-    spacing: FishUI.Units.smallSpacing / 2
     clip: true
+    spacing: FishUI.Units.smallSpacing / 2
 
     property real itemWidth: rootItem.iconSize + FishUI.Units.largeSpacing
 
@@ -23,14 +23,66 @@ ListView {
         id: trayModel
     }
 
+    moveDisplaced: Transition {
+        NumberAnimation {
+            properties: "x, y"
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     delegate: StandardItem {
+        id: _trayItem
+
         property bool darkMode: rootItem.darkMode
+        property int dragItemIndex: index
+        property bool dragStarted: false
 
         width: trayView.itemWidth
         height: ListView.view.height
         animationEnabled: true
 
         onDarkModeChanged: updateTimer.restart()
+
+        Drag.active: _trayItem.mouseArea.drag.active
+        Drag.dragType: Drag.Automatic
+        Drag.supportedActions: Qt.MoveAction
+        Drag.hotSpot.x: iconItem.width / 2
+        Drag.hotSpot.y: iconItem.height / 2
+
+        Drag.onDragStarted:  {
+            dragStarted = true
+        }
+
+        Drag.onDragFinished: {
+            dragStarted = false
+        }
+
+        onPositionChanged: {
+            if (_trayItem.mouseArea.pressed) {
+                _trayItem.mouseArea.drag.target = iconItem
+                iconItem.grabToImage(function(result) {
+                    _trayItem.Drag.imageSource = result.url
+                })
+            } else {
+                _trayItem.mouseArea.drag.target = null
+            }
+        }
+
+        onReleased: {
+            _trayItem.mouseArea.drag.target = null
+        }
+
+        DropArea {
+            anchors.fill: parent
+            enabled: true
+
+            onEntered: {
+                if (drag.source)
+                    trayModel.move(drag.source.dragItemIndex,
+                                   _trayItem.dragItemIndex)
+            }
+        }
 
         Timer {
             id: updateTimer
@@ -46,10 +98,21 @@ ListView {
             source: model.iconName ? model.iconName : model.icon
             antialiasing: true
             smooth: false
+            visible: !dragStarted
         }
 
-        onClicked: trayModel.leftButtonClick(model.id)
-        onRightClicked: trayModel.rightButtonClick(model.id)
+        onClicked: {
+            var pos = trayModel.popupPosition(_trayItem, mouse.x, mouse.y)
+
+            if (mouse.button === Qt.LeftButton) {
+                trayModel.leftButtonClick(model.id, pos.x, pos.y)
+            } else if (mouse.button === Qt.RightButton) {
+                trayModel.rightButtonClick(model.id, _trayItem, pos.x, pos.y)
+            } else if (mouse.button === Qt.MiddleButton) {
+                trayModel.middleButtonClick(model.id, pos.x, pos.y)
+            }
+        }
+
         popupText: model.toolTip ? model.toolTip : model.title
     }
 }
