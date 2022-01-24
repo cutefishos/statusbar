@@ -97,7 +97,7 @@ ListView {
             height: width
             source: model.iconName ? model.iconName : model.icon
             antialiasing: true
-            smooth: false
+            smooth: true
             visible: !dragStarted
         }
 

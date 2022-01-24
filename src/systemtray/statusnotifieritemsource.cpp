@@ -262,6 +262,12 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
         m_title = properties[QStringLiteral("Title")].toString();
         m_iconName = properties[QStringLiteral("IconName")].toString();
 
+        // Kate: search icon by id
+        QString id = properties[QStringLiteral("Id")].toString();
+        if (!QIcon::fromTheme(id).isNull()) {
+            m_iconName = id;
+        }
+
         // Reion: For icon theme path
         QString iconThemePath = properties[QStringLiteral("IconThemePath")].toString();
         if (!iconThemePath.isEmpty()) {
