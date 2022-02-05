@@ -343,6 +343,12 @@ ControlCenterDialog {
                     Layout.fillHeight: true
                     onMoved: brightnessTimer.start()
                 }
+
+                Label {
+                    text: brightnessSlider.value + "%"
+                    color: FishUI.Theme.disabledTextColor
+                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
+                }
             }
         }
 
@@ -384,9 +390,9 @@ ControlCenterDialog {
                     Layout.fillHeight: true
 
                     from: PulseAudio.MinimalVolume
-                    to: PulseAudio.MaximalVolume
+                    to: PulseAudio.NormalVolume
 
-                    stepSize: to / (to / PulseAudio.MaximalVolume * 100.0)
+                    stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
 
                     value: defaultSink ? defaultSink.volume : 0
 
@@ -398,7 +404,17 @@ ControlCenterDialog {
                         defaultSink.muted = (value === 0)
                     }
                 }
+
+                Label {
+                    text: parseInt(volumeSlider.value / PulseAudio.NormalVolume * 100.0) + "%"
+                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
+                    color: FishUI.Theme.disabledTextColor
+                }
             }
+        }
+
+        FontMetrics {
+            id: _fontMetrics
         }
 
         RowLayout {
