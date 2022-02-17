@@ -29,7 +29,6 @@ Item {
     property bool checked: false
     property alias icon: _image.source
     property alias label: _titleLabel.text
-    property alias text: _label.text
 
     signal clicked
     signal pressAndHold
@@ -53,43 +52,8 @@ Item {
         acceptedButtons: Qt.LeftButton
         onClicked: control.clicked()
 
-        onPressedChanged: {
-            control.scale = pressed ? 0.95 : 1.0
-        }
-
         onPressAndHold: {
             control.pressAndHold()
-        }
-    }
-
-    Behavior on scale {
-        NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutSine
-        }
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        radius: FishUI.Theme.bigRadius
-        opacity: 1
-
-        color: {
-            if (control.checked) {
-                if (_mouseArea.pressed)
-                    return highlightPressedColor
-                else if (_mouseArea.containsMouse)
-                    return highlightHoverColor
-                else
-                    return FishUI.Theme.highlightColor
-            } else {
-                if (_mouseArea.pressed)
-                    return pressedColor
-                else if (_mouseArea.containsMouse)
-                    return hoverColor
-                else
-                    return backgroundColor
-            }
         }
     }
 
@@ -97,46 +61,59 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: FishUI.Theme.smallRadius
         anchors.rightMargin: FishUI.Theme.smallRadius
-        spacing: FishUI.Units.smallSpacing
+        spacing: FishUI.Units.largeSpacing
 
         Item {
             Layout.fillHeight: true
         }
 
-        Image {
-            id: _image
-            Layout.preferredWidth: 28
-            Layout.preferredHeight: 28
-            sourceSize: Qt.size(28, 28)
-            asynchronous: true
-            Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: FishUI.Units.largeSpacing
-            antialiasing: true
-            smooth: true
+        Item {
+            Layout.preferredWidth: 28 + FishUI.Units.largeSpacing * 2
+            Layout.preferredHeight: 28 + FishUI.Units.largeSpacing * 2
 
-//            ColorOverlay {
-//                anchors.fill: _image
-//                source: _image
-//                color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.disabledTextColor
-//            }
+            Layout.alignment: Qt.AlignHCenter
+
+            Rectangle {
+                anchors.fill: parent
+                radius: height / 2
+//                color: "#E5E5E5"
+
+                color: {
+                    if (control.checked) {
+                        if (_mouseArea.pressed)
+                            return highlightPressedColor
+                        else if (_mouseArea.containsMouse)
+                            return highlightHoverColor
+                        else
+                            return FishUI.Theme.highlightColor
+                    } else {
+                        if (_mouseArea.pressed)
+                            return pressedColor
+                        else if (_mouseArea.containsMouse)
+                            return hoverColor
+                        else
+                            return backgroundColor
+                    }
+                }
+            }
+
+            Image {
+                id: _image
+                Layout.preferredWidth: 28
+                Layout.preferredHeight: 28
+                anchors.centerIn: parent
+                sourceSize: Qt.size(28, 28)
+                asynchronous: true
+                antialiasing: true
+                smooth: true
+            }
         }
 
         Label {
             id: _titleLabel
-            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
+//            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
             Layout.preferredHeight: control.height * 0.15
             Layout.alignment: Qt.AlignHCenter
-            visible: text
-        }
-
-        Label {
-            id: _label
-            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
-            elide: Label.ElideRight
-            Layout.preferredHeight: control.height * 0.1
-            Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: control.width - FishUI.Units.largeSpacing
-            Layout.bottomMargin: FishUI.Units.largeSpacing
             visible: text
         }
 

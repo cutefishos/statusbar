@@ -32,8 +32,8 @@ import FishUI 1.0 as FishUI
 ControlCenterDialog {
     id: control
 
-    width: 420
-    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2.5
+    width: 450
+    height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
 
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
@@ -132,8 +132,8 @@ ControlCenterDialog {
         id: _background
         anchors.fill: parent
         radius: windowHelper.compositing ? FishUI.Theme.bigRadius * 1.5 : 0
-        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
-        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
+        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#F0F0F0"
+        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.6 : 0.8 : 1.0
         antialiasing: true
         border.width: 1 / Screen.devicePixelRatio
         border.pixelAligned: Screen.devicePixelRatio > 1 ? false : true
@@ -150,54 +150,26 @@ ControlCenterDialog {
     ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
-        anchors.leftMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.rightMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.topMargin: FishUI.Units.largeSpacing * 1.5
-        anchors.bottomMargin: FishUI.Units.largeSpacing
+        anchors.margins: FishUI.Units.largeSpacing
         spacing: FishUI.Units.largeSpacing
 
         Item {
             id: topItem
             Layout.fillWidth: true
-            height: 36
+            height: 32
 
             RowLayout {
                 id: topItemLayout
                 anchors.fill: parent
+                anchors.rightMargin: FishUI.Units.largeSpacing
                 spacing: FishUI.Units.largeSpacing
 
-                Image {
-                    id: userIcon
-
-                    property int iconSize: 36
-
-                    Layout.preferredHeight: iconSize
-                    Layout.preferredWidth: iconSize
-                    sourceSize: String(source) === "image://icontheme/default-user" ? Qt.size(iconSize, iconSize) : undefined
-                    source: currentUser.iconFileName ? "file:///" + currentUser.iconFileName : "image://icontheme/default-user"
-                    antialiasing: true
-                    smooth: false
-
-                    layer.enabled: true
-                    layer.effect: OpacityMask {
-                        maskSource: Item {
-                            width: userIcon.width
-                            height: userIcon.height
-
-                            Rectangle {
-                                anchors.fill: parent
-                                radius: parent.height / 2
-                            }
-                        }
-                    }
-                }
-
                 Label {
-                    id: userLabel
-                    text: currentUser.userName
-                    Layout.fillHeight: true
+                    leftPadding: FishUI.Units.largeSpacing
+                    text: qsTr("Control Center")
+                    font.bold: true
+                    font.pointSize: 14
                     Layout.fillWidth: true
-                    elide: Label.ElideRight
                 }
 
                 IconButton {
@@ -229,12 +201,17 @@ ControlCenterDialog {
         Item {
             id: cardItems
             Layout.fillWidth: true
-            height: 100
-            visible: wirelessItem.visible || bluetoothItem.visible
+            height: 110
 
-            RowLayout {
+            Rectangle {
                 anchors.fill: parent
-                spacing: FishUI.Units.largeSpacing
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                radius: FishUI.Theme.bigRadius
+                opacity: 0.8
+            }
+
+            GridLayout {
+                anchors.fill: parent
 
                 CardItem {
                     id: wirelessItem
@@ -244,10 +221,7 @@ ControlCenterDialog {
                                                            : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: enabledConnections.wirelessHwEnabled
                     checked: enabledConnections.wirelessEnabled
-                    label: qsTr("Wi-Fi")
-                    text: enabledConnections.wirelessEnabled ? activeConnection.wirelessName ?
-                                                               activeConnection.wirelessName :
-                                                               qsTr("On") : qsTr("Off")
+                    label: activeConnection.wirelessName ? activeConnection.wirelessName : qsTr("Wi-Fi")
                     onClicked: nmHandler.enableWireless(!checked)
                     onPressAndHold: {
                         control.visible = false
@@ -263,7 +237,6 @@ ControlCenterDialog {
                                                          : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: !control.bluetoothDisConnected
                     label: qsTr("Bluetooth")
-                    text: checked ? qsTr("On") : qsTr("Off")
                     visible: Bluez.Manager.adapters.length
                     onClicked: control.toggleBluetooth()
                     onPressAndHold: {
@@ -280,12 +253,7 @@ ControlCenterDialog {
                                                          : "qrc:/images/light/dark-mode.svg"
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
-                    text: FishUI.Theme.darkMode ? qsTr("On") : qsTr("Off")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
-                }
-
-                Item {
-                    Layout.fillWidth: true
                 }
             }
         }
@@ -304,9 +272,9 @@ ControlCenterDialog {
             Rectangle {
                 id: brightnessItemBg
                 anchors.fill: parent
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
-                                             : Qt.rgba(0, 0, 0, 0.05)
+                opacity: 0.8
             }
 
             RowLayout {
@@ -344,11 +312,11 @@ ControlCenterDialog {
                     onMoved: brightnessTimer.start()
                 }
 
-                Label {
-                    text: brightnessSlider.value + "%"
-                    color: FishUI.Theme.disabledTextColor
-                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
-                }
+//                Label {
+//                    text: brightnessSlider.value + "%"
+//                    color: FishUI.Theme.disabledTextColor
+//                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
+//                }
             }
         }
 
@@ -361,9 +329,9 @@ ControlCenterDialog {
             Rectangle {
                 id: volumeItemBg
                 anchors.fill: parent
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                color: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
-                                             : Qt.rgba(0, 0, 0, 0.05)
+                opacity: 0.8
             }
 
             RowLayout {
@@ -405,11 +373,11 @@ ControlCenterDialog {
                     }
                 }
 
-                Label {
-                    text: parseInt(volumeSlider.value / PulseAudio.NormalVolume * 100.0) + "%"
-                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
-                    color: FishUI.Theme.disabledTextColor
-                }
+//                Label {
+//                    text: parseInt(volumeSlider.value / PulseAudio.NormalVolume * 100.0) + "%"
+//                    Layout.preferredWidth: _fontMetrics.advanceWidth("100%")
+//                    color: FishUI.Theme.disabledTextColor
+//                }
             }
         }
 
@@ -476,5 +444,16 @@ ControlCenterDialog {
                 }
             }
         }
+    }
+
+    function calcExtraSpacing(cellSize, containerSize) {
+        var availableColumns = Math.floor(containerSize / cellSize)
+        var extraSpacing = 0
+        if (availableColumns > 0) {
+            var allColumnSize = availableColumns * cellSize
+            var extraSpace = Math.max(containerSize - allColumnSize, 0)
+            extraSpacing = extraSpace / availableColumns
+        }
+        return Math.floor(extraSpacing)
     }
 }

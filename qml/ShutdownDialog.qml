@@ -45,6 +45,10 @@ ControlCenterDialog {
                                                                   : Qt.rgba(0, 0, 0, 0.2) : FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.15)
                                                                                                                   : Qt.rgba(0, 0, 0, 0.15)
 
+    Accounts.UserAccount {
+        id: currentUser
+    }
+
     FishUI.WindowBlur {
         view: control
         geometry: Qt.rect(control.x, control.y, control.width, control.height)
@@ -77,86 +81,128 @@ ControlCenterDialog {
         }
     }
 
-    GridLayout {
+    ColumnLayout {
         id: _mainLayout
         anchors.fill: parent
         anchors.margins: FishUI.Units.largeSpacing * 1.5
-        rowSpacing: FishUI.Units.largeSpacing
-        columnSpacing: FishUI.Units.largeSpacing
-        columns: 3
+        spacing: FishUI.Units.largeSpacing
 
-        StandardCard {
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
-            icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-shutdown.svg"
-                                        : "qrc:/images/light/system-shutdown.svg"
-            visible: true
-            checked: false
-            text: qsTr("Shutdown")
+        RowLayout {
+            spacing: FishUI.Units.smallSpacing * 1.5
 
-            onClicked: {
-                control.visible = false
-                actions.shutdown()
+            Image {
+                id: userIcon
+
+                property int iconSize: 33
+
+                Layout.preferredHeight: iconSize
+                Layout.preferredWidth: iconSize
+                sourceSize: String(source) === "image://icontheme/default-user" ? Qt.size(iconSize, iconSize) : undefined
+                source: currentUser.iconFileName ? "file:///" + currentUser.iconFileName : "image://icontheme/default-user"
+                antialiasing: true
+                smooth: false
+
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: Item {
+                        width: userIcon.width
+                        height: userIcon.height
+
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: parent.height / 2
+                        }
+                    }
+                }
+            }
+
+            Label {
+                id: userLabel
+                text: currentUser.userName
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                elide: Label.ElideRight
             }
         }
 
-        StandardCard {
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
-            icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-reboot.svg"
-                                        : "qrc:/images/light/system-reboot.svg"
-            visible: true
-            checked: false
-            text: qsTr("Reboot")
+        GridLayout {
+            rowSpacing: FishUI.Units.largeSpacing
+            columnSpacing: FishUI.Units.largeSpacing
+            columns: 3
 
-            onClicked: {
-                control.visible = false
-                actions.reboot()
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-shutdown.svg"
+                                            : "qrc:/images/light/system-shutdown.svg"
+                visible: true
+                checked: false
+                text: qsTr("Shutdown")
+
+                onClicked: {
+                    control.visible = false
+                    actions.shutdown()
+                }
             }
-        }
 
-        StandardCard {
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
-            icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-log-out.svg"
-                                        : "qrc:/images/light/system-log-out.svg"
-            visible: true
-            checked: false
-            text: qsTr("Log out")
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-reboot.svg"
+                                            : "qrc:/images/light/system-reboot.svg"
+                visible: true
+                checked: false
+                text: qsTr("Reboot")
 
-            onClicked: {
-                control.visible = false
-                actions.logout()
+                onClicked: {
+                    control.visible = false
+                    actions.reboot()
+                }
             }
-        }
 
-        StandardCard {
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
-            icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-lock-screen.svg"
-                                        : "qrc:/images/light/system-lock-screen.svg"
-            visible: true
-            checked: false
-            text: qsTr("Lock Screen")
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-log-out.svg"
+                                            : "qrc:/images/light/system-log-out.svg"
+                visible: true
+                checked: false
+                text: qsTr("Log out")
 
-            onClicked: {
-                control.visible = false
-                actions.lockScreen()
+                onClicked: {
+                    control.visible = false
+                    actions.logout()
+                }
             }
-        }
 
-        StandardCard {
-            Layout.preferredWidth: 96
-            Layout.preferredHeight: 96
-            icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-suspend.svg"
-                                        : "qrc:/images/light/system-suspend.svg"
-            visible: true
-            checked: false
-            text: qsTr("Suspend")
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-lock-screen.svg"
+                                            : "qrc:/images/light/system-lock-screen.svg"
+                visible: true
+                checked: false
+                text: qsTr("Lock Screen")
 
-            onClicked: {
-                control.visible = false
-                actions.suspend()
+                onClicked: {
+                    control.visible = false
+                    actions.lockScreen()
+                }
+            }
+
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/system-suspend.svg"
+                                            : "qrc:/images/light/system-suspend.svg"
+                visible: true
+                checked: false
+                text: qsTr("Suspend")
+
+                onClicked: {
+                    control.visible = false
+                    actions.suspend()
+                }
             }
         }
     }

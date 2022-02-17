@@ -12,31 +12,22 @@
 <context>
     <name>ControlCenter</name>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="247"/>
+        <location filename="../qml/ControlCenter.qml" line="222"/>
         <source>Wi-Fi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="250"/>
-        <location filename="../qml/ControlCenter.qml" line="266"/>
-        <location filename="../qml/ControlCenter.qml" line="283"/>
-        <source>On</source>
+        <location filename="../qml/ControlCenter.qml" line="167"/>
+        <source>Control Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="250"/>
-        <location filename="../qml/ControlCenter.qml" line="266"/>
-        <location filename="../qml/ControlCenter.qml" line="283"/>
-        <source>Off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/ControlCenter.qml" line="265"/>
+        <location filename="../qml/ControlCenter.qml" line="237"/>
         <source>Bluetooth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="282"/>
+        <location filename="../qml/ControlCenter.qml" line="253"/>
         <source>Dark Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -44,27 +35,27 @@
 <context>
     <name>ShutdownDialog</name>
     <message>
-        <location filename="../qml/ShutdownDialog.qml" line="95"/>
+        <location filename="../qml/ShutdownDialog.qml" line="140"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ShutdownDialog.qml" line="110"/>
+        <location filename="../qml/ShutdownDialog.qml" line="155"/>
         <source>Reboot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ShutdownDialog.qml" line="125"/>
+        <location filename="../qml/ShutdownDialog.qml" line="170"/>
         <source>Log out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ShutdownDialog.qml" line="140"/>
+        <location filename="../qml/ShutdownDialog.qml" line="185"/>
         <source>Lock Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ShutdownDialog.qml" line="155"/>
+        <location filename="../qml/ShutdownDialog.qml" line="200"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
