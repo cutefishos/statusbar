@@ -203,6 +203,8 @@ ControlCenterDialog {
             Layout.fillWidth: true
             height: 110
 
+            property var cellWidth: cardItems.width / 3
+
             Rectangle {
                 anchors.fill: parent
                 color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
@@ -212,11 +214,13 @@ ControlCenterDialog {
 
             GridLayout {
                 anchors.fill: parent
+                columnSpacing: 0
+                columns: 3
 
                 CardItem {
                     id: wirelessItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: 120
+                    Layout.preferredWidth: cardItems.cellWidth
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/network-wireless-connected-100.svg"
                                                            : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: enabledConnections.wirelessHwEnabled
@@ -232,9 +236,9 @@ ControlCenterDialog {
                 CardItem {
                     id: bluetoothItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: 120
+                    Layout.preferredWidth: cardItems.cellWidth
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
-                                                         : "qrc:/images/light/bluetooth-symbolic.svg"
+                                                           : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: !control.bluetoothDisConnected
                     label: qsTr("Bluetooth")
                     visible: Bluez.Manager.adapters.length
@@ -248,9 +252,9 @@ ControlCenterDialog {
                 CardItem {
                     id: darkModeItem
                     Layout.fillHeight: true
-                    Layout.preferredWidth: 120
+                    Layout.preferredWidth: cardItems.cellWidth
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
-                                                         : "qrc:/images/light/dark-mode.svg"
+                                                           : "qrc:/images/light/dark-mode.svg"
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
