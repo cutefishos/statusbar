@@ -207,9 +207,9 @@ ControlCenterDialog {
 
             Rectangle {
                 anchors.fill: parent
-                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                color: "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: 0.7
+                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
             }
 
             GridLayout {
@@ -301,9 +301,9 @@ ControlCenterDialog {
             Rectangle {
                 id: brightnessItemBg
                 anchors.fill: parent
-                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                color: "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: 0.8
+                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
             }
 
             RowLayout {
@@ -358,9 +358,9 @@ ControlCenterDialog {
             Rectangle {
                 id: volumeItemBg
                 anchors.fill: parent
-                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                color: "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: 0.8
+                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
             }
 
             RowLayout {
