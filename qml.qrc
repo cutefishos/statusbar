@@ -123,5 +123,7 @@
         <file>images/dark/system-shutdown.svg</file>
         <file>images/dark/system-suspend.svg</file>
         <file>qml/StandardCard.qml</file>
+        <file>images/light/screenshot.svg</file>
+        <file>images/dark/screenshot.svg</file>
     </qresource>
 </RCC>

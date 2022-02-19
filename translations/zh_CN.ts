@@ -12,24 +12,29 @@
 <context>
     <name>ControlCenter</name>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="222"/>
+        <location filename="../qml/ControlCenter.qml" line="240"/>
         <source>Wi-Fi</source>
         <translation>无线网络</translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="167"/>
+        <location filename="../qml/ControlCenter.qml" line="169"/>
         <source>Control Center</source>
         <translation>控制中心</translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="237"/>
+        <location filename="../qml/ControlCenter.qml" line="255"/>
         <source>Bluetooth</source>
         <translation>蓝牙</translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="253"/>
+        <location filename="../qml/ControlCenter.qml" line="271"/>
         <source>Dark Mode</source>
         <translation>深色模式</translation>
+    </message>
+    <message>
+        <location filename="../qml/ControlCenter.qml" line="281"/>
+        <source>Screenshot</source>
+        <translation>截图</translation>
     </message>
 </context>
 <context>

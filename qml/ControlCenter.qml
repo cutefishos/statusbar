@@ -201,21 +201,33 @@ ControlCenterDialog {
         Item {
             id: cardItems
             Layout.fillWidth: true
-            height: 110
+            Layout.preferredHeight: Math.ceil(cardLayout.count / 4) * 110
 
-            property var cellWidth: cardItems.width / 3
+            property var cellWidth: cardItems.width / 4
 
             Rectangle {
                 anchors.fill: parent
                 color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: 0.8
+                opacity: 0.7
             }
 
             GridLayout {
+                id: cardLayout
                 anchors.fill: parent
                 columnSpacing: 0
-                columns: 3
+                columns: 4
+
+                property int count: {
+                    var count = 0
+
+                    for (var i in cardLayout.children) {
+                        if (cardLayout.children[i].visible)
+                            ++count
+                    }
+
+                    return count
+                }
 
                 CardItem {
                     id: wirelessItem
@@ -258,6 +270,19 @@ ControlCenterDialog {
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
+                }
+
+                CardItem {
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: cardItems.cellWidth
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/screenshot.svg"
+                                                           : "qrc:/images/light/screenshot.svg"
+                    checked: false
+                    label: qsTr("Screenshot")
+                    onClicked: {
+                        control.visible = false
+                        process.startDetached("cutefish-screenshot", ["-d", "500"])
+                    }
                 }
             }
         }
@@ -390,6 +415,8 @@ ControlCenterDialog {
         }
 
         RowLayout {
+            Layout.leftMargin: FishUI.Units.smallSpacing
+            Layout.rightMargin: FishUI.Units.smallSpacing
             spacing: 0
 
             Label {

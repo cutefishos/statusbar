@@ -52,6 +52,10 @@ Item {
         acceptedButtons: Qt.LeftButton
         onClicked: control.clicked()
 
+        onPressedChanged: {
+            imageItem.scale = pressed ? 0.95 : 1.0
+        }
+
         onPressAndHold: {
             control.pressAndHold()
         }
@@ -68,10 +72,18 @@ Item {
         }
 
         Item {
+            id: imageItem
             Layout.preferredWidth: 28 + FishUI.Units.largeSpacing * 2
             Layout.preferredHeight: 28 + FishUI.Units.largeSpacing * 2
 
             Layout.alignment: Qt.AlignHCenter
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutSine
+                }
+            }
 
             Rectangle {
                 anchors.fill: parent
@@ -114,6 +126,9 @@ Item {
 //            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
             Layout.preferredHeight: control.height * 0.15
             Layout.alignment: Qt.AlignHCenter
+            horizontalAlignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            elide: Text.ElideMiddle
             visible: text
         }
 
