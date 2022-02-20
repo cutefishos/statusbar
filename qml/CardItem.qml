@@ -29,11 +29,12 @@ Item {
     property bool checked: false
     property alias icon: _image.source
     property alias label: _titleLabel.text
+    property alias label2:_titleLabel2.text
 
     signal clicked
     signal pressAndHold
 
-    property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
+   property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
                                                         : Qt.rgba(0, 0, 0, 0.05)
     property var hoverColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.15)
                                                    : Qt.rgba(0, 0, 0, 0.1)
@@ -52,38 +53,37 @@ Item {
         acceptedButtons: Qt.LeftButton
         onClicked: control.clicked()
 
-        onPressedChanged: {
-            imageItem.scale = pressed ? 0.95 : 1.0
-        }
-
         onPressAndHold: {
             control.pressAndHold()
         }
     }
-
-    ColumnLayout {
-        anchors.fill: parent
-        anchors.leftMargin: FishUI.Theme.smallRadius
-        anchors.rightMargin: FishUI.Theme.smallRadius
-        spacing: FishUI.Units.largeSpacing
-
+    Label {
+        id: _titleLabel2
+        leftPadding: FishUI.Units.largeSpacing
+        font.bold: true
+        topPadding: 2
+        font.pointSize: 10
+        Layout.fillWidth: true
+    }
+  //  ColumnLayout {
+    //    anchors.fill: parent
+      //  anchors.leftMargin: FishUI.Theme.smallRadius
+       // anchors.rightMargin: FishUI.Theme.smallRadius
+       // spacing: FishUI.Units.largeSpacing
+    RowLayout {
+       // anchors.rightMargin: FishUI.Units.largeSpacing
+        //anchors.leftMargin: FishUI.Theme.smallRadius
+        //anchors.rightMargin: FishUI.Theme.smallRadius
+        //spacing: FishUI.Units.largeSpacing
         Item {
             Layout.fillHeight: true
         }
 
         Item {
-            id: imageItem
-            Layout.preferredWidth: 28 + FishUI.Units.largeSpacing * 2
-            Layout.preferredHeight: 28 + FishUI.Units.largeSpacing * 2
+            Layout.preferredWidth: 12 + FishUI.Units.largeSpacing * 2
+            Layout.preferredHeight: 12 + FishUI.Units.largeSpacing * 2
 
-            Layout.alignment: Qt.AlignHCenter
-
-            Behavior on scale {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.OutSine
-                }
-            }
+            Layout.alignment: Qt.AlignLeft
 
             Rectangle {
                 anchors.fill: parent
@@ -108,32 +108,29 @@ Item {
                     }
                 }
             }
-
             Image {
                 id: _image
-                Layout.preferredWidth: 28
-                Layout.preferredHeight: 28
+                Layout.preferredWidth: 22
+                Layout.preferredHeight: 22
+                Layout.alignment: Qt.AlignVCenter+Qt.AlignLeft
                 anchors.centerIn: parent
-                sourceSize: Qt.size(28, 28)
+                sourceSize: Qt.size(22, 22)
                 asynchronous: true
                 antialiasing: true
                 smooth: true
             }
         }
-
         Label {
             id: _titleLabel
-//            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
-            Layout.preferredHeight: control.height * 0.15
-            Layout.alignment: Qt.AlignHCenter
-            horizontalAlignment: Qt.AlignHCenter
-            Layout.fillWidth: true
-            elide: Text.ElideMiddle
+    //            color: control.checked ? FishUI.Theme.highlightedTextColor : FishUI.Theme.textColor
+            Layout.preferredHeight:1
+            Layout.alignment:Qt.AlignLeft
+            topPadding: 20
+            font.pointSize: 8
             visible: text
         }
-
         Item {
             Layout.fillHeight: true
         }
-    }
 }
+    }

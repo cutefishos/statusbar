@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
@@ -28,13 +28,15 @@ import Cutefish.Bluez 1.0 as Bluez
 import Cutefish.StatusBar 1.0
 import Cutefish.Audio 1.0
 import FishUI 1.0 as FishUI
+import Cutefish.NetworkManagement 1.0 as NM
+
 
 ControlCenterDialog {
     id: control
-
-    width: 450
+      width:400
+    //width: 320
     height: _mainLayout.implicitHeight + FishUI.Units.largeSpacing * 2
-
+    property bool checked: false
     property var margin: 4 * Screen.devicePixelRatio
     property point position: Qt.point(0, 0)
     property var defaultSink: paSinkModel.defaultSink
@@ -152,84 +154,79 @@ ControlCenterDialog {
         anchors.fill: parent
         anchors.margins: FishUI.Units.largeSpacing
         spacing: FishUI.Units.largeSpacing
-
         Item {
-            id: topItem
-            Layout.fillWidth: true
-            height: 32
+                   id: topItem
+                   Layout.fillWidth: true
+                   height: 32
 
-            RowLayout {
-                id: topItemLayout
-                anchors.fill: parent
-                anchors.rightMargin: FishUI.Units.largeSpacing
-                spacing: FishUI.Units.largeSpacing
+                   RowLayout {
+                       id: topItemLayout
+                       anchors.fill: parent
+                       anchors.rightMargin: FishUI.Units.largeSpacing
+                       spacing: FishUI.Units.largeSpacing
 
-                Label {
-                    leftPadding: FishUI.Units.largeSpacing
-                    text: qsTr("Control Center")
-                    font.bold: true
-                    font.pointSize: 14
-                    Layout.fillWidth: true
-                }
+                       Label {
+                           leftPadding: FishUI.Units.largeSpacing
+                           text: qsTr("Control Center")
+                           font.bold: true
+                           font.pointSize: 14
+                           Layout.fillWidth: true
+                       }
 
-                IconButton {
-                    id: settingsButton
-                    implicitWidth: topItem.height
-                    implicitHeight: topItem.height
-                    Layout.alignment: Qt.AlignTop
-                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
-                    onLeftButtonClicked: {
-                        control.visible = false
-                        process.startDetached("cutefish-settings")
-                    }
-                }
+                       IconButton {
+                           id: settingsButton
+                           implicitWidth: topItem.height
+                           implicitHeight: topItem.height
+                           Layout.alignment: Qt.AlignTop
+                           source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
+                           onLeftButtonClicked: {
+                               control.visible = false
+                               process.startDetached("cutefish-settings")
+                           }
+                       }
 
-//                IconButton {
-//                    id: shutdownButton
-//                    implicitWidth: topItem.height
-//                    implicitHeight: topItem.height
-//                    Layout.alignment: Qt.AlignTop
-//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
-//                    onLeftButtonClicked: {
-//                        control.visible = false
-//                        process.startDetached("cutefish-shutdown")
-//                    }
-//                }
-            }
-        }
+       //                IconButton {
+       //                    id: shutdownButton
+       //                    implicitWidth: topItem.height
+       //                    implicitHeight: topItem.height
+       //                    Layout.alignment: Qt.AlignTop
+       //                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+       //                    onLeftButtonClicked: {
+       //                        control.visible = false
+       //                        process.startDetached("cutefish-shutdown")
+       //                    }
+       //                }
+                   }
+               }
+
+
+        RowLayout {
+            id: middleItemLayout
+            anchors.rightMargin: FishUI.Units.largeSpacing
+            spacing: FishUI.Units.largeSpacing
 
         Item {
             id: cardItems
             Layout.fillWidth: true
-            Layout.preferredHeight: Math.ceil(cardLayout.count / 4) * 110
+            height: 150
 
-            property var cellWidth: cardItems.width / 4
+            property var cellWidth: cardItems.width / 3
 
             Rectangle {
                 anchors.fill: parent
-                color: "white"
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
+                opacity: 0.8
             }
-
             GridLayout {
-                id: cardLayout
                 anchors.fill: parent
-                columnSpacing: 0
-                columns: 4
-
-                property int count: {
-                    var count = 0
-
-                    for (var i in cardLayout.children) {
-                        if (cardLayout.children[i].visible)
-                            ++count
-                    }
-
-                    return count
-                }
-
+                anchors.topMargin: 9
+                columnSpacing:1
+                columns: 1
                 CardItem {
+                     Item {Layout.fillHeight: true}
+                    label2: "          "+"Wi-Fi"
+                    Item{Layout.fillHeight: true}
                     id: wirelessItem
                     Layout.fillHeight: true
                     Layout.preferredWidth: cardItems.cellWidth
@@ -237,22 +234,24 @@ ControlCenterDialog {
                                                            : "qrc:/images/light/network-wireless-connected-100.svg"
                     visible: enabledConnections.wirelessHwEnabled
                     checked: enabledConnections.wirelessEnabled
-                    label: activeConnection.wirelessName ? activeConnection.wirelessName : qsTr("Wi-Fi")
+                    label:activeConnection.wirelessName ? activeConnection.wirelessName : qsTr("Wi-Fi")
                     onClicked: nmHandler.enableWireless(!checked)
                     onPressAndHold: {
                         control.visible = false
                         process.startDetached("cutefish-settings", ["-m", "wlan"])
                     }
                 }
-
                 CardItem {
+                    label2: "          "+"Bluetooth"
+                    Item{Layout.fillHeight: true}
                     id: bluetoothItem
                     Layout.fillHeight: true
                     Layout.preferredWidth: cardItems.cellWidth
                     icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/bluetooth-symbolic.svg"
                                                            : "qrc:/images/light/bluetooth-symbolic.svg"
                     checked: !control.bluetoothDisConnected
-                    label: qsTr("Bluetooth")
+                    label:!control.bluetoothDisConnected ?qsTr("On")
+                                                   :qsTr("Off")
                     visible: Bluez.Manager.adapters.length
                     onClicked: control.toggleBluetooth()
                     onPressAndHold: {
@@ -262,35 +261,192 @@ ControlCenterDialog {
                 }
 
                 CardItem {
-                    id: darkModeItem
+                    label2: "          "+"Hotspot"
+                    Item{Layout.fillHeight: true}
+                    id: hotspot
                     Layout.fillHeight: true
                     Layout.preferredWidth: cardItems.cellWidth
-                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
-                                                           : "qrc:/images/light/dark-mode.svg"
-                    checked: FishUI.Theme.darkMode
-                    label: qsTr("Dark Mode")
-                    onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
-                }
-
-                CardItem {
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: cardItems.cellWidth
-                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/screenshot.svg"
-                                                           : "qrc:/images/light/screenshot.svg"
-                    checked: false
-                    label: qsTr("Screenshot")
-                    onClicked: {
-                        control.visible = false
-                        process.startDetached("cutefish-screenshot", ["-d", "500"])
-                    }
+                    icon//: FishUI.Theme.darkMode || checked ? "qrc:/images/light/hotspot.svg"
+                                                           : "qrc:/images/dark/hotspot.svg"
+                    checked:handler.hotspotSupported
+                    label:qsTr("Not Supported")
+                    onClicked: if (checked) {
+                                   handler.createHotspot()
+                               } else {
+                                   handler.stopHotspot()
+                               }
                 }
             }
         }
+        ColumnLayout {
+            id: middleItemLayout2
+           anchors.margins: FishUI.Units.largeSpacing
+            spacing: FishUI.Units.largeSpacing
 
-        MprisItem {
-            height: 96
+            Item {
+                id: doNotDisturb
+                Layout.fillWidth: true
+                height: 69
+                 property var cellWidth: cardItems.width / 3
+                Rectangle {
+                    anchors.fill: parent
+                    color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                    radius: FishUI.Theme.bigRadius
+                    opacity: 0.8
+
+                }
+                GridLayout{anchors.fill: parent
+                    anchors.topMargin: 9
+                    columnSpacing:1
+                    columns: 2
+                    Layout.alignment: Qt.AlignCenter
+                    GridLayout {
+                        anchors.fill: parent
+                        anchors.topMargin: 7
+                        anchors.leftMargin: 10
+                        anchors.rightMargin: 5
+                        anchors.bottomMargin: 25
+
+                        columnSpacing:1
+                        columns: 1
+                    CardItem {
+                                       Layout.fillHeight: true
+                                       Layout.preferredWidth: cardItems.cellWidth
+                                       icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dnd.svg"
+                                                                              : "qrc:/images/light/dnd.svg"
+                                       checked: false
+                                       label: qsTr("")
+                                       visible: Bluez.Manager.adapters.length
+
+                                      onPressAndHold: {
+                                           control.visible = false
+                                           process.startDetached("cutefish-settings", ["-m", "notifications",])
+                                       }
+                    }}
+
+                    Label {
+                        anchors.fill: parent
+                        topPadding: 6
+                          leftPadding:63
+                        rightPadding:10
+                        bottomPadding: 35
+                        Layout.alignment: Qt.AlignCenter+Qt.AlignVCenter
+                        text: qsTr("Do Not\n")+qsTr("Disturb")
+                        font.bold: true
+                        font.pointSize: 12
+                       Layout.fillWidth: true
+                        wrapMode: "WordWrap"
+                    }
+                }
+            }
+            GridLayout {
+                anchors.fill: parent
+                anchors.topMargin: 80
+              //  Layout.alignment: Qt.AlignCenter
+
+                columnSpacing:1
+                columns: 2
+        Item {
+            id: darkMode
             Layout.fillWidth: true
+            height: 69           
+            property var cellWidth: cardItems.width / 3
+            Rectangle {
+                anchors.fill: parent
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                radius: FishUI.Theme.bigRadius
+                opacity: 0.8}
+            GridLayout {
+                anchors.fill: parent
+                anchors.topMargin: 7
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 25
+
+                columnSpacing:1
+                columns: 1
+                IconButton {
+
+                    implicitWidth:40
+                    implicitHeight:40
+                    Layout.alignment: Qt.AlignVCenter+Qt.AlignHCenter
+                    checked: FishUI.Theme.darkMode
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "light/" : "dark/") + "dark-mode.svg"
+                    onLeftButtonClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
+                    onPressAndHold:{control.visible = false
+                        process.startDetached("cutefish-settings",["-m","appearance"])
+
+                    }
+                }
+
+            }
+
+            Label {
+                    topPadding: 50
+                    leftPadding: FishUI.Units.largeSpacing*2
+                    rightPadding: FishUI.Units.largeSpacing*2
+                    text: qsTr("Dark Mode")
+                    font.bold: true
+                    font.pointSize: 7
+                    Layout.fillWidth: true
+                }
+     /*   Label{
+            topPadding: 57
+            leftPadding:12
+            rightPadding:15
+            font.pointSize: 6
+            font.bold: false
+        text:FishUI.Theme.darkMode || checked ? qsTr("Dark-layout")
+                                              :qsTr("Light-layout")
+
+        }*/}
+        Item {
+            id: screenshot
+            Layout.fillWidth: true
+            height: 69
+             property var cellWidth: cardItems.width / 3
+            Rectangle {
+                anchors.fill: parent
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
+                radius: FishUI.Theme.bigRadius
+                anchors.leftMargin: 5
+                opacity: 0.8
+
+            }anchors.leftMargin: 25
+            anchors.topMargin: 25
+            GridLayout {
+                anchors.fill: parent
+                anchors.topMargin: 7
+                anchors.leftMargin: 7
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 25
+
+                columnSpacing:1
+                columns: 1
+            IconButton {
+                id: screenshotButton
+                implicitWidth:40
+                implicitHeight:40
+                Layout.alignment: Qt.AlignVCenter+Qt.AlignHCenter
+                source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "screenshot.svg"
+                checked: false
+                onLeftButtonClicked: {
+                    control.visible = true
+                    process.startDetached("cutefish-screenshot",["-d","500"])
+                }
+            }}
+            Label {
+                topPadding: 50
+                leftPadding: FishUI.Units.largeSpacing*2
+                rightPadding: FishUI.Units.largeSpacing*2
+                text: qsTr("Screenshot")                
+                font.bold: true
+                font.pointSize: 7
+                Layout.fillWidth: true
+            }
+
         }
+      } } }
 
         Item {
             id: brightnessItem
@@ -301,9 +457,9 @@ ControlCenterDialog {
             Rectangle {
                 id: brightnessItemBg
                 anchors.fill: parent
-                color: "white"
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
+                opacity: 0.8
             }
 
             RowLayout {
@@ -358,9 +514,9 @@ ControlCenterDialog {
             Rectangle {
                 id: volumeItemBg
                 anchors.fill: parent
-                color: "white"
+                color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
                 radius: FishUI.Theme.bigRadius
-                opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
+                opacity: 0.8
             }
 
             RowLayout {
@@ -409,14 +565,16 @@ ControlCenterDialog {
 //                }
             }
         }
+        MprisItem {
+            height: 96
+            Layout.fillWidth: true
+        }
 
         FontMetrics {
             id: _fontMetrics
         }
 
         RowLayout {
-            Layout.leftMargin: FishUI.Units.smallSpacing
-            Layout.rightMargin: FishUI.Units.smallSpacing
             spacing: 0
 
             Label {
@@ -475,6 +633,50 @@ ControlCenterDialog {
                 }
             }
         }
+       /* Item {
+            id: topItem
+            Layout.fillWidth: true
+            height: 32
+
+            RowLayout {
+                id: topItemLayout
+                anchors.fill: parent
+                anchors.rightMargin: FishUI.Units.largeSpacing
+                spacing: FishUI.Units.largeSpacing
+
+                Label {
+                    leftPadding: FishUI.Units.largeSpacing
+                    text: qsTr("Control Center")
+                    font.bold: true
+                    font.pointSize: 14
+                    Layout.fillWidth: true
+                }
+
+                IconButton {
+                    id: settingsButton
+                    implicitWidth: topItem.height
+                    implicitHeight: topItem.height
+                    Layout.alignment: Qt.AlignTop
+                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
+                    onLeftButtonClicked: {
+                        control.visible = false
+                        process.startDetached("cutefish-settings")
+                    }
+                }
+
+//                IconButton {
+//                    id: shutdownButton
+//                    implicitWidth: topItem.height
+//                    implicitHeight: topItem.height
+//                    Layout.alignment: Qt.AlignTop
+//                    source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "system-shutdown-symbolic.svg"
+//                    onLeftButtonClicked: {
+//                        control.visible = false
+//                        process.startDetached("cutefish-shutdown")
+//                    }
+//                }
+            }
+        }*/
     }
 
     function calcExtraSpacing(cellSize, containerSize) {

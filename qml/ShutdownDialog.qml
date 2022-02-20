@@ -123,6 +123,28 @@ ControlCenterDialog {
                 Layout.fillWidth: true
                 elide: Label.ElideRight
             }
+          /*  IconButton {
+                id: settingsButton
+                implicitWidth: topItem.height
+                implicitHeight: topItem.height
+                Layout.alignment: Qt.AlignTop
+                source: "qrc:/images/" + (FishUI.Theme.darkMode ? "dark/" : "light/") + "settings.svg"
+                onLeftButtonClicked: {
+                    control.visible = false
+                    process.startDetached("cutefish-settings")
+                }}
+            StandardCard {
+                Layout.preferredWidth: 32
+                Layout.preferredHeight: 32
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/settings.svg"
+                                            : "qrc:/images/light/settings.svg"
+                visible: true
+                checked: false
+                onClicked: {
+                    control.visible = false
+                    process.startDetached("cutefish-settings")
+                }
+            }*/
         }
 
         GridLayout {
@@ -204,7 +226,20 @@ ControlCenterDialog {
                     actions.suspend()
                 }
             }
-        }
+            StandardCard {
+                Layout.preferredWidth: 96
+                Layout.preferredHeight: 96
+                icon: FishUI.Theme.darkMode ? "qrc:/images/dark/settings.svg"
+                                            : "qrc:/images/light/settings.svg"
+                visible: true
+                checked: false
+                text: qsTr("Settings")
+
+                onClicked: {
+                    control.visible = false
+                    process.startDetached("cutefish-settings")
+                }
+        }}
     }
 
     PowerActions {

@@ -76,6 +76,10 @@
         <file>images/light/battery-level-90-symbolic.svg</file>
         <file>images/light/bluetooth-symbolic.svg</file>
         <file>images/light/brightness.svg</file>
+        <file>images/light/activities.svg</file>
+        <file>images/dark/activities.svg</file>
+        <file>images/light/screenshot.svg</file>
+        <file>images/dark/screenshot.svg</file>
         <file>images/light/close_normal.svg</file>
         <file>images/light/control.svg</file>
         <file>images/light/dark-mode.svg</file>
@@ -93,6 +97,10 @@
         <file>images/light/network-wireless-connected-75.svg</file>
         <file>images/light/restore_normal.svg</file>
         <file>images/light/settings.svg</file>
+        <file>images/light/hotspot.svg</file>
+        <file>images/dark/hotspot.svg</file>
+        <file>images/light/dnd.svg</file>
+        <file>images/dark/dnd.svg</file>
         <file>images/light/system-shutdown-symbolic.svg</file>
         <file>images/media-playback-pause-symbolic.svg</file>
         <file>images/media-playback-start-symbolic.svg</file>
@@ -123,7 +131,5 @@
         <file>images/dark/system-shutdown.svg</file>
         <file>images/dark/system-suspend.svg</file>
         <file>qml/StandardCard.qml</file>
-        <file>images/light/screenshot.svg</file>
-        <file>images/dark/screenshot.svg</file>
     </qresource>
 </RCC>

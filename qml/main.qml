@@ -102,17 +102,16 @@ Item {
                 spacing: FishUI.Units.smallSpacing
 
                 Image {
-                    id: acticityIcon
-                    width: rootItem.iconSize
-                    height: rootItem.iconSize
-                    sourceSize: Qt.size(rootItem.iconSize,
-                                        rootItem.iconSize)
-                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
-                    visible: status === Image.Ready
-                    antialiasing: true
-                    smooth: false
-                }
-
+                                    id: acticityIcon
+                                    width: rootItem.iconSize
+                                    height: rootItem.iconSize
+                                    sourceSize: Qt.size(rootItem.iconSize,
+                                                        rootItem.iconSize)
+                                    source: acticity.icon ? "image://icontheme/" + acticity.icon : ""
+                                    visible: status === Image.Ready
+                                    antialiasing: true
+                                    smooth: false
+                                }
                 Label {
                     id: acticityLabel
                     text: acticity.title
@@ -283,11 +282,15 @@ Item {
                     antialiasing: true
                     smooth: false
                 }
-
-                // Battery Item
+               // Battery Item
                 RowLayout {
                     visible: battery.available
-
+                    Label {
+                        text: battery.chargePercent + "%"
+                        font.pointSize: rootItem.fontSize
+                        color: rootItem.textColor
+                        visible: battery.showPercentage
+                    }
                     Image {
                         id: batteryIcon
                         height: rootItem.iconSize
@@ -299,12 +302,12 @@ Item {
                         smooth: false
                     }
 
-                    Label {
+                   /* Label {
                         text: battery.chargePercent + "%"
                         font.pointSize: rootItem.fontSize
                         color: rootItem.textColor
                         visible: battery.showPercentage
-                    }
+                    }*/
                 }
             }
         }
@@ -376,8 +379,10 @@ Item {
                         running: true
                         triggeredOnStart: true
                         onTriggered: {
-                            timeLabel.text = new Date().toLocaleTimeString(Qt.locale(), StatusBar.twentyFourTime ? rootItem.timeFormat
-                                                                                                                 : Locale.ShortFormat)
+                     timeLabel.text =new Date().toLocaleDateString(Qt.locale(),"ddd MMM d")+" "+ new Date() .toLocaleTimeString(Qt.locale(), StatusBar.twentyFourTime ? rootItem.timeFormat
+                                                                                                                           : Locale.ShortFormat)
+               //             timeLabel.text = new Date() .toLocaleTimeString(Qt.locale(), StatusBar.twentyFourTime ? rootItem.timeFormat
+                 //                                                      : Locale.ShortFormat)
                         }
                     }
                 }

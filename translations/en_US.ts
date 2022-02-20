@@ -12,28 +12,23 @@
 <context>
     <name>ControlCenter</name>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="240"/>
+        <location filename="../qml/ControlCenter.qml" line="222"/>
         <source>Wi-Fi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="169"/>
+        <location filename="../qml/ControlCenter.qml" line="167"/>
         <source>Control Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="255"/>
+        <location filename="../qml/ControlCenter.qml" line="237"/>
         <source>Bluetooth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ControlCenter.qml" line="271"/>
+        <location filename="../qml/ControlCenter.qml" line="253"/>
         <source>Dark Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/ControlCenter.qml" line="281"/>
-        <source>Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

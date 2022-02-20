@@ -60,9 +60,9 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: "white"
+        color: FishUI.Theme.darkMode ? "#AEAEAE" : "white"
         radius: FishUI.Theme.bigRadius
-        opacity: FishUI.Theme.darkMode ? 0.2 : 0.7
+        opacity: 0.8
     }
 
     RowLayout {

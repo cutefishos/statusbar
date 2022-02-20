@@ -26,11 +26,27 @@ Item {
     id: control
 
     property url source
+    property bool checked: false
     property real size: 24
     property string popupText
 
     signal leftButtonClicked
     signal rightButtonClicked
+    signal clicked
+    signal pressAndHold
+    property var backgroundColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.1)
+                                                         : Qt.rgba(0, 0, 0, 0.05)
+     property var hoverColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.15)
+                                                    : Qt.rgba(0, 0, 0, 0.1)
+     property var pressedColor: FishUI.Theme.darkMode ? Qt.rgba(255, 255, 255, 0.2)
+                                                      : Qt.rgba(0, 0, 0, 0.15)
+
+     property var highlightHoverColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
+                                                             : Qt.darker(FishUI.Theme.highlightColor, 1.1)
+     property var highlightPressedColor: FishUI.Theme.darkMode ? Qt.lighter(FishUI.Theme.highlightColor, 1.1)
+                                                               : Qt.darker(FishUI.Theme.highlightColor, 1.2)
+
+
 
     MouseArea {
         id: mouseArea
@@ -44,14 +60,18 @@ Item {
             else if (mouse.button === Qt.RightButton)
                 control.rightButtonClicked()
         }
+        onPressAndHold: {
+            control.pressAndHold()
+        }
     }
+
 
     Rectangle {
         anchors.fill: parent
         // radius: parent.height * 0.2
-        radius: parent.height / 2
-
-        color: {
+       //radius: parent.height / 2
+        radius: height/2
+       /* color: {
             if (mouseArea.containsMouse) {
                 if (mouseArea.containsPress)
                     return (FishUI.Theme.darkMode) ? Qt.rgba(255, 255, 255, 0.3) : Qt.rgba(0, 0, 0, 0.2)
@@ -60,19 +80,37 @@ Item {
             }
 
             return "transparent"
+        }*/
+        color: {
+            if (control.checked) {
+                if (mouseArea.pressed)
+                    return highlightPressedColor
+                else if (mouseArea.containsMouse)
+                    return highlightHoverColor
+                else
+                    return FishUI.Theme.highlightColor
+            } else {
+                if (mouseArea.pressed)
+                    return pressedColor
+                else if (mouseArea.containsMouse)
+                    return hoverColor
+                else
+                    return backgroundColor
+            }
         }
     }
 
     Image {
         id: iconImage
         anchors.centerIn: parent
-        width: parent.height * 0.75
-        height: width
-        sourceSize.width: width
-        sourceSize.height: height
+        width:22
+        height:22
+        sourceSize.width:22
+        sourceSize.height:22
         source: control.source
         asynchronous: true
         antialiasing: true
         smooth: false
     }
 }
+
