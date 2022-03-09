@@ -125,5 +125,7 @@
         <file>qml/StandardCard.qml</file>
         <file>images/light/screenshot.svg</file>
         <file>images/dark/screenshot.svg</file>
+        <file>images/light/do-not-disturb.svg</file>
+        <file>images/dark/do-not-disturb.svg</file>
     </qresource>
 </RCC>

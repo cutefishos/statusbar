@@ -279,8 +279,8 @@ ControlCenterDialog {
                 CardItem {
                     Layout.fillHeight: true
                     Layout.preferredWidth: cardItems.cellWidth
-                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
-                                                           : "qrc:/images/light/dark-mode.svg"
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/do-not-disturb.svg"
+                                                           : "qrc:/images/light/do-not-disturb.svg"
                     checked: notifications.doNotDisturb
                     label: qsTr("Do Not Disturb")
                     onClicked: notifications.doNotDisturb = !notifications.doNotDisturb
