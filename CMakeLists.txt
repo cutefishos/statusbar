@@ -27,6 +27,7 @@ set(SRCS
     src/processprovider.cpp
     src/activity.cpp
     src/capplications.cpp
+    src/notifications.cpp
 
     src/systemtray/statusnotifieritemsource.cpp
     src/systemtray/systemtraytypes.cpp

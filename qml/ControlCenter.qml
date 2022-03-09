@@ -74,6 +74,10 @@ ControlCenterDialog {
         id: appearance
     }
 
+    Notifications {
+        id: notifications
+    }
+
     SinkModel {
         id: paSinkModel
 
@@ -270,6 +274,16 @@ ControlCenterDialog {
                     checked: FishUI.Theme.darkMode
                     label: qsTr("Dark Mode")
                     onClicked: appearance.switchDarkMode(!FishUI.Theme.darkMode)
+                }
+
+                CardItem {
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: cardItems.cellWidth
+                    icon: FishUI.Theme.darkMode || checked ? "qrc:/images/dark/dark-mode.svg"
+                                                           : "qrc:/images/light/dark-mode.svg"
+                    checked: notifications.doNotDisturb
+                    label: qsTr("Do Not Disturb")
+                    onClicked: notifications.doNotDisturb = !notifications.doNotDisturb
                 }
 
                 CardItem {

@@ -27,6 +27,7 @@
 #include "appmenu/appmenumodel.h"
 #include "appmenu/appmenuapplet.h"
 #include "poweractions.h"
+#include "notifications.h"
 
 #include "appearance.h"
 #include "brightness.h"
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<AppMenuModel>(uri, 1, 0, "AppMenuModel");
     qmlRegisterType<AppMenuApplet>(uri, 1, 0, "AppMenuApplet");
     qmlRegisterType<PowerActions>(uri, 1, 0, "PowerActions");
+    qmlRegisterType<Notifications>(uri, 1, 0, "Notifications");
 
     QString qmFilePath = QString("%1/%2.qm").arg("/usr/share/cutefish-statusbar/translations/").arg(QLocale::system().name());
     if (QFile::exists(qmFilePath)) {
