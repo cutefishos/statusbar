@@ -65,11 +65,11 @@ StatusBar::StatusBar(QQuickView *parent)
 
     connect(m_acticity, &Activity::launchPadChanged, this, &StatusBar::initState);
 
-    connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
-    connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
+    connect(screen(), &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
+    connect(screen(), &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
 
     // Always show on the main screen
-    connect(qApp, &QApplication::primaryScreenChanged, this, &StatusBar::onPrimaryScreenChanged);
+    connect(qGuiApp, &QGuiApplication::primaryScreenChanged, this, &StatusBar::onPrimaryScreenChanged);
 }
 
 QRect StatusBar::screenRect()
@@ -145,6 +145,11 @@ void StatusBar::initState()
 
 void StatusBar::onPrimaryScreenChanged(QScreen *screen)
 {
+    disconnect(this->screen());
+
     setScreen(screen);
     updateGeometry();
+
+    connect(screen, &QScreen::virtualGeometryChanged, this, &StatusBar::updateGeometry);
+    connect(screen, &QScreen::geometryChanged, this, &StatusBar::updateGeometry);
 }
