@@ -25,6 +25,11 @@
 
 #include <KWindowSystem>
 
+static QStringList noColorOverlayList = {
+    "netease-cloud-music",
+    "chrome_status_icon_1"
+};
+
 SystemTrayModel::SystemTrayModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -58,6 +63,7 @@ QHash<int, QByteArray> SystemTrayModel::roleNames() const
     roles[IconRole] = "icon";
     roles[TitleRole] = "title";
     roles[ToolTipRole] = "toolTip";
+    roles[CanColorOverlay] = "canColorOverlay";
     return roles;
 }
 
@@ -83,6 +89,8 @@ QVariant SystemTrayModel::data(const QModelIndex &index, int role) const
         return item->title();
     case ToolTipRole:
         return item->tooltip();
+    case CanColorOverlay:
+        return !noColorOverlayList.contains(item->appId());
     }
 
     return QVariant();

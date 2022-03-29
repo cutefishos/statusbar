@@ -99,6 +99,11 @@ QString StatusNotifierItemSource::id() const
     return m_id;
 }
 
+QString StatusNotifierItemSource::appId() const
+{
+    return m_appId;
+}
+
 QString StatusNotifierItemSource::title() const
 {
     return m_title;
@@ -267,6 +272,7 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
         if (!QIcon::fromTheme(id).isNull()) {
             m_iconName = id;
         }
+        m_appId = id;
 
         // Reion: For icon theme path
         QString iconThemePath = properties[QStringLiteral("IconThemePath")].toString();

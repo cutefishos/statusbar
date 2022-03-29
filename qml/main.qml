@@ -22,6 +22,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
 
+import Cutefish.System 1.0 as System
 import Cutefish.StatusBar 1.0
 import Cutefish.NetworkManagement 1.0 as NM
 import FishUI 1.0 as FishUI
@@ -34,7 +35,7 @@ Item {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    property bool darkMode: FishUI.Theme.darkMode
+    property bool darkMode: false
     property color textColor: rootItem.darkMode ? "#FFFFFF" : "#000000";
     property var fontSize: rootItem.height ? rootItem.height / 3 : 1
 
@@ -44,15 +45,43 @@ Item {
         timeTimer.restart()
     }
 
+    System.Wallpaper {
+        id: sysWallpaper
+
+        function reload() {
+            if (sysWallpaper.type === 0)
+                bgHelper.setBackgound(sysWallpaper.path)
+            else
+                bgHelper.setColor(sysWallpaper.color)
+        }
+
+        Component.onCompleted: sysWallpaper.reload()
+
+        onTypeChanged: sysWallpaper.reload()
+        onColorChanged: sysWallpaper.reload()
+        onPathChanged: sysWallpaper.reload()
+    }
+
+    BackgroundHelper {
+        id: bgHelper
+
+        onNewColor: {
+            background.color = color
+            rootItem.darkMode = lightness < 128 ? true : false
+        }
+    }
+
     Rectangle {
         id: background
         anchors.fill: parent
-        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
-        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
+        opacity: 0.3
+
+//        color: FishUI.Theme.darkMode ? "#4D4D4D" : "#FFFFFF"
+//        opacity: windowHelper.compositing ? FishUI.Theme.darkMode ? 0.5 : 0.7 : 1.0
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
+                duration: 100
                 easing.type: Easing.Linear
             }
         }

@@ -43,6 +43,7 @@ public:
     ~StatusNotifierItemSource();
 
     QString id() const;
+    QString appId() const;
     QString title() const;
     QString tooltip() const;
     QString subtitle() const;
@@ -87,6 +88,7 @@ private:
     bool m_tooltipUpdate : 1;
     bool m_statusUpdate : 1;
 
+    QString m_appId;
     QString m_id;
     QString m_title;
     QString m_tooltip;

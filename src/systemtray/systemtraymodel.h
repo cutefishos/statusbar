@@ -40,7 +40,8 @@ public:
         IconNameRole,
         IconRole,
         TitleRole,
-        ToolTipRole
+        ToolTipRole,
+        CanColorOverlay
     };
 
     explicit SystemTrayModel(QObject *parent = nullptr);

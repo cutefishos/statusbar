@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
 
 import Cutefish.StatusBar 1.0
 import FishUI 1.0 as FishUI
@@ -90,6 +91,17 @@ ListView {
             onTriggered: iconItem.updateIcon()
         }
 
+        ColorOverlay {
+            id: iconOverlay
+            anchors.centerIn: parent
+            width: rootItem.iconSize
+            height: width
+            source: iconItem
+            color: rootItem.textColor
+            opacity: rootItem.darkMode ? 1 : 0.7
+            visible: model.canColorOverlay
+        }
+
         FishUI.IconItem {
             id: iconItem
             anchors.centerIn: parent
@@ -98,7 +110,7 @@ ListView {
             source: model.iconName ? model.iconName : model.icon
             antialiasing: true
             smooth: true
-            visible: !dragStarted
+            visible: !dragStarted && !iconOverlay.visible
         }
 
         onClicked: {
