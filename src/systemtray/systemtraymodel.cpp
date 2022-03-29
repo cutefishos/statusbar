@@ -27,7 +27,9 @@
 
 static QStringList noColorOverlayList = {
     "netease-cloud-music",
-    "chrome_status_icon_1"
+    "chrome_status_icon_1",
+    "35682", // obs studio
+    "lark_status_icon_1"
 };
 
 SystemTrayModel::SystemTrayModel(QObject *parent)

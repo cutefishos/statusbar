@@ -22,22 +22,29 @@
 #include <QApplication>
 #include <QDebug>
 #include <QPixmap>
+#include <QPixmapCache>
 #include <QScreen>
 #include <QRgb>
 
 BackgroundHelper::BackgroundHelper(QObject *parent)
     : QObject(parent)
     , m_statusBarHeight(25 / qApp->devicePixelRatio())
+    , m_type(0)
 {
 }
 
 void BackgroundHelper::setColor(QColor c)
 {
+    m_color = c;
+    m_type = 1;
     emit newColor(c, c.lightness());
 }
 
 void BackgroundHelper::setBackgound(const QString &fileName)
 {
+    m_wallpaper = fileName;
+    m_type = 0;
+
     QImage img(fileName);
 
     QSize screenSize = qApp->primaryScreen()->geometry().size();
@@ -68,4 +75,21 @@ void BackgroundHelper::setBackgound(const QString &fileName)
     QColor c = QColor(sumR, sumG, sumB);
 
     emit newColor(c, c.lightness());
+
+    // clear cache.
+    QPixmapCache::clear();
+}
+
+void BackgroundHelper::onChanged()
+{
+    switch (m_type) {
+    case 0:
+        setBackgound(m_wallpaper);
+        break;
+    case 1:
+        setColor(m_color);
+        break;
+    default:
+        break;
+    }
 }

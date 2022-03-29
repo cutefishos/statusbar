@@ -273,6 +273,7 @@ void StatusNotifierItemSource::refreshCallback(QDBusPendingCallWatcher *call)
             m_iconName = id;
         }
         m_appId = id;
+        // qDebug() << m_appId;
 
         // Reion: For icon theme path
         QString iconThemePath = properties[QStringLiteral("IconThemePath")].toString();
