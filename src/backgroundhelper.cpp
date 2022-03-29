@@ -31,6 +31,8 @@ BackgroundHelper::BackgroundHelper(QObject *parent)
     , m_statusBarHeight(25 / qApp->devicePixelRatio())
     , m_type(0)
 {
+    onPrimaryScreenChanged();
+    connect(qApp, &QApplication::primaryScreenChanged, this, &BackgroundHelper::onPrimaryScreenChanged);
 }
 
 void BackgroundHelper::setColor(QColor c)
@@ -78,6 +80,14 @@ void BackgroundHelper::setBackgound(const QString &fileName)
 
     // clear cache.
     QPixmapCache::clear();
+}
+
+void BackgroundHelper::onPrimaryScreenChanged()
+{
+    disconnect(qApp->primaryScreen());
+
+    connect(qApp->primaryScreen(), &QScreen::geometryChanged, this, &BackgroundHelper::onChanged);
+    connect(qApp->primaryScreen(), &QScreen::virtualGeometryChanged, this, &BackgroundHelper::onChanged);
 }
 
 void BackgroundHelper::onChanged()

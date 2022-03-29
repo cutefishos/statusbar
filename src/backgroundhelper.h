@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void setBackgound(const QString &fileName);
 
 private slots:
+    void onPrimaryScreenChanged();
     void onChanged();
 
 signals:
