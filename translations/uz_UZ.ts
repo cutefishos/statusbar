@@ -29,7 +29,7 @@
     <message>
         <location filename="../qml/ControlCenter.qml" line="213"/>
         <source>Dark Mode</source>
-        <translation>To&apos;q rejim</translation>
+        <translation>Tungi rejim</translation>
     </message>
 </context>
 <context>
