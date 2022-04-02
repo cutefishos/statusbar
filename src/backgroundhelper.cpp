@@ -39,7 +39,12 @@ void BackgroundHelper::setColor(QColor c)
 {
     m_color = c;
     m_type = 1;
-    emit newColor(c, c.lightness());
+
+    bool isDark = (c.red() * 0.299 +
+                   c.green() * 0.587 +
+                   c.blue() * 0.114) < 186;
+
+    emit newColor(c, isDark);
 }
 
 void BackgroundHelper::setBackgound(const QString &fileName)
@@ -75,8 +80,13 @@ void BackgroundHelper::setBackgound(const QString &fileName)
     sumB /= measureArea;
 
     QColor c = QColor(sumR, sumG, sumB);
+    QColor textColor = (sumR * 0.299 +
+                        sumG * 0.587 +
+                        sumB * 0.114) > 186 ? "#000000" : "#FFFFFF";
 
-    emit newColor(c, c.lightness());
+    qDebug() << c << textColor;
+
+    emit newColor(c, textColor == "#FFFFFF");
 
     // clear cache.
     QPixmapCache::clear();

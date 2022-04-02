@@ -38,7 +38,7 @@ private slots:
     void onChanged();
 
 signals:
-    void newColor(QColor color, int lightness);
+    void newColor(QColor color, bool darkMode);
 
 private:
     int m_statusBarHeight;

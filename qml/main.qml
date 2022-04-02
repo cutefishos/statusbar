@@ -67,7 +67,7 @@ Item {
 
         onNewColor: {
             background.color = color
-            rootItem.darkMode = lightness < 128 ? true : false
+            rootItem.darkMode = darkMode
         }
     }
 
