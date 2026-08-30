@@ -23,7 +23,7 @@
 #ifndef APPMENUMODEL_H
 #define APPMENUMODEL_H
 
-#include <KWindowSystem>
+#include <KX11Extras>
 #include <QAbstractListModel>
 #include <QPointer>
 #include <QRect>

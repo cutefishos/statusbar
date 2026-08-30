@@ -18,7 +18,7 @@
  */
 
 #include "controlcenterdialog.h"
-#include <KWindowSystem>
+#include <KX11Extras>
 
 ControlCenterDialog::ControlCenterDialog(QQuickWindow *parent)
     : QQuickWindow(parent)
@@ -49,7 +49,7 @@ bool ControlCenterDialog::eventFilter(QObject *object, QEvent *event)
             ControlCenterDialog::setVisible(false);
         }
     } else if (event->type() == QEvent::Show) {
-        KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::SkipSwitcher);
+        KX11Extras::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::SkipSwitcher);
     } else if (event->type() == QEvent::Hide) {
         setMouseGrabEnabled(false);
         setKeyboardGrabEnabled(false);

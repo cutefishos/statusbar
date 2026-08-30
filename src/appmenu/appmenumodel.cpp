@@ -33,7 +33,9 @@
 
 #include <QX11Info>
 
-#include <KWindowSystem>
+#include <KX11Extras>
+#include <KWindowInfo>
+#include <NETWM>
 
 #include "../libdbusmenuqt/dbusmenuimporter.h"
 #include <QDebug>
@@ -96,8 +98,9 @@ AppMenuModel::AppMenuModel(QObject *parent)
     });
 
     // Active window
-    connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &AppMenuModel::onActiveWindowChanged, Qt::QueuedConnection);
-    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId)>(&KWindowSystem::windowChanged), this, &AppMenuModel::onActiveWindowChanged, Qt::QueuedConnection);
+    connect(KX11Extras::self(), &KX11Extras::activeWindowChanged, this, &AppMenuModel::onActiveWindowChanged, Qt::QueuedConnection);
+    connect(KX11Extras::self(), &KX11Extras::windowChanged, this,
+            [this](WId, NET::Properties, NET::Properties2) { onActiveWindowChanged(); }, Qt::QueuedConnection);
     onActiveWindowChanged();
 
     m_serviceWatcher->setConnection(QDBusConnection::sessionBus());
@@ -160,14 +163,14 @@ void AppMenuModel::update()
 void AppMenuModel::onActiveWindowChanged()
 {
     // 为了兼容旧版本，不使用新的 API
-//    KWindowInfo info(KWindowSystem::activeWindow(),
+//    KWindowInfo info(KX11Extras::activeWindow(),
 //                     NET::WMState | NET::WMVisibleName,
 //                     NET::WM2AppMenuObjectPath | NET::WM2AppMenuServiceName);
 //    const QString objectPath = info.applicationMenuObjectPath();
 //    const QString serviceName = info.applicationMenuServiceName();
 
-    const QString objectPath = QString::fromUtf8(getWindowPropertyString(KWindowSystem::activeWindow(), "_KDE_NET_WM_APPMENU_OBJECT_PATH"));
-    const QString serviceName = QString::fromUtf8(getWindowPropertyString(KWindowSystem::activeWindow(), "_KDE_NET_WM_APPMENU_SERVICE_NAME"));
+    const QString objectPath = QString::fromUtf8(getWindowPropertyString(KX11Extras::activeWindow(), "_KDE_NET_WM_APPMENU_OBJECT_PATH"));
+    const QString serviceName = QString::fromUtf8(getWindowPropertyString(KX11Extras::activeWindow(), "_KDE_NET_WM_APPMENU_SERVICE_NAME"));
 
     if (!objectPath.isEmpty() && !serviceName.isEmpty()) {
         setMenuAvailable(true);

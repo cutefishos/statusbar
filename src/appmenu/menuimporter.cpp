@@ -30,7 +30,7 @@
 #include <QDBusServiceWatcher>
 
 #include <KWindowInfo>
-#include <KWindowSystem>
+#include <KX11Extras>
 
 static const char *DBUS_SERVICE = "com.canonical.AppMenu.Registrar";
 static const char *DBUS_OBJECT_PATH = "/com/canonical/AppMenu/Registrar";

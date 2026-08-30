@@ -167,7 +167,6 @@ void CApplications::addApplication(const QString &filePath)
         return;
 
     QSettings desktop(filePath, QSettings::IniFormat);
-    desktop.setIniCodec("UTF-8");
     desktop.beginGroup("Desktop Entry");
 
     // Skip...
@@ -264,4 +263,3 @@ QStringList CApplications::commandFromPid(quint32 pid)
 
     return QStringList();
 }
-

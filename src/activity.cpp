@@ -28,7 +28,8 @@
 #include <QRegularExpression>
 
 #include <NETWM>
-#include <KWindowSystem>
+#include <KX11Extras>
+#include <KWindowInfo>
 
 static const QStringList blockList = {"cutefish-launcher",
                                       "cutefish-statusbar"};
@@ -39,8 +40,8 @@ Activity::Activity(QObject *parent)
 {
     onActiveWindowChanged();
 
-    connect(KWindowSystem::self(), &KWindowSystem::activeWindowChanged, this, &Activity::onActiveWindowChanged);
-    connect(KWindowSystem::self(), static_cast<void (KWindowSystem::*)(WId id, NET::Properties properties, NET::Properties2 properties2)>(&KWindowSystem::windowChanged),
+    connect(KX11Extras::self(), &KX11Extras::activeWindowChanged, this, &Activity::onActiveWindowChanged);
+    connect(KX11Extras::self(), static_cast<void (KX11Extras::*)(WId id, NET::Properties properties, NET::Properties2 properties2)>(&KX11Extras::windowChanged),
             this, &Activity::onActiveWindowChanged);
 }
 
@@ -61,27 +62,27 @@ QString Activity::icon() const
 
 void Activity::close()
 {
-    NETRootInfo(QX11Info::connection(), NET::CloseWindow).closeWindowRequest(KWindowSystem::activeWindow());
+    NETRootInfo(QX11Info::connection(), NET::CloseWindow).closeWindowRequest(KX11Extras::activeWindow());
 }
 
 void Activity::minimize()
 {
-    KWindowSystem::minimizeWindow(KWindowSystem::activeWindow());
+    KX11Extras::minimizeWindow(KX11Extras::activeWindow());
 }
 
 void Activity::restore()
 {
-    KWindowSystem::clearState(KWindowSystem::activeWindow(), NET::Max);
+    KX11Extras::clearState(KX11Extras::activeWindow(), NET::Max);
 }
 
 void Activity::maximize()
 {
-    KWindowSystem::setState(KWindowSystem::activeWindow(), NET::Max);
+    KX11Extras::setState(KX11Extras::activeWindow(), NET::Max);
 }
 
 void Activity::toggleMaximize()
 {
-    KWindowInfo info(KWindowSystem::activeWindow(), NET::WMState);
+    KWindowInfo info(KX11Extras::activeWindow(), NET::WMState);
     bool isWindow = !info.hasState(NET::SkipTaskbar) ||
                      info.windowType(NET::UtilityMask) != NET::Utility ||
                      info.windowType(NET::DesktopMask) != NET::Desktop;
@@ -95,7 +96,7 @@ void Activity::toggleMaximize()
 
 void Activity::move()
 {
-    WId winId = KWindowSystem::activeWindow();
+    WId winId = KX11Extras::activeWindow();
     KWindowInfo info(winId, NET::WMState | NET::WMGeometry | NET::WMDesktop);
     bool window = !info.hasState(NET::SkipTaskbar) ||
                      info.windowType(NET::UtilityMask) != NET::Utility ||
@@ -106,8 +107,8 @@ void Activity::move()
 
     bool onCurrent = info.isOnCurrentDesktop();
     if (!onCurrent) {
-        KWindowSystem::setCurrentDesktop(info.desktop());
-        KWindowSystem::forceActiveWindow(winId);
+        KX11Extras::setCurrentDesktop(info.desktop());
+        KX11Extras::forceActiveWindow(winId);
     }
 
     NETRootInfo ri(QX11Info::connection(), NET::WMMoveResize);
@@ -155,7 +156,7 @@ bool Activity::isAcceptableWindow(quint64 wid)
 
 void Activity::onActiveWindowChanged()
 {
-    KWindowInfo info(KWindowSystem::activeWindow(),
+    KWindowInfo info(KX11Extras::activeWindow(),
                      NET::WMState | NET::WMVisibleName | NET::WMWindowType,
                      NET::WM2WindowClass);
 
@@ -172,7 +173,7 @@ void Activity::onActiveWindowChanged()
         return;
     }
 
-    if (!isAcceptableWindow(KWindowSystem::activeWindow())
+    if (!isAcceptableWindow(KX11Extras::activeWindow())
             || blockList.contains(info.windowClassClass())) {
         clearTitle();
         clearIcon();

@@ -31,6 +31,7 @@
 #include <QQuickWindow>
 #include <QScreen>
 #include <QTimer>
+#include <KWindowSystem>
 
 int AppMenuApplet::s_refs = 0;
 

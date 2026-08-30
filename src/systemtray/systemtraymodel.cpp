@@ -23,7 +23,7 @@
 #include <QApplication>
 #include <QDebug>
 
-#include <KWindowSystem>
+#include <KX11Extras>
 
 static QStringList noColorOverlayList = {
     "netease-cloud-music",

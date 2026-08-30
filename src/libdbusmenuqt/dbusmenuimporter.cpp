@@ -22,6 +22,7 @@
 #include "dbusmenuimporter.h"
 
 // Qt
+#include <QActionGroup>
 #include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDBusInterface>
